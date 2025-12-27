@@ -1,29 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Heart, Calendar, MapPin, Users, Gift, Camera, MessageCircle, Globe } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
-import content from '../../data/content.json';
 import { trackClick } from '../../services/analytics';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [language, setLanguage] = useState('en');
   const location = useLocation();
 
   const navItems = [
-    { path: '/', label: 'Home', icon: Heart },
-    { path: '/events', label: 'Events', icon: Calendar },
-    { path: '/travel', label: 'Travel & Stay', icon: MapPin },
-    { path: '/rsvp', label: 'RSVP', icon: Users, highlight: true },
-    { path: '/ceremonies', label: 'Traditions', icon: Gift },
-    { path: '/gallery', label: 'Gallery', icon: Camera },
-    { path: '/guestbook', label: 'Guest Book', icon: MessageCircle },
+    { path: '/', label: 'Home' },
+    { path: '/events', label: 'Schedule' },
+    { path: '/travel', label: 'Travel' },
+    { path: '/rsvp', label: 'RSVP', highlight: true },
+    { path: '/ceremonies', label: 'Guide' },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 50);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -35,195 +31,122 @@ const Header = () => {
     setIsMobileMenuOpen(false);
   };
 
-  const toggleLanguage = () => {
-    const newLang = language === 'en' ? 'hi' : 'en';
-    setLanguage(newLang);
-    trackClick('Language Toggle', { from: language, to: newLang });
-  };
-
-  const headerVariants = {
-    initial: { y: -100 },
-    animate: {
-      y: 0,
-      transition: {
-        type: 'spring',
-        stiffness: 100,
-        damping: 20
-      }
-    }
-  };
-
-  const logoVariants = {
-    initial: { opacity: 0, scale: 0.8 },
-    animate: {
-      opacity: 1,
-      scale: 1,
-      transition: { delay: 0.2, duration: 0.5 }
-    }
-  };
-
   return (
     <>
       <motion.header
-        variants={headerVariants}
-        initial="initial"
-        animate="animate"
-        className={`fixed top-0 w-full z-40 transition-all duration-500 ${
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
+        className={`fixed top-0 w-full z-50 transition-all duration-700 ${
           isScrolled
-            ? 'bg-white/95 backdrop-blur-md shadow-lg py-3'
-            : 'bg-gradient-to-b from-white/80 to-transparent py-5'
+            ? 'bg-white/95 backdrop-blur-md border-b border-primary-50'
+            : 'bg-transparent'
         }`}
       >
-        <div className="container-custom mx-auto px-4">
-          <nav className="flex items-center justify-between">
-            {/* Logo/Names */}
-            <Link to="/" onClick={() => handleNavClick({ label: 'Logo', path: '/' })}>
-              <motion.div
-                variants={logoVariants}
-                className="flex items-center gap-2 group"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <div className="relative">
-                  <Heart className="w-8 h-8 text-primary-400 fill-primary-200 group-hover:fill-primary-300 transition-colors" />
-                  <motion.div
-                    className="absolute -inset-1 bg-primary-200 rounded-full opacity-30"
-                    animate={{
-                      scale: [1, 1.2, 1],
-                      opacity: [0.3, 0.1, 0.3]
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
-                  />
-                </div>
-                <div className="hidden sm:block">
-                  <h1 className="text-xl md:text-2xl font-display text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-accent-500">
-                    {content.wedding.brideName.replace('[', '').replace(']', '')} & {content.wedding.groomName.replace('[', '').replace(']', '')}
-                  </h1>
-                  <p className="text-xs text-neutral-500 font-light">April 24-25, 2026</p>
-                </div>
-                <div className="sm:hidden">
-                  <h1 className="text-lg font-display text-primary-500">B & G</h1>
-                </div>
-              </motion.div>
-            </Link>
-
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center gap-1">
-              {navItems.map((item, index) => {
-                const Icon = item.icon;
-                const isActive = location.pathname === item.path;
-
-                return (
-                  <Link
-                    key={item.path}
-                    to={item.path}
-                    onClick={() => handleNavClick(item)}
-                  >
-                    <motion.div
-                      initial={{ opacity: 0, y: -20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.1 + 0.3 }}
-                      className={`
-                        relative px-4 py-2 rounded-lg transition-all duration-300 group
-                        ${isActive
-                          ? 'text-primary-600 bg-primary-50'
-                          : 'text-neutral-600 hover:text-primary-600 hover:bg-primary-50/50'
-                        }
-                        ${item.highlight ? 'ml-2' : ''}
-                      `}
-                      whileHover={{ y: -2 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      {item.highlight && (
-                        <motion.span
-                          className="absolute -top-2 -right-2 bg-gradient-to-r from-primary-400 to-accent-400 text-white text-xs px-2 py-0.5 rounded-full font-medium"
-                          animate={{
-                            scale: [1, 1.1, 1],
-                          }}
-                          transition={{
-                            duration: 2,
-                            repeat: Infinity,
-                            ease: "easeInOut"
-                          }}
-                        >
-                          RSVP Now
-                        </motion.span>
-                      )}
-                      <div className="flex items-center gap-2">
-                        <Icon size={16} />
-                        <span className="font-medium">{item.label}</span>
-                      </div>
-                      {isActive && (
-                        <motion.div
-                          className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary-400 to-accent-400"
-                          layoutId="activeTab"
-                        />
-                      )}
-                    </motion.div>
-                  </Link>
-                );
-              })}
-
-              {/* Language Toggle */}
-              <motion.button
-                onClick={toggleLanguage}
-                className="ml-4 p-2 rounded-lg bg-neutral-100 hover:bg-neutral-200 transition-colors"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.8 }}
-              >
-                <Globe size={20} className="text-neutral-600" />
-              </motion.button>
-            </div>
-
-            {/* Mobile Menu Button */}
-            <motion.button
-              className="lg:hidden p-2 rounded-lg hover:bg-neutral-100 transition-colors"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        <nav className="max-w-screen-2xl mx-auto px-6 lg:px-12 py-6 flex items-center justify-between">
+          {/* Logo/Date */}
+          <Link
+            to="/"
+            onClick={() => handleNavClick({ label: 'Logo', path: '/' })}
+            className="text-primary-900"
+          >
+            <motion.div
               whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400 }}
+              className="flex flex-col gap-0.5"
+            >
+              <span className="font-display text-lg font-medium tracking-tight"
+                    style={{ fontVariationSettings: '"opsz" 24, "wght" 500' }}>
+                P & A
+              </span>
+              <span className="text-label text-[9px] opacity-70">
+                04.24—25.26
+              </span>
+            </motion.div>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-10 lg:gap-14">
+            {navItems.map((item) => {
+              const isActive = location.pathname === item.path;
+
+              return (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  onClick={() => handleNavClick(item)}
+                  className="relative group"
+                >
+                  <span
+                    className={`
+                      text-label transition-all duration-300
+                      ${isActive
+                        ? 'text-primary-900'
+                        : 'text-primary-500 hover:text-primary-900'
+                      }
+                      ${item.highlight ? 'font-medium' : ''}
+                    `}
+                  >
+                    {item.label}
+                  </span>
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeNav"
+                      className="absolute -bottom-2 left-0 right-0 h-[1.5px] bg-primary-900"
+                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                    />
+                  )}
+                  {!isActive && (
+                    <span className="absolute -bottom-2 left-0 right-0 h-[1px] bg-primary-900 scale-x-0 transition-transform duration-300 group-hover:scale-x-100" />
+                  )}
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden p-2"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            <motion.div
+              animate={{ rotate: isMobileMenuOpen ? 90 : 0 }}
+              transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
             >
               {isMobileMenuOpen ? (
-                <X size={24} className="text-neutral-700" />
+                <X size={20} strokeWidth={1.5} className="text-primary-900" />
               ) : (
-                <Menu size={24} className="text-neutral-700" />
+                <Menu size={20} strokeWidth={1.5} className="text-primary-900" />
               )}
-            </motion.button>
-          </nav>
-        </div>
+            </motion.div>
+          </button>
+        </nav>
       </motion.header>
 
       {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <>
-            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/20 backdrop-blur-sm z-30 lg:hidden"
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 bg-primary-900/10 backdrop-blur-sm z-40 md:hidden"
               onClick={() => setIsMobileMenuOpen(false)}
             />
 
-            {/* Menu Panel */}
             <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-              className="fixed right-0 top-0 h-full w-80 bg-white shadow-2xl z-40 lg:hidden overflow-y-auto"
+              className="fixed right-0 top-0 h-full w-72 bg-white shadow-2xl z-40 md:hidden"
             >
-              <div className="p-6 pt-20">
-                <div className="space-y-2">
-                  {navItems.map((item) => {
-                    const Icon = item.icon;
+              <div className="pt-24 px-8">
+                <div className="space-y-6">
+                  {navItems.map((item, index) => {
                     const isActive = location.pathname === item.path;
 
                     return (
@@ -233,48 +156,35 @@ const Header = () => {
                         onClick={() => handleNavClick(item)}
                       >
                         <motion.div
+                          initial={{ opacity: 0, x: 20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: index * 0.05 }}
                           className={`
-                            flex items-center gap-3 px-4 py-3 rounded-lg transition-all
-                            ${isActive
-                              ? 'bg-primary-100 text-primary-700'
-                              : 'text-neutral-700 hover:bg-neutral-50'
-                            }
-                            ${item.highlight ? 'bg-gradient-to-r from-primary-50 to-accent-50 border border-primary-200' : ''}
+                            text-lg font-sans
+                            ${isActive ? 'text-primary-900 font-medium' : 'text-primary-600 font-normal'}
+                            ${item.highlight ? 'font-medium' : ''}
+                            transition-all duration-300 hover:translate-x-2
                           `}
-                          whileHover={{ x: 5 }}
-                          whileTap={{ scale: 0.95 }}
                         >
-                          <Icon size={20} />
-                          <span className="font-medium text-lg">{item.label}</span>
-                          {item.highlight && (
-                            <span className="ml-auto text-xs bg-primary-400 text-white px-2 py-1 rounded-full">
-                              Now
-                            </span>
-                          )}
+                          {item.label}
                         </motion.div>
                       </Link>
                     );
                   })}
                 </div>
 
-                {/* Language Toggle in Mobile */}
-                <motion.button
-                  onClick={toggleLanguage}
-                  className="mt-6 w-full p-3 rounded-lg bg-neutral-100 hover:bg-neutral-200 transition-colors flex items-center justify-center gap-2"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <Globe size={20} />
-                  <span className="font-medium">
-                    {language === 'en' ? 'हिंदी' : 'English'}
-                  </span>
-                </motion.button>
-
-                {/* Wedding Info in Mobile */}
-                <div className="mt-8 p-4 bg-gradient-to-br from-primary-50 to-accent-50 rounded-lg">
-                  <p className="text-sm text-neutral-600 mb-1">Save the Date</p>
-                  <p className="font-serif text-lg text-primary-700">April 24-25, 2026</p>
-                  <p className="text-sm text-neutral-600 mt-1">{content.wedding.location}</p>
+                <div className="mt-20 pt-8 border-t border-primary-100">
+                  <p className="text-label text-xs opacity-60">
+                    APRIL 24—25, 2026
+                  </p>
+                  <p className="text-label text-xs opacity-60 mt-2">
+                    NASHIK, MAHARASHTRA
+                  </p>
+                  <div className="mt-8">
+                    <p className="font-serif italic text-sm text-primary-500">
+                      Prerna & Arpit
+                    </p>
+                  </div>
                 </div>
               </div>
             </motion.div>

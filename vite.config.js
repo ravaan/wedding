@@ -5,6 +5,13 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   base: '/wedding/',
+  server: {
+    // This ensures the dev server handles the base path correctly
+    // and redirects properly for SPA routing
+    historyApiFallback: {
+      index: '/wedding/index.html'
+    }
+  },
   build: {
     outDir: 'dist',
     assetsDir: 'assets',

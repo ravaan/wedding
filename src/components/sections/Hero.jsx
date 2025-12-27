@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronDown, Calendar, MapPin, Heart } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import content from '../../data/content.json';
-import Button from '../ui/Button';
 import { trackCountdownView, trackClick } from '../../services/analytics';
 
 dayjs.extend(duration);
 
 const Hero = () => {
+  const navigate = useNavigate();
   const [countdown, setCountdown] = useState({
     days: 0,
     hours: 0,
@@ -32,264 +32,178 @@ const Hero = () => {
           minutes: duration.minutes(),
           seconds: duration.seconds()
         });
-      } else {
-        setCountdown({ days: 0, hours: 0, minutes: 0, seconds: 0 });
       }
     };
 
     updateCountdown();
     const interval = setInterval(updateCountdown, 1000);
 
-    // Track countdown view
     trackCountdownView(Math.floor(dayjs.duration(weddingDate.diff(dayjs())).asDays()));
 
     return () => clearInterval(interval);
   }, []);
 
-  const scrollToNext = () => {
-    trackClick('Scroll Indicator', { from: 'hero' });
-    window.scrollTo({
-      top: window.innerHeight,
-      behavior: 'smooth'
-    });
-  };
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: [0.43, 0.13, 0.23, 0.96]
-      }
-    }
-  };
-
-  const CountdownUnit = ({ value, label }) => (
-    <motion.div
-      className="text-center"
-      whileHover={{ scale: 1.05 }}
-      initial={{ scale: 0.8, opacity: 0 }}
-      animate={{ scale: 1, opacity: 1 }}
-      transition={{ type: 'spring', stiffness: 200, damping: 15 }}
-    >
-      <motion.div
-        key={value}
-        initial={{ rotateX: -90, opacity: 0 }}
-        animate={{ rotateX: 0, opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        className="relative"
-      >
-        <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl p-4 md:p-6 min-w-[80px] md:min-w-[100px]">
-          <div className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-accent-500">
-            {String(value).padStart(2, '0')}
-          </div>
-        </div>
-      </motion.div>
-      <p className="text-sm md:text-base text-white/90 mt-2 font-medium uppercase tracking-wider">
-        {label}
-      </p>
-    </motion.div>
-  );
-
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Animated gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary-200 via-secondary-200 to-accent-200">
-        <motion.div
-          className="absolute inset-0 opacity-30"
-          animate={{
-            backgroundImage: [
-              'radial-gradient(circle at 20% 50%, rgba(255, 216, 232, 0.4) 0%, transparent 50%)',
-              'radial-gradient(circle at 80% 50%, rgba(244, 228, 193, 0.4) 0%, transparent 50%)',
-              'radial-gradient(circle at 50% 80%, rgba(232, 165, 152, 0.4) 0%, transparent 50%)',
-              'radial-gradient(circle at 20% 50%, rgba(255, 216, 232, 0.4) 0%, transparent 50%)',
-            ]
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: 'linear'
-          }}
-        />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white px-6 lg:px-12">
+      {/* Sophisticated background texture */}
+      <div className="absolute inset-0 opacity-[0.02]">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+        }} />
       </div>
 
-      {/* Floating hearts animation */}
-      <div className="absolute inset-0 overflow-hidden">
-        {[...Array(6)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute text-white/10"
-            initial={{
-              x: Math.random() * window.innerWidth,
-              y: window.innerHeight + 100,
-            }}
-            animate={{
-              y: -100,
-              x: Math.random() * window.innerWidth,
-            }}
-            transition={{
-              duration: Math.random() * 20 + 20,
-              repeat: Infinity,
-              delay: Math.random() * 5,
-              ease: 'linear'
-            }}
-          >
-            <Heart size={Math.random() * 40 + 20} fill="currentColor" />
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Main content */}
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="relative z-10 text-center px-4 py-20"
-      >
-        {/* Decorative element */}
+      <div className="relative z-10 w-full max-w-screen-xl mx-auto">
+        {/* Elevated date typography */}
         <motion.div
-          variants={itemVariants}
-          className="flex justify-center mb-6"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
+          className="text-center mb-8 md:mb-16"
         >
-          <motion.div
-            animate={{
-              scale: [1, 1.1, 1],
-              rotate: [0, 5, -5, 0]
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          >
-            <Heart className="w-16 h-16 text-white/80 fill-white/40" />
-          </motion.div>
+          <span className="text-label tracking-[0.3em]">
+            APRIL 24—25, 2026
+          </span>
         </motion.div>
 
-        {/* Names */}
-        <motion.div variants={itemVariants}>
-          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl text-white mb-4">
-            <motion.span
-              className="inline-block"
-              whileHover={{ scale: 1.05 }}
+        {/* Award-winning name display */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.5, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
+          className="text-center mb-12 md:mb-20"
+        >
+          <div className="overflow-hidden">
+            <motion.h1
+              className="type-display balance"
+              initial={{ y: 100 }}
+              animate={{ y: 0 }}
+              transition={{ duration: 1.2, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
             >
-              {content.wedding.brideName.split(' ')[0]}
-            </motion.span>
-            <motion.span
-              className="inline-block mx-4 text-3xl md:text-5xl"
-              animate={{
-                scale: [1, 1.2, 1],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            >
+              <span className="block lg:inline">{content.wedding.brideName.split(' ')[0]}</span>
+            </motion.h1>
+          </div>
+
+          <motion.div
+            className="my-6 md:my-8 lg:my-12"
+            initial={{ scale: 0, rotate: -180 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{ duration: 1, delay: 0.8, ease: [0.23, 1, 0.32, 1] }}
+          >
+            <span className="font-display text-3xl md:text-4xl lg:text-5xl font-light"
+                  style={{ fontVariationSettings: '"opsz" 9, "wght" 200' }}>
               &
-            </motion.span>
-            <motion.span
-              className="inline-block"
-              whileHover={{ scale: 1.05 }}
+            </span>
+          </motion.div>
+
+          <div className="overflow-hidden">
+            <motion.h1
+              className="type-display balance"
+              initial={{ y: 100 }}
+              animate={{ y: 0 }}
+              transition={{ duration: 1.2, delay: 0.5, ease: [0.23, 1, 0.32, 1] }}
             >
-              {content.wedding.groomName.split(' ')[0]}
-            </motion.span>
-          </h1>
+              <span className="block lg:inline">{content.wedding.groomName.split(' ')[0]}</span>
+            </motion.h1>
+          </div>
         </motion.div>
 
-        {/* Tagline */}
-        <motion.div variants={itemVariants}>
-          <p className="text-xl md:text-2xl text-white/90 font-serif italic mb-8">
-            {content.wedding.tagline}
+        {/* Refined location */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1, ease: [0.23, 1, 0.32, 1] }}
+          className="text-center mb-12 md:mb-20"
+        >
+          <p className="lead">
+            <em>Nashik, Maharashtra</em>
           </p>
         </motion.div>
 
-        {/* Date and Location */}
+        {/* Sophisticated countdown */}
         <motion.div
-          variants={itemVariants}
-          className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 1.2, ease: [0.23, 1, 0.32, 1] }}
+          className="flex justify-center gap-8 md:gap-12 lg:gap-20 mb-12 md:mb-20"
         >
-          <div className="flex items-center gap-2 text-white/90">
-            <Calendar size={20} />
-            <span className="text-lg md:text-xl font-medium">April 24-25, 2026</span>
-          </div>
-          <div className="hidden md:block text-white/60">•</div>
-          <div className="flex items-center gap-2 text-white/90">
-            <MapPin size={20} />
-            <span className="text-lg md:text-xl font-medium">{content.wedding.location}</span>
-          </div>
+          {[
+            { value: countdown.days, label: 'Days' },
+            { value: countdown.hours, label: 'Hours' },
+            { value: countdown.minutes, label: 'Minutes' }
+          ].map((item, index) => (
+            <motion.div
+              key={item.label}
+              className="text-center"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 400 }}
+            >
+              <motion.div
+                key={item.value}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
+                className="relative"
+              >
+                <span className="font-display text-4xl md:text-5xl lg:text-7xl font-light tracking-tight"
+                      style={{ fontVariationSettings: '"opsz" 72, "wght" 350' }}>
+                  {String(item.value).padStart(2, '0')}
+                </span>
+              </motion.div>
+              <p className="text-label mt-2 md:mt-3 text-[10px] md:text-xs">
+                {item.label}
+              </p>
+            </motion.div>
+          ))}
         </motion.div>
 
-        {/* Countdown */}
-        <motion.div variants={itemVariants} className="mb-12">
-          <p className="text-white/80 text-sm md:text-base uppercase tracking-widest mb-6">
-            Counting down to our special day
-          </p>
-          <div className="flex justify-center gap-4 md:gap-6">
-            <CountdownUnit value={countdown.days} label="Days" />
-            <CountdownUnit value={countdown.hours} label="Hours" />
-            <CountdownUnit value={countdown.minutes} label="Minutes" />
-            <CountdownUnit value={countdown.seconds} label="Seconds" />
-          </div>
-        </motion.div>
-
-        {/* CTA Buttons */}
+        {/* Award-winning CTA buttons */}
         <motion.div
-          variants={itemVariants}
-          className="flex flex-col sm:flex-row gap-4 justify-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1.5, ease: [0.23, 1, 0.32, 1] }}
+          className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center items-center"
         >
-          <Button
-            variant="primary"
-            size="large"
-            onClick={() => trackClick('Hero RSVP Button')}
-            className="bg-white text-primary-600 hover:bg-white/90"
-            trackingLabel="Hero RSVP"
+          <button
+            onClick={() => {
+              trackClick('Hero RSVP Button');
+              navigate('/rsvp');
+            }}
+            className="btn-primary group w-full sm:w-auto"
           >
-            RSVP Now
-          </Button>
-          <Button
-            variant="outline"
-            size="large"
-            onClick={() => trackClick('Hero View Events Button')}
-            className="border-white text-white hover:bg-white/10"
-            trackingLabel="Hero View Events"
+            <span className="relative z-10">Confirm Attendance</span>
+          </button>
+
+          <button
+            onClick={() => {
+              trackClick('Hero View Details Button');
+              navigate('/events');
+            }}
+            className="btn-secondary w-full sm:w-auto"
           >
-            View Events
-          </Button>
+            View Schedule
+          </button>
+        </motion.div>
+      </div>
+
+      {/* Minimal scroll indicator */}
+      <motion.div
+        className="absolute bottom-8 md:bottom-12 left-1/2 -translate-x-1/2"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.4 }}
+        transition={{ duration: 1, delay: 2 }}
+      >
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          className="flex flex-col items-center gap-2 cursor-pointer"
+          onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+        >
+          <span className="text-label text-[10px] md:text-xs">Scroll</span>
+          <svg width="1" height="40" viewBox="0 0 1 40" fill="none">
+            <line x1="0.5" y1="0" x2="0.5" y2="40" stroke="currentColor" strokeDasharray="2 2" opacity="0.3"/>
+          </svg>
         </motion.div>
       </motion.div>
-
-      {/* Scroll indicator */}
-      <motion.button
-        onClick={scrollToNext}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/80 hover:text-white transition-colors"
-        animate={{
-          y: [0, 10, 0],
-        }}
-        transition={{
-          duration: 1.5,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      >
-        <div className="flex flex-col items-center gap-2">
-          <span className="text-sm uppercase tracking-wider">{content.hero.scrollText}</span>
-          <ChevronDown size={24} />
-        </div>
-      </motion.button>
     </section>
   );
 };

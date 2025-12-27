@@ -1,10 +1,8 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { Calendar, MapPin, Users, Gift, Heart, Camera } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import Hero from '../components/sections/Hero';
-import Card from '../components/ui/Card';
-import content from '../data/content.json';
 import { trackPageView, trackClick } from '../services/analytics';
 
 const HomePage = () => {
@@ -14,232 +12,167 @@ const HomePage = () => {
     trackPageView('Home');
   }, []);
 
-  const navigationCards = [
+  const sections = [
     {
-      title: 'Events Schedule',
-      description: 'Two days of celebration and joy',
-      icon: Calendar,
+      number: '01',
+      title: 'Schedule',
+      subtitle: 'Two days of celebration',
       path: '/events',
-      color: 'from-primary-400 to-primary-600',
-      delay: 0.1
+      description: 'Sangeet, Ceremony & Reception'
     },
     {
+      number: '02',
       title: 'RSVP',
-      description: 'Let us know you\'re coming',
-      icon: Users,
+      subtitle: 'Confirm your attendance',
       path: '/rsvp',
-      color: 'from-accent-400 to-accent-600',
-      highlight: true,
-      delay: 0.2
+      description: 'Let us know you\'ll be there',
+      highlight: true
     },
     {
-      title: 'Travel & Stay',
-      description: 'Plan your journey to Nashik',
-      icon: MapPin,
+      number: '03',
+      title: 'Travel',
+      subtitle: 'Plan your journey',
       path: '/travel',
-      color: 'from-secondary-400 to-secondary-600',
-      delay: 0.3
+      description: 'Flights, Hotels & Transport'
     },
     {
-      title: 'Traditions',
-      description: 'Learn about our ceremonies',
-      icon: Gift,
+      number: '04',
+      title: 'Guide',
+      subtitle: 'Ceremony traditions',
       path: '/ceremonies',
-      color: 'from-primary-400 to-accent-400',
-      delay: 0.4
+      description: 'Understanding our rituals'
     }
   ];
 
-  const handleCardClick = (card) => {
-    trackClick('Navigation Card', { title: card.title, path: card.path });
-    navigate(card.path);
+  const handleSectionClick = (section) => {
+    trackClick('Section Card', { title: section.title, path: section.path });
+    navigate(section.path);
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="pt-0"
-    >
-      {/* Hero Section */}
+    <>
       <Hero />
 
-      {/* Navigation Cards Section */}
-      <section className="section-padding -mt-20 relative z-20">
-        <div className="container-custom mx-auto">
-          {/* Welcome Message */}
+      {/* Minimal Sections */}
+      <section className="bg-white py-32">
+        <div className="max-w-screen-lg mx-auto px-6 lg:px-12">
+          <div className="space-y-px">
+            {sections.map((section, index) => (
+              <motion.div
+                key={section.path}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.6, delay: index * 0.05 }}
+                onClick={() => handleSectionClick(section)}
+                className={`
+                  group bg-white border-b border-primary-100 py-12 cursor-pointer transition-all duration-300
+                  hover:pl-4
+                  ${section.highlight ? 'border-primary-300' : ''}
+                `}
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-baseline gap-8">
+                    <span className="text-primary-300 font-light text-xs">
+                      {section.number}
+                    </span>
+                    <div>
+                      <h3 className="text-2xl font-serif font-extralight text-primary-900 mb-1">
+                        {section.title}
+                      </h3>
+                      <p className="text-primary-400 font-light text-xs uppercase tracking-[0.2em]">
+                        {section.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  <ArrowRight
+                    className="text-primary-300 group-hover:text-primary-900 transition-all duration-300 group-hover:translate-x-1"
+                    size={16}
+                    strokeWidth={1}
+                  />
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Essential Information - Ultra Minimal */}
+      <section className="bg-white py-32 border-t border-primary-100">
+        <div className="max-w-screen-md mx-auto px-6 lg:px-12 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-12"
           >
-            <Heart className="w-12 h-12 text-primary-400 fill-primary-200 mx-auto mb-4" />
-            <h2 className="text-3xl md:text-4xl font-serif text-neutral-800 mb-4">
-              {content.messages.welcome}
+            <h2 className="text-4xl lg:text-5xl font-serif font-extralight text-primary-900 mb-20">
+              Details
             </h2>
-            <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
-              Mark your calendar for April 24-25, 2026, and join us in Nashik for an unforgettable celebration
-              filled with love, tradition, and joy.
-            </p>
-          </motion.div>
 
-          {/* Navigation Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {navigationCards.map((card) => {
-              const Icon = card.icon;
-              return (
-                <Card
-                  key={card.path}
-                  hover
-                  delay={card.delay}
-                  onClick={() => handleCardClick(card)}
-                  className={`
-                    relative overflow-hidden group cursor-pointer
-                    ${card.highlight ? 'ring-2 ring-primary-400 ring-offset-2' : ''}
-                  `}
-                >
-                  {card.highlight && (
-                    <motion.div
-                      className="absolute top-0 right-0 bg-gradient-to-br from-primary-400 to-accent-400 text-white text-xs px-3 py-1 rounded-bl-lg font-medium"
-                      animate={{
-                        scale: [1, 1.05, 1],
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                      }}
-                    >
-                      Important
-                    </motion.div>
-                  )}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+              <div>
+                <p className="text-[10px] font-sans uppercase tracking-[0.3em] text-primary-400 mb-3">
+                  Venue
+                </p>
+                <p className="text-lg font-light text-primary-900">
+                  Radisson Nashik
+                </p>
+              </div>
 
-                  <div className="relative z-10">
-                    <div className={`
-                      w-14 h-14 rounded-xl bg-gradient-to-br ${card.color}
-                      flex items-center justify-center mb-4
-                      group-hover:scale-110 transition-transform duration-300
-                    `}>
-                      <Icon className="w-7 h-7 text-white" />
-                    </div>
+              <div>
+                <p className="text-[10px] font-sans uppercase tracking-[0.3em] text-primary-400 mb-3">
+                  When
+                </p>
+                <p className="text-lg font-light text-primary-900">
+                  April 24—25, 2026
+                </p>
+              </div>
 
-                    <h3 className="text-xl font-serif text-neutral-800 mb-2">
-                      {card.title}
-                    </h3>
-                    <p className="text-neutral-600">
-                      {card.description}
-                    </p>
+              <div>
+                <p className="text-[10px] font-sans uppercase tracking-[0.3em] text-primary-400 mb-3">
+                  Where
+                </p>
+                <p className="text-lg font-light text-primary-900">
+                  Nashik, Maharashtra
+                </p>
+              </div>
+            </div>
 
-                    <div className="mt-4 text-primary-600 font-medium flex items-center gap-2">
-                      <span>Explore</span>
-                      <motion.span
-                        animate={{ x: [0, 5, 0] }}
-                        transition={{
-                          duration: 1.5,
-                          repeat: Infinity,
-                          ease: "easeInOut"
-                        }}
-                      >
-                        →
-                      </motion.span>
-                    </div>
-                  </div>
-
-                  {/* Hover gradient overlay */}
-                  <div className={`
-                    absolute inset-0 bg-gradient-to-br ${card.color} opacity-0
-                    group-hover:opacity-5 transition-opacity duration-300
-                  `} />
-                </Card>
-              );
-            })}
-          </div>
-
-          {/* Additional Info Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-            {/* Venue Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className="bg-gradient-to-br from-white to-primary-50 rounded-xl p-6 shadow-lg"
-            >
-              <MapPin className="w-8 h-8 text-primary-500 mb-3" />
-              <h3 className="font-serif text-lg text-neutral-800 mb-2">Venue</h3>
-              <p className="text-neutral-600 font-medium">{content.venue.name}</p>
-              <p className="text-sm text-neutral-500">{content.venue.address}</p>
-            </motion.div>
-
-            {/* Date Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="bg-gradient-to-br from-white to-accent-50 rounded-xl p-6 shadow-lg"
-            >
-              <Calendar className="w-8 h-8 text-accent-500 mb-3" />
-              <h3 className="font-serif text-lg text-neutral-800 mb-2">Save the Date</h3>
-              <p className="text-neutral-600 font-medium">April 24-25, 2026</p>
-              <p className="text-sm text-neutral-500">Two days of celebration</p>
-            </motion.div>
-
-            {/* Gallery Teaser */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.7 }}
-              className="bg-gradient-to-br from-white to-secondary-50 rounded-xl p-6 shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
+            <motion.button
               onClick={() => {
-                trackClick('Gallery Teaser');
-                navigate('/gallery');
+                trackClick('Details RSVP Button');
+                navigate('/rsvp');
               }}
+              className="btn-primary mt-20"
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.99 }}
             >
-              <Camera className="w-8 h-8 text-secondary-500 mb-3" />
-              <h3 className="font-serif text-lg text-neutral-800 mb-2">Gallery</h3>
-              <p className="text-neutral-600 font-medium">Coming Soon</p>
-              <p className="text-sm text-neutral-500">Beautiful moments await</p>
-            </motion.div>
-          </div>
+              RSVP
+            </motion.button>
+          </motion.div>
+        </div>
+      </section>
 
-          {/* Quote Section */}
+      {/* Closing Statement */}
+      <section className="bg-white py-32 border-t border-primary-100">
+        <div className="max-w-screen-md mx-auto px-6 lg:px-12 text-center">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.8 }}
-            className="mt-20 text-center"
+            transition={{ duration: 1 }}
           >
-            <div className="max-w-3xl mx-auto">
-              <motion.div
-                animate={{
-                  scale: [1, 1.05, 1],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-                className="inline-block"
-              >
-                <Heart className="w-8 h-8 text-primary-400 fill-primary-400 mx-auto mb-4" />
-              </motion.div>
-              <p className="text-2xl md:text-3xl font-serif italic text-neutral-700">
-                "Two souls, one heart, infinite love"
-              </p>
-              <p className="mt-4 text-neutral-600">
-                We can't wait to celebrate this special moment with you
-              </p>
-            </div>
+            <p className="text-2xl lg:text-3xl font-serif font-extralight leading-relaxed text-primary-900">
+              Your presence at our wedding
+              <br />
+              is the greatest gift of all
+            </p>
           </motion.div>
         </div>
       </section>
-    </motion.div>
+    </>
   );
 };
 

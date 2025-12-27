@@ -5,17 +5,17 @@
     "language": "en"
   },
   "wedding": {
-    "brideName": "[Bride Name]",
-    "brideNameIsPlaceholder": true,
-    "groomName": "[Groom Name]",
-    "groomNameIsPlaceholder": true,
+    "brideName": "Prerna Bhatia",
+    "brideNameIsPlaceholder": false,
+    "groomName": "Arpit Agarwal",
+    "groomNameIsPlaceholder": false,
     "date": "2026-04-25",
     "endDate": "2026-04-26",
     "location": "Nashik, Maharashtra",
     "tagline": "Together with our families, we invite you to celebrate our union",
     "taglineIsPlaceholder": true,
-    "hashtag": "#BrideGroomWedding2026",
-    "hashtagIsPlaceholder": true
+    "hashtag": "#PrernaArpitWedding2026",
+    "hashtagIsPlaceholder": false
   },
   "hero": {
     "title": "We're Getting Married!",

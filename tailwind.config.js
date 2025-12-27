@@ -7,76 +7,52 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Pastel wedding colors - Rajasthani-Sindhi inspired
+        // Ultra-minimalist palette - almost monochrome with subtle warmth
         primary: {
-          50: '#fff5f7',
-          100: '#ffe8ed',
-          200: '#ffd6e8',  // Primary pastel pink
-          300: '#ffb8d3',
-          400: '#ff8ab5',
-          500: '#ff5897',
-          600: '#f43875',
-          700: '#dc1e5a',
-          800: '#b81649',
-          900: '#9b1340',
+          DEFAULT: '#1a1a1a',
+          50: '#fafafa',
+          100: '#f7f7f7',
+          200: '#efefef',
+          300: '#e0e0e0',
+          400: '#b8b8b8',
+          500: '#8a8a8a',
+          600: '#5c5c5c',
+          700: '#3d3d3d',
+          800: '#2a2a2a',
+          900: '#1a1a1a',
+          950: '#0d0d0d',
         },
-        secondary: {
-          50: '#fffef5',
-          100: '#fffce8',
-          200: '#f4e4c1',  // Pastel gold/beige
-          300: '#e8dcc4',
-          400: '#d4c5a5',
-          500: '#c0ae87',
-          600: '#a8956b',
-          700: '#8b7656',
-          800: '#735f49',
-          900: '#61503f',
-        },
+        // Extremely subtle accent - barely there
         accent: {
-          50: '#fff8f5',
-          100: '#ffefe8',
-          200: '#ffddd2',
-          300: '#e8a598',  // Muted coral
-          400: '#d4a5a5',
-          500: '#c08a8a',
-          600: '#a86f6f',
-          700: '#8b5757',
-          800: '#734848',
-          900: '#613d3d',
+          DEFAULT: '#9b8b7a', // Very muted warm gray
+          light: '#b5a89a',
+          dark: '#7a6d5f',
+          muted: '#faf8f6',
         },
-        neutral: {
-          50: '#fafafa',   // Off-white
-          100: '#f5f5f5',
-          200: '#e5e5e5',
-          300: '#d4d4d4',
-          400: '#a3a3a3',
-          500: '#737373',
-          600: '#525252',
-          700: '#404040',
-          800: '#262626',
-          900: '#171717',
-        },
-        success: '#b8e6d5',  // Soft mint green for RSVP
-        error: '#f4a5a5',    // Soft red for errors
+        // Off-white backgrounds
+        cream: '#fcfcfc',
+        sand: '#faf9f8',
+        stone: '#f5f4f2',
       },
       fontFamily: {
-        // Elegant serif for headings
-        serif: ['Playfair Display', 'Cormorant Garamond', 'Georgia', 'serif'],
-        // Clean sans-serif for body
-        sans: ['Inter', 'Montserrat', 'system-ui', 'sans-serif'],
-        // Decorative for special elements
-        display: ['Dancing Script', 'Great Vibes', 'cursive'],
-        // For Hindi/Devanagari text
-        hindi: ['Noto Sans Devanagari', 'Poppins', 'sans-serif'],
+        sans: ['Inter Tight', 'system-ui', '-apple-system', 'sans-serif'],
+        serif: ['Instrument Serif', 'Georgia', 'serif'],
+        display: ['Fraunces', 'Georgia', 'serif'],
+      },
+      fontSize: {
+        '10xl': '10rem',
+        '11xl': '12rem',
+        '12xl': '14rem',
+      },
+      letterSpacing: {
+        tightest: '-.075em',
+        widest: '.25em',
       },
       animation: {
-        'fade-in': 'fadeIn 0.8s ease-out',
-        'fade-up': 'fadeUp 0.8s ease-out',
-        'fade-down': 'fadeDown 0.8s ease-out',
-        'scale-in': 'scaleIn 0.6s ease-out',
-        'float': 'float 3s ease-in-out infinite',
-        'pulse-soft': 'pulseSoft 2s ease-in-out infinite',
-        'countdown': 'flip 0.6s ease-out',
+        'fade-in': 'fadeIn 1s ease-out',
+        'fade-up': 'fadeUp 1s ease-out',
+        'slide-in': 'slideIn 0.5s ease-out',
+        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
       keyframes: {
         fadeIn: {
@@ -84,34 +60,13 @@ export default {
           '100%': { opacity: '1' },
         },
         fadeUp: {
-          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '0%': { opacity: '0', transform: 'translateY(30px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
-        fadeDown: {
-          '0%': { opacity: '0', transform: 'translateY(-20px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
+        slideIn: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(0)' },
         },
-        scaleIn: {
-          '0%': { transform: 'scale(0.9)', opacity: '0' },
-          '100%': { transform: 'scale(1)', opacity: '1' },
-        },
-        float: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-10px)' },
-        },
-        pulseSoft: {
-          '0%, 100%': { opacity: '1' },
-          '50%': { opacity: '0.8' },
-        },
-        flip: {
-          '0%': { transform: 'rotateX(0deg)' },
-          '100%': { transform: 'rotateX(360deg)' },
-        },
-      },
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'hero-pattern': "url('/src/assets/images/pattern.svg')",
-        'hero-gradient': 'linear-gradient(135deg, #ffd6e8 0%, #f4e4c1 50%, #e8a598 100%)',
       },
       spacing: {
         '18': '4.5rem',
@@ -123,6 +78,10 @@ export default {
       screens: {
         'xs': '475px',
         '3xl': '1920px',
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'noise': "url('data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E')",
       },
     },
   },

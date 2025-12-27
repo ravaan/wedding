@@ -1,122 +1,357 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=Dancing+Script:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Award-winning Typography System */
 @layer base {
+  :root {
+    /* Sophisticated type scale */
+    --type-scale-ratio: 1.25;
+    --type-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+    --type-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+    --type-sm: clamp(0.875rem, 0.85rem + 0.125vw, 0.9375rem);
+    --type-lg: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+    --type-xl: clamp(1.5rem, 1.35rem + 0.75vw, 2rem);
+    --type-2xl: clamp(2rem, 1.75rem + 1.25vw, 2.75rem);
+    --type-3xl: clamp(2.5rem, 2rem + 2.5vw, 4rem);
+    --type-4xl: clamp(3.5rem, 2.5rem + 5vw, 6rem);
+    --type-5xl: clamp(4.5rem, 3rem + 7.5vw, 8rem);
+    --type-display: clamp(6rem, 4rem + 10vw, 12rem);
+
+    /* Refined spacing */
+    --space-xs: clamp(0.5rem, 0.45rem + 0.25vw, 0.75rem);
+    --space-sm: clamp(1rem, 0.9rem + 0.5vw, 1.5rem);
+    --space-md: clamp(2rem, 1.75rem + 1.25vw, 3rem);
+    --space-lg: clamp(3rem, 2.5rem + 2.5vw, 5rem);
+    --space-xl: clamp(4rem, 3rem + 5vw, 8rem);
+    --space-2xl: clamp(6rem, 4rem + 10vw, 12rem);
+
+    /* Letter spacing values */
+    --letter-tight: -0.04em;
+    --letter-normal: -0.02em;
+    --letter-loose: 0.025em;
+    --letter-wide: 0.08em;
+    --letter-wider: 0.15em;
+    --letter-widest: 0.25em;
+  }
+
   html {
     scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "ss01" 1;
   }
 
   body {
-    @apply bg-neutral-50 text-neutral-800 font-sans antialiased;
+    @apply bg-white text-primary-900;
+    font-family: 'Inter Tight', system-ui, sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: var(--letter-normal);
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-serif;
+  ::selection {
+    @apply bg-primary-900 text-white;
+  }
+
+  /* Display Typography - Award-winning large type */
+  .type-display {
+    font-family: 'Fraunces', serif;
+    font-size: var(--type-display);
+    font-weight: 300;
+    font-optical-sizing: auto;
+    font-variation-settings: "opsz" 144, "wght" 300;
+    line-height: 0.85;
+    letter-spacing: var(--letter-tight);
+  }
+
+  /* Refined Heading Hierarchy */
+  h1, .h1 {
+    font-family: 'Fraunces', serif;
+    font-size: var(--type-4xl);
+    font-weight: 400;
+    font-optical-sizing: auto;
+    font-variation-settings: "opsz" 72, "wght" 400;
+    line-height: 1;
+    letter-spacing: var(--letter-tight);
+    @apply mb-8;
+  }
+
+  h2, .h2 {
+    font-family: 'Fraunces', serif;
+    font-size: var(--type-3xl);
+    font-weight: 450;
+    font-variation-settings: "opsz" 48, "wght" 450;
+    line-height: 1.1;
+    letter-spacing: var(--letter-tight);
+    @apply mb-6;
+  }
+
+  h3, .h3 {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: var(--type-2xl);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: var(--letter-normal);
+    @apply mb-4;
+  }
+
+  h4, .h4 {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: var(--type-xl);
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: var(--letter-normal);
+    @apply mb-3;
+  }
+
+  /* Editorial paragraph styles */
+  .lead {
+    font-family: 'Instrument Serif', serif;
+    font-size: var(--type-lg);
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: 0;
+  }
+
+  p {
+    font-size: var(--type-base);
+    line-height: 1.7;
+    @apply mb-4;
+  }
+
+  /* Small text hierarchy */
+  .text-label {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: var(--type-xs);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: var(--letter-widest);
+  }
+
+  .text-caption {
+    font-size: var(--type-sm);
+    line-height: 1.5;
+    @apply text-primary-600;
+  }
+
+  /* Sophisticated emphasis */
+  em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    letter-spacing: 0.01em;
+  }
+
+  strong {
+    font-weight: 600;
+    letter-spacing: -0.01em;
   }
 }
 
 @layer components {
+  /* Award-winning button designs */
   .btn-primary {
-    @apply px-6 py-3 bg-primary-400 hover:bg-primary-500 text-white font-medium rounded-lg transition-all duration-200 transform hover:scale-105 hover:shadow-lg;
+    @apply relative overflow-hidden;
+    font-family: 'Inter Tight', sans-serif;
+    font-size: var(--type-sm);
+    font-weight: 500;
+    letter-spacing: var(--letter-wider);
+    text-transform: uppercase;
+    padding: 1.125rem 2.5rem;
+    background: linear-gradient(to right, #1a1a1a 50%, #0a0a0a 50%);
+    background-size: 200% 100%;
+    background-position: left bottom;
+    color: white;
+    border: 0;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .btn-primary:hover {
+    background-position: right bottom;
+    letter-spacing: var(--letter-widest);
   }
 
   .btn-secondary {
-    @apply px-6 py-3 bg-secondary-300 hover:bg-secondary-400 text-neutral-800 font-medium rounded-lg transition-all duration-200 transform hover:scale-105 hover:shadow-lg;
+    font-family: 'Inter Tight', sans-serif;
+    font-size: var(--type-sm);
+    font-weight: 500;
+    letter-spacing: var(--letter-wider);
+    text-transform: uppercase;
+    padding: 1rem 2.25rem;
+    background: transparent;
+    color: #1a1a1a;
+    border: 1px solid #1a1a1a;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
   }
 
-  .btn-outline {
-    @apply px-6 py-3 border-2 border-primary-400 text-primary-600 hover:bg-primary-400 hover:text-white font-medium rounded-lg transition-all duration-200;
+  .btn-secondary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: #1a1a1a;
+    transition: width 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    z-index: -1;
   }
 
-  .card {
-    @apply bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 p-6;
+  .btn-secondary:hover {
+    color: white;
   }
 
-  .section-padding {
-    @apply px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20;
+  .btn-secondary:hover::before {
+    width: 100%;
   }
 
-  .container-custom {
-    @apply max-w-7xl mx-auto;
+  /* Elegant link styles */
+  .link-elegant {
+    position: relative;
+    font-weight: 400;
+    text-decoration: none;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 1px;
+    transition: background-size 0.3s cubic-bezier(0.23, 1, 0.32, 1);
   }
 
-  .text-gradient {
-    @apply bg-gradient-to-r from-primary-500 to-accent-500 bg-clip-text text-transparent;
+  .link-elegant:hover {
+    background-size: 100% 1px;
+  }
+
+  /* Sophisticated cards */
+  .card-editorial {
+    @apply bg-white;
+    padding: var(--space-md);
+    border: 0.5px solid rgba(0, 0, 0, 0.08);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .card-editorial:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Text blocks with rhythm */
+  .prose-elegant {
+    font-family: 'Instrument Serif', serif;
+    font-size: var(--type-base);
+    line-height: 1.75;
+    letter-spacing: 0.01em;
+  }
+
+  .prose-elegant p {
+    margin-bottom: 1.5em;
+  }
+
+  .prose-elegant h2 {
+    font-family: 'Fraunces', serif;
+    margin-top: 2em;
+    margin-bottom: 0.75em;
   }
 }
 
 @layer utilities {
-  .animation-delay-200 {
-    animation-delay: 200ms;
+  /* Refined animations */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
   }
 
-  .animation-delay-400 {
-    animation-delay: 400ms;
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
   }
 
-  .animation-delay-600 {
-    animation-delay: 600ms;
+  .animate-reveal {
+    animation: reveal 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
   }
 
-  .animation-delay-800 {
-    animation-delay: 800ms;
+  @keyframes reveal {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
-  .animation-delay-1000 {
-    animation-delay: 1000ms;
+  /* Subtle parallax */
+  .parallax-slow {
+    transform: translateY(calc(var(--scroll) * 0.3));
   }
 
-  /* Hide scrollbar but keep functionality */
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+  .parallax-fast {
+    transform: translateY(calc(var(--scroll) * 0.5));
   }
 
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
+  /* Typography utilities */
+  .balance {
+    text-wrap: balance;
+  }
+
+  .optical-adjust {
+    font-kerning: normal;
+    font-variant-ligatures: common-ligatures contextual;
+    font-feature-settings: "kern", "liga", "clig", "calt";
+  }
+
+  /* Elegant transitions */
+  .transition-elegant {
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  /* Sophisticated hover states */
+  .hover-lift {
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
   }
 }
 
-/* Custom animations for wedding elements */
-.confetti {
-  animation: confetti-fall 3s linear infinite;
+/* Scrollbar styling for elegance */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
 
-@keyframes confetti-fall {
-  0% {
-    transform: translateY(-100vh) rotate(0deg);
-    opacity: 1;
+::-webkit-scrollbar-track {
+  background: #f9f9f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1a1a1a;
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #000;
+}
+
+/* Focus styles for accessibility with style */
+:focus-visible {
+  outline: 2px solid #1a1a1a;
+  outline-offset: 4px;
+}
+
+/* Print styles for wedding materials */
+@media print {
+  body {
+    font-family: 'Instrument Serif', serif;
+    font-size: 11pt;
+    line-height: 1.5;
   }
-  100% {
-    transform: translateY(100vh) rotate(720deg);
-    opacity: 0;
-  }
-}
 
-/* Loading spinner */
-.spinner {
-  border: 3px solid rgba(255, 216, 232, 0.3);
-  border-radius: 50%;
-  border-top: 3px solid #ff8ab5;
-  width: 40px;
-  height: 40px;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+  h1, h2, h3 {
+    font-family: 'Fraunces', serif;
+    page-break-after: avoid;
   }
 }
