@@ -1,0 +1,568 @@
+{
+  "meta": {
+    "lastUpdated": "2024-12-28",
+    "version": "1.0.0",
+    "language": "en"
+  },
+  "wedding": {
+    "brideName": "[Bride Name]",
+    "brideNameIsPlaceholder": true,
+    "groomName": "[Groom Name]",
+    "groomNameIsPlaceholder": true,
+    "date": "2026-04-25",
+    "endDate": "2026-04-26",
+    "location": "Nashik, Maharashtra",
+    "tagline": "Together with our families, we invite you to celebrate our union",
+    "taglineIsPlaceholder": true,
+    "hashtag": "#BrideGroomWedding2026",
+    "hashtagIsPlaceholder": true
+  },
+  "hero": {
+    "title": "We're Getting Married!",
+    "titleIsPlaceholder": true,
+    "subtitle": "Join us for two days of love, laughter, and celebration",
+    "subtitleIsPlaceholder": true,
+    "heroImage": "/placeholder-hero.jpg",
+    "heroImageIsPlaceholder": true,
+    "scrollText": "Scroll to Explore Our Journey"
+  },
+  "events": {
+    "day1": {
+      "date": "2026-04-24",
+      "title": "Day 1 - Sangeet & Party",
+      "events": [
+        {
+          "id": "sangeet",
+          "name": "Sangeet Ceremony",
+          "nameHindi": "संगीत समारोह",
+          "time": "7:00 PM",
+          "timeIsPlaceholder": true,
+          "duration": "3 hours",
+          "venue": "Radisson Nashik",
+          "venueAddress": "Mumbai-Agra Road, Nashik, Maharashtra",
+          "venueAddressIsPlaceholder": true,
+          "description": "An evening of music, dance, and performances by family and friends",
+          "descriptionIsPlaceholder": true,
+          "dressCode": "Indo-Western, Colorful & Festive",
+          "dressCodeIsPlaceholder": true,
+          "icon": "music"
+        },
+        {
+          "id": "party",
+          "name": "Cocktail Party",
+          "nameHindi": "पार्टी",
+          "time": "10:00 PM",
+          "timeIsPlaceholder": true,
+          "duration": "Till late",
+          "venue": "Radisson Nashik",
+          "venueAddress": "Mumbai-Agra Road, Nashik, Maharashtra",
+          "venueAddressIsPlaceholder": true,
+          "description": "Dance the night away with DJ, drinks, and delicious food",
+          "descriptionIsPlaceholder": true,
+          "dressCode": "Party Wear, Glamorous",
+          "dressCodeIsPlaceholder": true,
+          "icon": "glass"
+        }
+      ]
+    },
+    "day2": {
+      "date": "2026-04-25",
+      "title": "Day 2 - Wedding Day",
+      "events": [
+        {
+          "id": "bhaat",
+          "name": "Bhaat Ceremony",
+          "nameHindi": "भात समारोह",
+          "time": "8:00 AM",
+          "timeIsPlaceholder": true,
+          "duration": "2 hours",
+          "venue": "Radisson Nashik",
+          "venueAddress": "Mumbai-Agra Road, Nashik, Maharashtra",
+          "venueAddressIsPlaceholder": true,
+          "description": "Traditional Marwadi pre-wedding ritual where the bride is blessed with turmeric and oil",
+          "descriptionIsPlaceholder": false,
+          "dressCode": "Traditional Indian Attire",
+          "dressCodeIsPlaceholder": true,
+          "icon": "flower"
+        },
+        {
+          "id": "haldi",
+          "name": "Haldi Ceremony",
+          "nameHindi": "हल्दी समारोह",
+          "time": "10:30 AM",
+          "timeIsPlaceholder": true,
+          "duration": "1.5 hours",
+          "venue": "Radisson Nashik",
+          "venueAddress": "Mumbai-Agra Road, Nashik, Maharashtra",
+          "venueAddressIsPlaceholder": true,
+          "description": "Auspicious turmeric ceremony to bless the bride and groom",
+          "descriptionIsPlaceholder": false,
+          "dressCode": "Yellow/Light Colors (will get turmeric stains)",
+          "dressCodeIsPlaceholder": false,
+          "icon": "sun"
+        },
+        {
+          "id": "baraat",
+          "name": "Baraat Procession",
+          "nameHindi": "बारात",
+          "time": "4:00 PM",
+          "timeIsPlaceholder": true,
+          "duration": "1.5 hours",
+          "venue": "Starting Point TBD",
+          "venueAddress": "Route details will be shared soon",
+          "venueAddressIsPlaceholder": true,
+          "description": "Groom's wedding procession with music, dancing, and celebration",
+          "descriptionIsPlaceholder": false,
+          "dressCode": "Festive Traditional Wear",
+          "dressCodeIsPlaceholder": true,
+          "routeMap": {
+            "start": { "lat": 19.9975, "lng": 73.7898 },
+            "end": { "lat": 20.0075, "lng": 73.7998 },
+            "startIsPlaceholder": true,
+            "endIsPlaceholder": true
+          },
+          "icon": "horse"
+        },
+        {
+          "id": "jaimala",
+          "name": "Jaimala Ceremony",
+          "nameHindi": "जयमाला",
+          "time": "6:00 PM",
+          "timeIsPlaceholder": true,
+          "duration": "30 minutes",
+          "venue": "Radisson Nashik",
+          "venueAddress": "Mumbai-Agra Road, Nashik, Maharashtra",
+          "venueAddressIsPlaceholder": true,
+          "description": "Exchange of floral garlands symbolizing acceptance and respect",
+          "descriptionIsPlaceholder": false,
+          "dressCode": "Traditional Wedding Attire",
+          "dressCodeIsPlaceholder": true,
+          "icon": "flower2"
+        },
+        {
+          "id": "shaadi",
+          "name": "Wedding Ceremony",
+          "nameHindi": "विवाह संस्कार",
+          "time": "7:30 PM",
+          "timeIsPlaceholder": true,
+          "duration": "3 hours",
+          "venue": "Radisson Nashik",
+          "venueAddress": "Mumbai-Agra Road, Nashik, Maharashtra",
+          "venueAddressIsPlaceholder": true,
+          "description": "Sacred wedding rituals including Pheras around the holy fire",
+          "descriptionIsPlaceholder": false,
+          "dressCode": "Traditional Formal Attire",
+          "dressCodeIsPlaceholder": true,
+          "icon": "flame"
+        },
+        {
+          "id": "reception",
+          "name": "Reception & Dinner",
+          "nameHindi": "स्वागत समारोह",
+          "time": "8:30 PM onwards",
+          "timeIsPlaceholder": true,
+          "duration": "Till midnight",
+          "venue": "Radisson Nashik",
+          "venueAddress": "Mumbai-Agra Road, Nashik, Maharashtra",
+          "venueAddressIsPlaceholder": true,
+          "description": "Evening celebration with dinner, toasts, and dancing",
+          "descriptionIsPlaceholder": false,
+          "dressCode": "Formal/Cocktail Attire",
+          "dressCodeIsPlaceholder": true,
+          "icon": "utensils"
+        }
+      ]
+    }
+  },
+  "ceremonies": {
+    "bhaat": {
+      "title": "Bhaat Ceremony",
+      "titleHindi": "भात समारोह",
+      "significance": "The Bhaat ceremony is a cherished Marwadi and Sindhi pre-wedding ritual that marks the beginning of wedding festivities. During this sacred ceremony, the bride is blessed by married women of the family who apply turmeric paste and oil to her skin.",
+      "whatToExpect": "Guests will witness traditional songs, blessings, and the application of turmeric and oil. The atmosphere is intimate and emotional as the bride receives blessings for her new journey. Close family members participate actively while other guests observe this beautiful tradition.",
+      "participation": "Close family members will be invited to apply turmeric and offer blessings. All guests are welcome to witness this auspicious ceremony and share in the joy.",
+      "isPlaceholder": false
+    },
+    "haldi": {
+      "title": "Haldi Ceremony",
+      "titleHindi": "हल्दी समारोह",
+      "significance": "The Haldi ceremony is one of the most joyful pre-wedding rituals where turmeric paste is applied to the bride and groom for good luck and to ward off evil spirits. The yellow color symbolizes new beginnings and prosperity.",
+      "whatToExpect": "This is a fun, colorful ceremony where everyone participates in applying haldi to the couple. Expect music, laughter, and playful moments. Wear clothes you don't mind getting stained with turmeric!",
+      "participation": "All guests are encouraged to apply haldi to the bride and groom and offer their blessings. Come prepared to get a little messy and have lots of fun!",
+      "isPlaceholder": false
+    },
+    "baraat": {
+      "title": "Baraat Procession",
+      "titleHindi": "बारात",
+      "significance": "The Baraat is the groom's wedding procession, a celebration of the groom's journey to claim his bride. Traditionally, the groom arrives on a decorated horse accompanied by family and friends dancing to dhol beats.",
+      "whatToExpect": "Join the energetic procession with music, dancing, and celebration as we make our way to the wedding venue. The Baraat is all about high energy, loud music, and non-stop dancing!",
+      "participation": "Everyone is invited to dance and celebrate in the Baraat! Join the procession, dance to the dhol beats, and help create an unforgettable entrance for the groom.",
+      "isPlaceholder": false
+    },
+    "jaimala": {
+      "title": "Jaimala - Exchange of Garlands",
+      "titleHindi": "जयमाला",
+      "significance": "The Jaimala ceremony symbolizes the acceptance of one another and mutual respect. The couple exchanges floral garlands three times, signifying their union and the beginning of their journey together.",
+      "whatToExpect": "Watch as the bride and groom exchange beautiful floral garlands, often with playful moments as friends lift them to make it challenging! This ceremony is filled with cheers, laughter, and joy.",
+      "participation": "Guests cheer and celebrate as the couple exchanges garlands. Have your cameras ready for this beautiful and often amusing moment!",
+      "isPlaceholder": false
+    },
+    "shaadi": {
+      "title": "Wedding Ceremony",
+      "titleHindi": "विवाह संस्कार",
+      "significance": "The wedding ceremony is the heart of the celebration, where sacred vows are exchanged. The couple takes seven pheras (circles) around the holy fire, with each circle representing a vow for their married life.",
+      "whatToExpect": "The ceremony includes various rituals like Kanyadaan, Pheras, and Sindoor. You'll witness the sacred fire ceremony, mantras being chanted, and the couple making their seven vows. The atmosphere is spiritual and emotional.",
+      "participation": "Guests observe respectfully during the religious ceremonies. Close family members may be called to participate in specific rituals. Please maintain a peaceful atmosphere during the sacred ceremonies.",
+      "isPlaceholder": false
+    },
+    "reception": {
+      "title": "Reception Celebration",
+      "titleHindi": "स्वागत समारोह",
+      "significance": "The reception is a grand celebration where the newlyweds are formally introduced to the extended community as a married couple. It's a time for feasting, toasting, and celebrating the union.",
+      "whatToExpect": "Enjoy a lavish dinner, heartfelt speeches, cake cutting, and dancing. This is the most relaxed event where everyone can mingle, congratulate the couple, and celebrate freely.",
+      "participation": "Greet the couple, enjoy the feast, hit the dance floor, and celebrate! This is your time to personally congratulate the newlyweds and enjoy the festivities.",
+      "isPlaceholder": false
+    }
+  },
+  "venue": {
+    "name": "Radisson Nashik",
+    "nameIsPlaceholder": false,
+    "address": "Mumbai-Agra Road, Nashik, Maharashtra 422009",
+    "addressIsPlaceholder": true,
+    "phone": "+91 253 6666666",
+    "phoneIsPlaceholder": true,
+    "website": "https://www.radissonhotels.com/en-us/hotels/radisson-nashik",
+    "mapCoordinates": {
+      "lat": 20.0075,
+      "lng": 73.7998
+    },
+    "mapCoordinatesIsPlaceholder": true,
+    "directions": "Located on Mumbai-Agra Highway, 20 minutes from Nashik Airport",
+    "parking": "Ample parking available for all guests",
+    "landmarks": "Near Nashik City Center, 10 minutes from Sula Vineyards"
+  },
+  "travel": {
+    "flights": {
+      "title": "By Air",
+      "options": [
+        {
+          "route": "Bangalore to Nashik",
+          "airlines": "IndiGo, SpiceJet",
+          "duration": "2 hours direct",
+          "bookingLink": "https://www.google.com/travel/flights",
+          "isPlaceholder": true
+        },
+        {
+          "route": "Delhi to Nashik",
+          "airlines": "IndiGo, Air India",
+          "duration": "2.5 hours direct",
+          "bookingLink": "https://www.google.com/travel/flights",
+          "isPlaceholder": true
+        },
+        {
+          "route": "Via Mumbai",
+          "airlines": "Multiple options",
+          "duration": "1 hour flight + 3 hours drive",
+          "bookingLink": "https://www.google.com/travel/flights",
+          "note": "Fly to Mumbai, then taxi/car to Nashik (180 km)",
+          "isPlaceholder": true
+        }
+      ]
+    },
+    "train": {
+      "title": "By Train",
+      "stations": ["Nashik Road Station", "Nashik City Station"],
+      "majorRoutes": [
+        "Mumbai - Nashik: 3-4 hours",
+        "Delhi - Nashik: 18-20 hours",
+        "Bangalore - Nashik: 24 hours"
+      ],
+      "bookingLink": "https://www.irctc.co.in",
+      "isPlaceholder": false
+    },
+    "road": {
+      "title": "By Road",
+      "distances": [
+        { "from": "Mumbai", "distance": "180 km", "duration": "3-4 hours" },
+        { "from": "Pune", "distance": "220 km", "duration": "4-5 hours" },
+        { "from": "Surat", "distance": "160 km", "duration": "3 hours" }
+      ],
+      "highways": "NH-3 (Mumbai-Agra Highway)",
+      "isPlaceholder": false
+    }
+  },
+  "accommodation": {
+    "hotels": [
+      {
+        "name": "Radisson Nashik",
+        "category": "5 Star",
+        "distance": "Venue Hotel",
+        "priceRange": "₹5,000 - ₹8,000",
+        "amenities": ["Pool", "Spa", "Gym", "Restaurant"],
+        "bookingLink": "https://www.radissonhotels.com",
+        "phone": "+91 253 6666666",
+        "special": "Group discount available - mention wedding",
+        "isPlaceholder": false
+      },
+      {
+        "name": "Express Inn The Business Hotel",
+        "category": "4 Star",
+        "distance": "2 km from venue",
+        "priceRange": "₹3,000 - ₹5,000",
+        "amenities": ["Restaurant", "Gym", "Business Center"],
+        "bookingLink": "https://www.expressinnhotels.com",
+        "phone": "+91 253 2580000",
+        "isPlaceholder": true
+      },
+      {
+        "name": "Hotel Lily",
+        "category": "3 Star",
+        "distance": "3 km from venue",
+        "priceRange": "₹2,000 - ₹3,500",
+        "amenities": ["Restaurant", "Room Service", "Parking"],
+        "bookingLink": "#",
+        "phone": "+91 253 2571000",
+        "isPlaceholder": true
+      },
+      {
+        "name": "Ginger Nashik",
+        "category": "Budget",
+        "distance": "5 km from venue",
+        "priceRange": "₹1,500 - ₹2,500",
+        "amenities": ["Restaurant", "WiFi", "Parking"],
+        "bookingLink": "https://www.gingerhotels.com",
+        "phone": "+91 253 6688100",
+        "isPlaceholder": true
+      }
+    ]
+  },
+  "attractions": {
+    "title": "Explore Nashik",
+    "subtitle": "Things to do during your stay",
+    "places": [
+      {
+        "name": "Sula Vineyards",
+        "description": "India's premier vineyard with wine tasting tours and beautiful views",
+        "distance": "15 km from venue",
+        "timing": "11 AM - 11 PM",
+        "image": "/placeholder-sula.jpg",
+        "mapLink": "https://maps.google.com",
+        "isPlaceholder": false
+      },
+      {
+        "name": "Pandavleni Caves",
+        "description": "Ancient Buddhist caves dating back to 1st century BC",
+        "distance": "8 km from venue",
+        "timing": "8 AM - 5:30 PM",
+        "image": "/placeholder-caves.jpg",
+        "mapLink": "https://maps.google.com",
+        "isPlaceholder": false
+      },
+      {
+        "name": "Saptashrungi Devi Temple",
+        "description": "Sacred Hindu temple located on a hilltop with panoramic views",
+        "distance": "60 km from venue",
+        "timing": "5 AM - 9 PM",
+        "image": "/placeholder-temple.jpg",
+        "mapLink": "https://maps.google.com",
+        "isPlaceholder": false
+      },
+      {
+        "name": "Panchavati",
+        "description": "Religious site with temples along the Godavari river",
+        "distance": "5 km from venue",
+        "timing": "6 AM - 8 PM",
+        "image": "/placeholder-panchavati.jpg",
+        "mapLink": "https://maps.google.com",
+        "isPlaceholder": false
+      },
+      {
+        "name": "Godavari Ghat",
+        "description": "Sacred bathing ghats along the Godavari river",
+        "distance": "4 km from venue",
+        "timing": "Open 24 hours",
+        "image": "/placeholder-ghat.jpg",
+        "mapLink": "https://maps.google.com",
+        "isPlaceholder": false
+      }
+    ]
+  },
+  "weather": {
+    "april": {
+      "temperature": "25°C - 35°C",
+      "description": "Warm and dry weather, perfect for outdoor ceremonies",
+      "rainfall": "Very low chance of rain",
+      "packingSuggestions": [
+        "Light cotton clothes",
+        "Sunscreen and sunglasses",
+        "Comfortable footwear",
+        "Light jacket for evening (optional)"
+      ]
+    }
+  },
+  "dressCodes": {
+    "general": "Indian weddings are colorful celebrations. Feel free to embrace traditional Indian attire or dress in your finest formal wear.",
+    "events": {
+      "sangeet": {
+        "title": "Sangeet Night",
+        "suggestion": "Semi-formal, colorful, and comfortable for dancing",
+        "examples": "Lehenga, Saree, Indo-western, Kurta-pajama",
+        "avoid": "White, black (traditionally)"
+      },
+      "haldi": {
+        "title": "Haldi Ceremony",
+        "suggestion": "Yellow or light colors, clothes you don't mind getting stained",
+        "examples": "Simple kurta, cotton saree, casual ethnic",
+        "avoid": "Expensive clothes, dark colors"
+      },
+      "wedding": {
+        "title": "Wedding Ceremony",
+        "suggestion": "Traditional formal attire",
+        "examples": "Saree, Lehenga, Sherwani, Formal suit",
+        "avoid": "Casual wear, all black or all white"
+      },
+      "reception": {
+        "title": "Reception",
+        "suggestion": "Formal or cocktail attire",
+        "examples": "Evening gown, cocktail dress, suit, Indo-western",
+        "avoid": "Overly casual attire"
+      }
+    }
+  },
+  "faqs": [
+    {
+      "question": "What is the dress code for different events?",
+      "answer": "Each event has a suggested dress code. Sangeet is semi-formal and colorful, Haldi requires light colors (preferably yellow), the Wedding ceremony calls for traditional formal attire, and the Reception is formal/cocktail. Check the Events section for specific details."
+    },
+    {
+      "question": "Is there parking available at the venue?",
+      "answer": "Yes, ample parking is available at Radisson Nashik for all guests."
+    },
+    {
+      "question": "Can I bring a plus one?",
+      "answer": "Please refer to your invitation. If it says 'and guest', you're welcome to bring someone. Otherwise, please check with us first."
+    },
+    {
+      "question": "Are children welcome?",
+      "answer": "Absolutely! We love children and they're welcome at all events. Please mention children in your RSVP."
+    },
+    {
+      "question": "What is the best way to reach Nashik?",
+      "answer": "Direct flights are available from major cities. Mumbai airport is the nearest major hub (3 hours by road). Check our Travel section for detailed options."
+    },
+    {
+      "question": "Will food cater to dietary restrictions?",
+      "answer": "Yes, we'll have Jain, vegetarian, and non-vegetarian options. Please mention any specific dietary requirements in your RSVP."
+    },
+    {
+      "question": "Is accommodation available nearby?",
+      "answer": "Yes, we've listed several hotels at different price points. Radisson Nashik (the venue) offers special rates for wedding guests."
+    },
+    {
+      "question": "What time should I arrive for each ceremony?",
+      "answer": "Please arrive 15-30 minutes before the listed time. For Baraat, join us at the starting point 30 minutes early."
+    },
+    {
+      "question": "Will there be transportation from hotels to venue?",
+      "answer": "We're arranging shuttle service from major hotels. Details will be shared closer to the date."
+    },
+    {
+      "question": "Can I take photos during the ceremonies?",
+      "answer": "Yes! We encourage you to capture memories. We just ask that you be respectful during religious ceremonies."
+    },
+    {
+      "question": "Who can I contact for more information?",
+      "answer": "Please check our Contact section for designated points of contact for different queries."
+    },
+    {
+      "question": "Is there a gift registry?",
+      "answer": "Your presence is the only gift we need! If you wish to give something, blessings and good wishes are most appreciated."
+    }
+  ],
+  "contacts": [
+    {
+      "role": "General Queries",
+      "name": "[Contact Name]",
+      "relation": "Bride's Brother",
+      "phone": "+91 98765 43210",
+      "email": "contact@wedding.com",
+      "whatsapp": "+91 98765 43210",
+      "isPlaceholder": true
+    },
+    {
+      "role": "Travel & Accommodation",
+      "name": "[Contact Name]",
+      "relation": "Groom's Friend",
+      "phone": "+91 98765 43211",
+      "email": "travel@wedding.com",
+      "whatsapp": "+91 98765 43211",
+      "isPlaceholder": true
+    },
+    {
+      "role": "RSVP Assistance",
+      "name": "[Contact Name]",
+      "relation": "Wedding Coordinator",
+      "phone": "+91 98765 43212",
+      "email": "rsvp@wedding.com",
+      "whatsapp": "+91 98765 43212",
+      "isPlaceholder": true
+    }
+  ],
+  "rsvp": {
+    "deadline": "2026-03-24",
+    "deadlineText": "Please RSVP by March 24, 2026",
+    "formFields": {
+      "mealOptions": ["Pure Vegetarian (Jain)", "Vegetarian", "Non-Vegetarian"],
+      "eventOptions": [
+        "Day 1: Sangeet & Party",
+        "Day 2: All Ceremonies (Bhaat to Reception)",
+        "Day 2: Wedding Ceremony & Reception only"
+      ],
+      "travelModes": ["Flight", "Train", "Car/Road", "Other"],
+      "accommodationOptions": ["Yes", "No", "Already Arranged"]
+    }
+  },
+  "messages": {
+    "welcome": "Welcome to our wedding celebration! We're thrilled to share this special moment with you.",
+    "rsvpSuccess": "Thank you for your RSVP! We can't wait to celebrate with you.",
+    "rsvpClosed": "RSVP deadline has passed. Please contact us directly for any changes.",
+    "galleryComingSoon": "Beautiful moments captured will be shared here soon!",
+    "ourStoryComingSoon": "Our love story will be shared here soon!"
+  },
+  "seo": {
+    "title": "[Bride] & [Groom] - Wedding Invitation | April 24-25, 2026",
+    "description": "Join us in celebrating our wedding in Nashik on April 24-25, 2026. RSVP, view event details, and plan your visit.",
+    "keywords": "wedding, indian wedding, nashik wedding, april 2026, rajasthani wedding, sindhi wedding",
+    "image": "/og-image.jpg",
+    "url": "https://wedding.com"
+  },
+  "footer": {
+    "tagline": "We can't wait to celebrate with you!",
+    "copyright": "© 2026 [Bride] & [Groom] Wedding. All Rights Reserved.",
+    "madeWith": "Made with ❤️ in India"
+  },
+  "languages": {
+    "available": ["en", "hi"],
+    "labels": {
+      "en": "English",
+      "hi": "हिन्दी"
+    }
+  },
+  "whatsappGroups": [
+    {
+      "name": "All Wedding Guests",
+      "link": "https://chat.whatsapp.com/placeholder1",
+      "isPlaceholder": true
+    },
+    {
+      "name": "Family Members",
+      "link": "https://chat.whatsapp.com/placeholder2",
+      "isPlaceholder": true
+    }
+  ],
+  "socialMedia": {
+    "instagram": "@wedding2026",
+    "facebook": "/wedding2026",
+    "isPlaceholder": true
+  }
+}
