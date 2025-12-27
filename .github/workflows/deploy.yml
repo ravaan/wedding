@@ -1,0 +1,76 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [master, main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build website
+        run: npm run build
+        env:
+          # Set production environment variables
+          VITE_MIXPANEL_PROJECT_TOKEN: ${{ secrets.VITE_MIXPANEL_PROJECT_TOKEN }}
+          VITE_ENABLE_ANALYTICS: true
+          VITE_GOOGLE_MAPS_API_KEY: ${{ secrets.VITE_GOOGLE_MAPS_API_KEY }}
+          VITE_GOOGLE_SCRIPT_URL: ${{ secrets.VITE_GOOGLE_SCRIPT_URL }}
+          VITE_AWS_REGION: ap-south-1
+          VITE_AWS_ACCESS_KEY_ID: ${{ secrets.VITE_AWS_ACCESS_KEY_ID }}
+          VITE_AWS_SECRET_ACCESS_KEY: ${{ secrets.VITE_AWS_SECRET_ACCESS_KEY }}
+          VITE_EMAIL_FROM_ADDRESS: ${{ secrets.VITE_EMAIL_FROM_ADDRESS }}
+          VITE_EMAIL_REPLY_TO: ${{ secrets.VITE_EMAIL_REPLY_TO }}
+          VITE_SMS_API_ENDPOINT: ${{ secrets.VITE_SMS_API_ENDPOINT }}
+          VITE_SMS_API_KEY: ${{ secrets.VITE_SMS_API_KEY }}
+          VITE_SMS_FROM_NUMBER: ${{ secrets.VITE_SMS_FROM_NUMBER }}
+          VITE_ENABLE_SMS: false
+          VITE_RSVP_DEADLINE: '2026-03-24'
+          VITE_WEDDING_DATE: '2026-04-25'
+          VITE_ENABLE_RSVP: true
+          VITE_ENABLE_GUEST_MESSAGES: true
+          VITE_SHOW_GALLERY: true
+          VITE_SHOW_OUR_STORY: false
+          VITE_ENABLE_BACKGROUND_MUSIC: false
+          VITE_ENABLE_EMAIL_NOTIFICATIONS: false
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
