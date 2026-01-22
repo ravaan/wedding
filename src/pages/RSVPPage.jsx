@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Check } from 'lucide-react';
+import { Check, AlertCircle } from 'lucide-react';
 import { trackPageView, trackRSVP } from '../services/analytics';
+import { submitRSVP, isRSVPServiceConfigured } from '../services/rsvp';
 
 const RSVPPage = () => {
   useEffect(() => {
@@ -26,6 +27,7 @@ const RSVPPage = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -50,18 +52,37 @@ const RSVPPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitError(null);
 
-    // Track RSVP submission
-    trackRSVP({
+    // Track RSVP submission attempt
+    trackRSVP('start', {
       ...formData,
       timestamp: new Date().toISOString()
     });
 
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      // Submit to Google Sheets
+      await submitRSVP(formData);
+
+      // Track successful submission
+      trackRSVP('complete', {
+        ...formData,
+        timestamp: new Date().toISOString()
+      });
+
       setIsSubmitted(true);
-    }, 2000);
+    } catch (error) {
+      console.error('RSVP submission failed:', error);
+      setSubmitError(error.message || 'Something went wrong. Please try again.');
+
+      // Track error
+      trackRSVP('error', {
+        error: error.message,
+        timestamp: new Date().toISOString()
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (isSubmitted) {
@@ -322,6 +343,24 @@ const RSVPPage = () => {
                       placeholder="Optional"
                     />
                   </div>
+                </div>
+              </motion.div>
+            )}
+
+            {/* Error Message */}
+            {submitError && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex items-start gap-3 p-4 bg-red-50 border border-red-200 rounded-lg"
+              >
+                <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-sm text-red-700">{submitError}</p>
+                  <p className="text-xs text-red-500 mt-1">
+                    You can also contact us directly at{' '}
+                    <a href="tel:+919876543210" className="underline">+91 98765 43210</a>
+                  </p>
                 </div>
               </motion.div>
             )}
