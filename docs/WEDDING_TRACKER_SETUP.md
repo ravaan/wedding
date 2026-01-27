@@ -171,4 +171,4 @@ If you have issues:
 
 ---
 
-*Last updated: January 2026*
+*Last updated: January 2025*

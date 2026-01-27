@@ -52,7 +52,7 @@ const TravelPage = () => {
               </div>
               <div className="ml-8 space-y-4">
                 <p className="text-lg font-light leading-relaxed">
-                  Nashik Airport (ISK) · 20km from city · 35km from venue
+                  Nashik Airport (ISK) · 26 km from venue
                 </p>
                 <p className="text-caption">
                   Direct IndiGo flights available from Delhi, Bangalore, Ahmedabad, and Goa.
@@ -69,7 +69,7 @@ const TravelPage = () => {
               </div>
               <div className="ml-8 space-y-4">
                 <p className="text-lg font-light leading-relaxed">
-                  Nashik Road Station · 8km from venue
+                  Nashik Road Station · 12 km from venue
                 </p>
                 <p className="text-caption">
                   Well-connected railway junction with direct trains from all major cities.
@@ -302,7 +302,7 @@ const TravelPage = () => {
             <div>
               <p className="text-label text-xs mb-3">FLIGHT BOOKINGS</p>
               <p className="text-sm font-light leading-relaxed text-primary-600">
-                Schedules for April 2026 will be available from May-June 2025
+                Schedules for April 2025 available now. Book early for best rates!
               </p>
             </div>
 

@@ -60,7 +60,7 @@ const Header = () => {
                 P & A
               </span>
               <span className="text-label text-[9px] opacity-70">
-                04.23—24.26
+                04.23—24.25
               </span>
             </motion.div>
           </Link>
@@ -175,7 +175,7 @@ const Header = () => {
 
                 <div className="mt-20 pt-8 border-t border-primary-100">
                   <p className="text-label text-xs opacity-60">
-                    APRIL 23—24, 2026
+                    APRIL 23—24, 2025
                   </p>
                   <p className="text-label text-xs opacity-60 mt-2">
                     NASHIK, MAHARASHTRA
