@@ -40,7 +40,7 @@ const Loading = ({ fullScreen = false, message = '', size = 'medium' }) => {
   if (fullScreen) {
     return (
       <motion.div
-        className="fixed inset-0 bg-white z-50 flex items-center justify-center"
+        className="fixed inset-0 bg-cream z-50 flex items-center justify-center"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}

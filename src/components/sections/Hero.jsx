@@ -5,6 +5,7 @@ import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import content from '../../data/content.json';
 import { trackCountdownView, trackClick } from '../../services/analytics';
+import FloralDecoration from '../ui/FloralDecoration';
 
 dayjs.extend(duration);
 
@@ -44,13 +45,110 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white px-6 lg:px-12">
-      {/* Sophisticated background texture */}
-      <div className="absolute inset-0 opacity-[0.02]">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
-        }} />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-cream px-6 lg:px-12 pt-24 md:pt-28">
+      {/* Maximalist floral decorations - Large corner pieces */}
+      <div className="absolute top-0 left-0 w-48 md:w-64 lg:w-80 xl:w-96 h-auto pointer-events-none">
+        <motion.div
+          initial={{ opacity: 0, x: -100, y: -100 }}
+          animate={{ opacity: 1, x: 0, y: 0 }}
+          transition={{ duration: 1.5, delay: 0.3 }}
+        >
+          <FloralDecoration variant="corner-left" className="w-full h-auto" />
+        </motion.div>
       </div>
+
+      <div className="absolute top-0 right-0 w-48 md:w-64 lg:w-80 xl:w-96 h-auto pointer-events-none">
+        <motion.div
+          initial={{ opacity: 0, x: 100, y: -100 }}
+          animate={{ opacity: 1, x: 0, y: 0 }}
+          transition={{ duration: 1.5, delay: 0.3 }}
+        >
+          <FloralDecoration variant="corner-right" className="w-full h-auto" />
+        </motion.div>
+      </div>
+
+      <div className="absolute bottom-0 left-0 w-48 md:w-64 lg:w-80 xl:w-96 h-auto pointer-events-none rotate-180">
+        <motion.div
+          initial={{ opacity: 0, x: -100, y: 100 }}
+          animate={{ opacity: 1, x: 0, y: 0 }}
+          transition={{ duration: 1.5, delay: 0.5 }}
+        >
+          <FloralDecoration variant="corner-left" className="w-full h-auto" />
+        </motion.div>
+      </div>
+
+      <div className="absolute bottom-0 right-0 w-48 md:w-64 lg:w-80 xl:w-96 h-auto pointer-events-none rotate-180">
+        <motion.div
+          initial={{ opacity: 0, x: 100, y: 100 }}
+          animate={{ opacity: 1, x: 0, y: 0 }}
+          transition={{ duration: 1.5, delay: 0.5 }}
+        >
+          <FloralDecoration variant="corner-right" className="w-full h-auto" />
+        </motion.div>
+      </div>
+
+      {/* Side borders for extra lushness */}
+      <div className="absolute left-0 top-1/4 w-16 md:w-20 lg:w-24 h-1/2 pointer-events-none hidden lg:block">
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1.5, delay: 0.7 }}
+        >
+          <FloralDecoration variant="side-border" className="w-full h-full" />
+        </motion.div>
+      </div>
+
+      <div className="absolute right-0 top-1/4 w-16 md:w-20 lg:w-24 h-1/2 pointer-events-none hidden lg:block rotate-180">
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1.5, delay: 0.7 }}
+        >
+          <FloralDecoration variant="side-border" className="w-full h-full" />
+        </motion.div>
+      </div>
+
+      {/* Decorative frame corners */}
+      <div className="absolute top-4 left-4 w-24 md:w-32 lg:w-40 pointer-events-none">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1 }}
+        >
+          <FloralDecoration variant="frame-corner" className="w-full h-auto" />
+        </motion.div>
+      </div>
+      <div className="absolute top-4 right-4 w-24 md:w-32 lg:w-40 pointer-events-none -scale-x-100">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1 }}
+        >
+          <FloralDecoration variant="frame-corner" className="w-full h-auto" />
+        </motion.div>
+      </div>
+      <div className="absolute bottom-4 left-4 w-24 md:w-32 lg:w-40 pointer-events-none -scale-y-100">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1 }}
+        >
+          <FloralDecoration variant="frame-corner" className="w-full h-auto" />
+        </motion.div>
+      </div>
+      <div className="absolute bottom-4 right-4 w-24 md:w-32 lg:w-40 pointer-events-none scale-[-1]">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1 }}
+        >
+          <FloralDecoration variant="frame-corner" className="w-full h-auto" />
+        </motion.div>
+      </div>
+
+      {/* Inner decorative border */}
+      <div className="absolute inset-6 md:inset-10 lg:inset-14 border-2 border-gold/40 pointer-events-none rounded-sm" />
+      <div className="absolute inset-8 md:inset-12 lg:inset-16 border border-white/20 pointer-events-none rounded-sm" />
 
       <div className="relative z-10 w-full max-w-screen-xl mx-auto">
         {/* Elevated date typography */}
@@ -58,23 +156,23 @@ const Hero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
-          className="text-center mb-8 md:mb-16"
+          className="text-center mb-6 md:mb-12"
         >
-          <span className="text-label tracking-[0.3em]">
+          <span className="text-label tracking-[0.3em] text-gold">
             APRIL 23—24, 2026
           </span>
         </motion.div>
 
-        {/* Award-winning name display */}
+        {/* Royal maximalist name display */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.5, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
-          className="text-center mb-12 md:mb-20"
+          className="text-center mb-8 md:mb-16"
         >
           <div className="overflow-hidden">
             <motion.h1
-              className="type-display balance"
+              className="type-display balance text-white"
               initial={{ y: 100 }}
               animate={{ y: 0 }}
               transition={{ duration: 1.2, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
@@ -84,12 +182,12 @@ const Hero = () => {
           </div>
 
           <motion.div
-            className="my-6 md:my-8 lg:my-12"
+            className="my-4 md:my-6 lg:my-10"
             initial={{ scale: 0, rotate: -180 }}
             animate={{ scale: 1, rotate: 0 }}
             transition={{ duration: 1, delay: 0.8, ease: [0.23, 1, 0.32, 1] }}
           >
-            <span className="font-display text-3xl md:text-4xl lg:text-5xl font-light"
+            <span className="font-display text-3xl md:text-4xl lg:text-5xl font-light text-gold-light"
                   style={{ fontVariationSettings: '"opsz" 9, "wght" 200' }}>
               &
             </span>
@@ -97,7 +195,7 @@ const Hero = () => {
 
           <div className="overflow-hidden">
             <motion.h1
-              className="type-display balance"
+              className="type-display balance text-white"
               initial={{ y: 100 }}
               animate={{ y: 0 }}
               transition={{ duration: 1.2, delay: 0.5, ease: [0.23, 1, 0.32, 1] }}
@@ -107,14 +205,24 @@ const Hero = () => {
           </div>
         </motion.div>
 
+        {/* Elaborate floral divider */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, delay: 0.9 }}
+          className="flex justify-center mb-6 md:mb-10"
+        >
+          <FloralDecoration variant="divider" className="w-64 md:w-80 lg:w-96 h-auto" />
+        </motion.div>
+
         {/* Refined location */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1, ease: [0.23, 1, 0.32, 1] }}
-          className="text-center mb-12 md:mb-20"
+          className="text-center mb-10 md:mb-16"
         >
-          <p className="lead">
+          <p className="lead text-white/90">
             <em>Nashik, Maharashtra</em>
           </p>
         </motion.div>
@@ -124,7 +232,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1.2, ease: [0.23, 1, 0.32, 1] }}
-          className="flex justify-center gap-8 md:gap-12 lg:gap-20 mb-12 md:mb-20"
+          className="flex justify-center gap-6 md:gap-10 lg:gap-16 mb-10 md:mb-16"
         >
           {[
             { value: countdown.days, label: 'Days' },
@@ -144,19 +252,19 @@ const Hero = () => {
                 transition={{ duration: 0.3 }}
                 className="relative"
               >
-                <span className="font-display text-4xl md:text-5xl lg:text-7xl font-light tracking-tight"
+                <span className="font-display text-3xl md:text-4xl lg:text-6xl font-light tracking-tight text-white"
                       style={{ fontVariationSettings: '"opsz" 72, "wght" 350' }}>
                   {String(item.value).padStart(2, '0')}
                 </span>
               </motion.div>
-              <p className="text-label mt-2 md:mt-3 text-[10px] md:text-xs">
+              <p className="text-label mt-2 md:mt-3 text-[10px] md:text-xs text-gold-light">
                 {item.label}
               </p>
             </motion.div>
           ))}
         </motion.div>
 
-        {/* Award-winning CTA buttons */}
+        {/* Royal CTA buttons */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -185,22 +293,22 @@ const Hero = () => {
         </motion.div>
       </div>
 
-      {/* Minimal scroll indicator */}
+      {/* Elegant scroll indicator */}
       <motion.div
-        className="absolute bottom-8 md:bottom-12 left-1/2 -translate-x-1/2"
+        className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2"
         initial={{ opacity: 0 }}
-        animate={{ opacity: 0.4 }}
+        animate={{ opacity: 0.7 }}
         transition={{ duration: 1, delay: 2 }}
       >
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="flex flex-col items-center gap-2 cursor-pointer"
+          className="flex flex-col items-center gap-2 cursor-pointer text-white/70"
           onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
         >
           <span className="text-label text-[10px] md:text-xs">Scroll</span>
           <svg width="1" height="40" viewBox="0 0 1 40" fill="none">
-            <line x1="0.5" y1="0" x2="0.5" y2="40" stroke="currentColor" strokeDasharray="2 2" opacity="0.3"/>
+            <line x1="0.5" y1="0" x2="0.5" y2="40" stroke="currentColor" strokeDasharray="2 2" opacity="0.5"/>
           </svg>
         </motion.div>
       </motion.div>

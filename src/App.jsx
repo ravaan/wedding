@@ -25,7 +25,7 @@ function App() {
 
   return (
     <Router basename="/wedding">
-      <div className="min-h-screen bg-neutral-50">
+      <div className="min-h-screen bg-cream">
         <Header />
 
         <AnimatePresence mode="wait">

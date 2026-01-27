@@ -46,7 +46,7 @@
   }
 
   body {
-    @apply bg-white text-primary-900;
+    @apply bg-cream text-white;
     font-family: 'Inter Tight', system-ui, sans-serif;
     font-weight: 400;
     line-height: 1.5;
@@ -54,10 +54,10 @@
   }
 
   ::selection {
-    @apply bg-primary-900 text-white;
+    @apply bg-gold text-primary-900;
   }
 
-  /* Display Typography - Award-winning large type */
+  /* Display Typography - Royal elegant type */
   .type-display {
     font-family: 'Fraunces', serif;
     font-size: var(--type-display);
@@ -66,6 +66,7 @@
     font-variation-settings: "opsz" 144, "wght" 300;
     line-height: 0.85;
     letter-spacing: var(--letter-tight);
+    color: #f5f0e1;
   }
 
   /* Refined Heading Hierarchy */
@@ -135,7 +136,7 @@
   .text-caption {
     font-size: var(--type-sm);
     line-height: 1.5;
-    @apply text-primary-600;
+    @apply text-primary-700;
   }
 
   /* Sophisticated emphasis */
@@ -152,7 +153,7 @@
 }
 
 @layer components {
-  /* Award-winning button designs */
+  /* Maximalist Forest Garden button designs - Dark background */
   .btn-primary {
     @apply relative overflow-hidden;
     font-family: 'Inter Tight', sans-serif;
@@ -161,17 +162,18 @@
     letter-spacing: var(--letter-wider);
     text-transform: uppercase;
     padding: 1.125rem 2.5rem;
-    background: linear-gradient(to right, #1a1a1a 50%, #0a0a0a 50%);
+    background: linear-gradient(to right, #6b7c5e 50%, #4a5a40 50%);
     background-size: 200% 100%;
     background-position: left bottom;
-    color: white;
-    border: 0;
+    color: #f5f0e1;
+    border: 2px solid #6b7c5e;
     transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
   }
 
   .btn-primary:hover {
     background-position: right bottom;
     letter-spacing: var(--letter-widest);
+    box-shadow: 0 8px 24px rgba(107, 124, 94, 0.4);
   }
 
   .btn-secondary {
@@ -182,8 +184,8 @@
     text-transform: uppercase;
     padding: 1rem 2.25rem;
     background: transparent;
-    color: #1a1a1a;
-    border: 1px solid #1a1a1a;
+    color: #8a9a7b;
+    border: 2px solid #6b7c5e;
     position: relative;
     transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
   }
@@ -195,13 +197,13 @@
     left: 0;
     width: 0;
     height: 100%;
-    background: #1a1a1a;
+    background: #6b7c5e;
     transition: width 0.4s cubic-bezier(0.23, 1, 0.32, 1);
     z-index: -1;
   }
 
   .btn-secondary:hover {
-    color: white;
+    color: #f5f0e1;
   }
 
   .btn-secondary:hover::before {
@@ -226,7 +228,7 @@
 
   /* Sophisticated cards */
   .card-editorial {
-    @apply bg-white;
+    @apply bg-cream;
     padding: var(--space-md);
     border: 0.5px solid rgba(0, 0, 0, 0.08);
     transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
@@ -317,28 +319,28 @@
   }
 }
 
-/* Scrollbar styling for elegance */
+/* Scrollbar styling - Dark burgundy theme */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f9f9f9;
+  background: #4a1c24;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1a1a1a;
+  background: linear-gradient(180deg, #C9A227 0%, #8a9a7b 100%);
   border-radius: 0;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #000;
+  background: linear-gradient(180deg, #E8C547 0%, #6b7c5e 100%);
 }
 
 /* Focus styles for accessibility with style */
 :focus-visible {
-  outline: 2px solid #1a1a1a;
+  outline: 2px solid #C9A227;
   outline-offset: 4px;
 }
 

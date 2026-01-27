@@ -24,7 +24,7 @@ const CeremoniesPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-cream">
       {/* Header - Full height with proper spacing */}
       <section className="min-h-screen flex items-center justify-center px-6 lg:px-12">
         <div className="max-w-screen-lg mx-auto w-full">
@@ -69,7 +69,7 @@ const CeremoniesPage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="border-t border-primary-100 pt-8"
+                  className="border-t border-white/20 pt-8"
                 >
                   <div className="mb-8">
                     <h3 className="text-2xl font-serif font-light mb-3">
@@ -80,14 +80,14 @@ const CeremoniesPage = () => {
                     </p>
                   </div>
 
-                  <p className="text-base font-light text-primary-600 leading-relaxed mb-6">
+                  <p className="text-base font-light text-white/70 leading-relaxed mb-6">
                     {ceremony.description}
                   </p>
 
                   {ceremony.significance && ceremony.significance !== ceremony.description && (
                     <div className="mt-8">
                       <p className="text-label text-xs mb-3">SIGNIFICANCE</p>
-                      <p className="text-sm font-light text-primary-600 leading-relaxed">
+                      <p className="text-sm font-light text-white/70 leading-relaxed">
                         {ceremony.significance}
                       </p>
                     </div>
@@ -100,7 +100,7 @@ const CeremoniesPage = () => {
       </section>
 
       {/* Traditions - Minimal */}
-      <section className="py-20 md:py-32 border-t border-primary-100">
+      <section className="py-20 md:py-32 border-t border-white/20">
         <div className="max-w-screen-md mx-auto px-6 lg:px-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -126,7 +126,7 @@ const CeremoniesPage = () => {
                   <h3 className="text-xl font-serif font-light mb-4">
                     {tradition.name}
                   </h3>
-                  <p className="text-sm font-light text-primary-600 leading-relaxed max-w-lg mx-auto">
+                  <p className="text-sm font-light text-white/70 leading-relaxed max-w-lg mx-auto">
                     {tradition.description}
                   </p>
                 </motion.div>
@@ -137,7 +137,7 @@ const CeremoniesPage = () => {
       </section>
 
       {/* Guest Guidelines - Minimal */}
-      <section className="py-20 md:py-32 border-t border-primary-100">
+      <section className="py-20 md:py-32 border-t border-white/20">
         <div className="max-w-screen-sm mx-auto px-6 lg:px-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -154,7 +154,7 @@ const CeremoniesPage = () => {
             <div className="space-y-8">
               <div>
                 <p className="text-label text-xs mb-3">PARTICIPATION</p>
-                <p className="text-sm font-light text-primary-600 leading-relaxed">
+                <p className="text-sm font-light text-white/70 leading-relaxed">
                   We warmly invite you to participate in our ceremonies.
                   Our families will guide you through each ritual.
                 </p>
@@ -162,14 +162,14 @@ const CeremoniesPage = () => {
 
               <div>
                 <p className="text-label text-xs mb-3">PHOTOGRAPHY</p>
-                <p className="text-sm font-light text-primary-600 leading-relaxed">
+                <p className="text-sm font-light text-white/70 leading-relaxed">
                   Feel free to capture moments, but please be respectful during the sacred ceremonies.
                 </p>
               </div>
 
               <div>
                 <p className="text-label text-xs mb-3">QUESTIONS</p>
-                <p className="text-sm font-light text-primary-600 leading-relaxed">
+                <p className="text-sm font-light text-white/70 leading-relaxed">
                   Don't hesitate to ask our family members about any tradition you'd like to understand better.
                 </p>
               </div>

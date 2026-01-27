@@ -21,7 +21,7 @@ const EventsPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-cream">
       {/* Header - Full height with proper spacing */}
       <section className="min-h-screen flex items-center justify-center px-6 lg:px-12">
         <div className="max-w-screen-lg mx-auto w-full">
@@ -90,13 +90,13 @@ const EventsPage = () => {
                       <h3 className="text-xl md:text-2xl font-serif font-light mb-4">
                         {event.name}
                       </h3>
-                      <p className="text-sm md:text-base font-light text-primary-600 leading-relaxed mb-6">
+                      <p className="text-sm md:text-base font-light text-white/70 leading-relaxed mb-6">
                         {event.description}
                       </p>
 
                       <div className="space-y-2">
                         <p className="text-caption flex items-center gap-2">
-                          <MapPin size={12} strokeWidth={1.5} className="text-primary-400" />
+                          <MapPin size={12} strokeWidth={1.5} className="text-gold-light" />
                           <span className="text-xs">{event.venue}</span>
                         </p>
                         {event.dress_code && (
@@ -148,13 +148,13 @@ const EventsPage = () => {
                       <h3 className="text-xl md:text-2xl font-serif font-light mb-4">
                         {event.name}
                       </h3>
-                      <p className="text-sm md:text-base font-light text-primary-600 leading-relaxed mb-6">
+                      <p className="text-sm md:text-base font-light text-white/70 leading-relaxed mb-6">
                         {event.description}
                       </p>
 
                       <div className="space-y-2">
                         <p className="text-caption flex items-center gap-2">
-                          <MapPin size={12} strokeWidth={1.5} className="text-primary-400" />
+                          <MapPin size={12} strokeWidth={1.5} className="text-gold-light" />
                           <span className="text-xs">{event.venue}</span>
                         </p>
                         {event.dress_code && (
@@ -173,7 +173,7 @@ const EventsPage = () => {
       </section>
 
       {/* Venue Information - Properly spaced */}
-      <section className="py-20 md:py-32 border-t border-primary-100">
+      <section className="py-20 md:py-32 border-t border-white/20">
         <div className="max-w-screen-sm mx-auto px-6 lg:px-12 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
