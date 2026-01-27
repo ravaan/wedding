@@ -62,10 +62,10 @@ function formatEvents(events) {
   if (!events) return '';
 
   const eventLabels = {
-    sangeet: 'Sangeet',
+    mehendi: 'Bhaat & Mehendi',
+    engagement: 'Engagement Party',
     haldi: 'Haldi',
-    ceremony: 'Wedding Ceremony',
-    reception: 'Reception',
+    wedding: 'Baraat, Jaimala & Pheras',
   };
 
   return Object.entries(events)
