@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(timeout:*)",
+      "Bash(cmd /c \"npm run dev\")",
+      "Bash(npx vite)",
+      "Bash(powershell -Command \"npm run dev\")",
+      "Bash(powershell:*)",
+      "Bash(powershell.exe -NoProfile -Command \"Set-Location ''C:\\\\Users\\\\conta\\\\Documents\\\\Work\\\\wedding''; $env:PATH = ''C:\\\\Program Files\\\\nodejs;'' + $env:PATH; & npm run dev\")",
+      "Bash(powershell.exe:*)"
+    ]
+  }
+}

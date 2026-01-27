@@ -10,7 +10,7 @@ const TravelPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#ff10f0]">
       {/* Header - Full height with proper spacing */}
       <section className="min-h-screen flex items-center justify-center px-6 lg:px-12">
         <div className="max-w-screen-lg mx-auto w-full">
