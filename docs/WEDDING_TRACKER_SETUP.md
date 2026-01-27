@@ -13,7 +13,7 @@ The tracker consists of:
 
 1. Go to [Google Sheets](https://sheets.google.com)
 2. Create a new spreadsheet
-3. Name it "Wedding Tracker - Prerna & Arpit"
+3. Name it "Wedding Tracker - Prerna & Idiot"
 
 ## Step 2: Set Up Google Apps Script
 
@@ -28,7 +28,7 @@ The tracker consists of:
 const CONFIG = {
   NOTIFICATION_EMAIL: 'your-email@example.com',  // Your email
   BRIDE_NAME: 'Prerna',
-  GROOM_NAME: 'Arpit',
+  GROOM_NAME: 'Idiot',
   WEDDING_DATE: 'April 23-24, 2025',
   WEDDING_VENUE: 'Taj Ambad, Nashik',
   // ... rest of config

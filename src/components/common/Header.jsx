@@ -182,7 +182,7 @@ const Header = () => {
                   </p>
                   <div className="mt-8">
                     <p className="font-serif italic text-sm text-primary-500">
-                      Prerna & Arpit
+                      Prerna & Idiot
                     </p>
                   </div>
                 </div>
