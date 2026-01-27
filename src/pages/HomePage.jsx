@@ -126,7 +126,7 @@ const HomePage = () => {
                   When
                 </p>
                 <p className="text-lg font-light text-primary-900">
-                  April 24—25, 2026
+                  April 23—24, 2026
                 </p>
               </div>
 
