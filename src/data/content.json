@@ -193,51 +193,62 @@
     "addressIsPlaceholder": false,
     "phone": "+91 253 660 3030",
     "phoneIsPlaceholder": false,
-    "website": "https://www.tajhotels.com/en-in/taj/taj-nashik",
+    "website": "https://www.tajhotels.com/en-in/taj/ambad-nashik/",
     "mapCoordinates": {
       "lat": 20.0169,
       "lng": 73.7508
     },
     "mapCoordinatesIsPlaceholder": false,
-    "directions": "Located on Mumbai-Agra Highway (NH3), MIDC Ambad area, 25 minutes from Nashik Road Railway Station",
+    "directions": "Located on Mumbai-Agra Highway (NH3), MIDC Ambad area. 12 km from Nashik Road Railway Station, 26 km from Nashik Airport (ISK)",
     "parking": "Ample parking available for all guests",
-    "landmarks": "MIDC Ambad Industrial Area, near Nashik-Pune Highway junction"
+    "landmarks": "MIDC Ambad Industrial Area, 2 km from Pandavleni Caves, near Mumbai-Agra Highway"
   },
   "travel": {
     "flights": {
       "title": "By Air",
       "options": [
         {
-          "route": "Bangalore to Nashik",
-          "airlines": "IndiGo, SpiceJet",
-          "duration": "2 hours direct",
-          "bookingLink": "https://www.google.com/travel/flights",
-          "isPlaceholder": true
-        },
-        {
           "route": "Delhi to Nashik",
-          "airlines": "IndiGo, Air India",
-          "duration": "2.5 hours direct",
-          "bookingLink": "https://www.google.com/travel/flights",
-          "isPlaceholder": true
+          "airlines": "IndiGo",
+          "duration": "2 hours direct",
+          "bookingLink": "https://www.goindigo.in/domestic-flights/flights-to-nashik.html",
+          "note": "Direct flights available to Nashik Airport (ISK)",
+          "isPlaceholder": false
         },
         {
-          "route": "Via Mumbai",
+          "route": "Bangalore to Nashik",
+          "airlines": "IndiGo",
+          "duration": "1.5 hours direct",
+          "bookingLink": "https://www.goindigo.in/domestic-flights/flights-to-nashik.html",
+          "note": "Direct flights available to Nashik Airport (ISK)",
+          "isPlaceholder": false
+        },
+        {
+          "route": "Hyderabad to Nashik",
+          "airlines": "IndiGo",
+          "duration": "1.5 hours direct",
+          "bookingLink": "https://www.goindigo.in/domestic-flights/flights-to-nashik.html",
+          "note": "Direct flights available to Nashik Airport (ISK)",
+          "isPlaceholder": false
+        },
+        {
+          "route": "Via Mumbai (for other cities)",
           "airlines": "Multiple options",
-          "duration": "1 hour flight + 3 hours drive",
+          "duration": "Flight + 3-4 hours drive",
           "bookingLink": "https://www.google.com/travel/flights",
-          "note": "Fly to Mumbai, then taxi/car to Nashik (180 km)",
-          "isPlaceholder": true
+          "note": "No direct Mumbai-Nashik flights. Fly to Mumbai (BOM), then drive 178 km to Nashik",
+          "isPlaceholder": false
         }
       ]
     },
     "train": {
       "title": "By Train",
-      "stations": ["Nashik Road Station", "Nashik City Station"],
+      "stations": ["Nashik Road Station (NK)"],
+      "stationNote": "Nashik Road is an A1 category station on Mumbai-Delhi main line. 12 km from venue.",
       "majorRoutes": [
-        "Mumbai - Nashik: 3-4 hours",
-        "Delhi - Nashik: 18-20 hours",
-        "Bangalore - Nashik: 24 hours"
+        "Mumbai CSMT - Nashik Road: 3-4 hours (Rajdhani fastest at 3 hrs)",
+        "Delhi - Nashik Road: 18-20 hours",
+        "Pune - Nashik Road: 4-5 hours"
       ],
       "bookingLink": "https://www.irctc.co.in",
       "isPlaceholder": false
@@ -245,11 +256,12 @@
     "road": {
       "title": "By Road",
       "distances": [
-        { "from": "Mumbai", "distance": "180 km", "duration": "3-4 hours" },
-        { "from": "Pune", "distance": "220 km", "duration": "4-5 hours" },
-        { "from": "Surat", "distance": "160 km", "duration": "3 hours" }
+        { "from": "Mumbai", "distance": "178 km", "duration": "3-4 hours via Mumbai-Agra Highway" },
+        { "from": "Pune", "distance": "210 km", "duration": "4 hours via NH60" },
+        { "from": "Shirdi", "distance": "89 km", "duration": "2 hours" },
+        { "from": "Aurangabad", "distance": "190 km", "duration": "3.5 hours" }
       ],
-      "highways": "NH-3 (Mumbai-Agra Highway)",
+      "highways": "Mumbai-Agra Highway (NH3). Venue is directly on the highway in MIDC Ambad.",
       "isPlaceholder": false
     }
   },
@@ -261,7 +273,7 @@
         "distance": "Venue Hotel",
         "priceRange": "₹8,000 - ₹15,000",
         "amenities": ["Pool", "Spa", "Gym", "Multiple Restaurants", "Bar"],
-        "bookingLink": "https://www.tajhotels.com/en-in/taj/taj-nashik",
+        "bookingLink": "https://www.tajhotels.com/en-in/taj/ambad-nashik/",
         "phone": "+91 253 660 3030",
         "special": "Wedding guests - rooms are arranged by the family",
         "isPlaceholder": false
@@ -388,7 +400,7 @@
     },
     {
       "question": "Is there parking available at the venue?",
-      "answer": "Yes, ample parking is available at Radisson Nashik for all guests."
+      "answer": "Yes, ample parking is available at Taj Ambad for all guests."
     },
     {
       "question": "Can I bring a plus one?",
@@ -408,7 +420,7 @@
     },
     {
       "question": "Is accommodation available nearby?",
-      "answer": "Yes, we've listed several hotels at different price points. Radisson Nashik (the venue) offers special rates for wedding guests."
+      "answer": "Yes, we've listed several hotels at different price points. Taj Ambad (the venue) offers special rates for wedding guests."
     },
     {
       "question": "What time should I arrive for each ceremony?",

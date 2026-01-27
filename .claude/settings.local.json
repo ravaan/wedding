@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nfeat: update venue to Taj Ambad and add accurate travel info\n\n- Update venue details with correct Taj Ambad address and website\n- Add direct flight routes from Delhi, Bangalore, Hyderabad to Nashik\n- Update train info with Nashik Road station details\n- Fix road distances and add Shirdi/Aurangabad routes\n- Replace Radisson references with Taj Ambad in FAQs\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push)"
+    ]
+  }
+}
