@@ -117,7 +117,7 @@ const HomePage = () => {
                   Venue
                 </p>
                 <p className="text-lg font-light text-primary-900">
-                  Radisson Nashik
+                  Taj Ambad
                 </p>
               </div>
 
