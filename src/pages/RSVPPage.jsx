@@ -133,7 +133,7 @@ const RSVPPage = () => {
               RSVP
             </h1>
             <p className="lead">
-              <em>Kindly respond by March 15, 2025</em>
+              <em>Kindly respond by March 15, 2026</em>
             </p>
           </motion.div>
         </div>
@@ -278,10 +278,10 @@ const RSVPPage = () => {
                   </label>
                   <div className="space-y-px">
                     {[
-                      { id: 'mehendi', label: 'Bhaat & Mehendi · April 23, Afternoon' },
-                      { id: 'engagement', label: 'Engagement Party · April 23, Evening' },
-                      { id: 'haldi', label: 'Haldi · April 24, Morning' },
-                      { id: 'wedding', label: 'Baraat, Jaimala & Pheras · April 24, Evening' }
+                      { id: 'mehendi', label: 'Bhaat & Mehendi · April 23, 2026' },
+                      { id: 'engagement', label: 'Engagement Party · April 23, 2026' },
+                      { id: 'haldi', label: 'Haldi · April 24, 2026' },
+                      { id: 'wedding', label: 'Baraat, Jaimala & Pheras · April 24, 2026' }
                     ].map(event => (
                       <label
                         key={event.id}

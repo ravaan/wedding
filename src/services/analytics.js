@@ -20,7 +20,7 @@ class Analytics {
         loaded: (mixpanel) => {
           // Set super properties that will be sent with every event
           mixpanel.register({
-            'Wedding Date': '2025-04-23',
+            'Wedding Date': '2026-04-23',
             'Platform': 'Web',
             'Device Type': this.getDeviceType(),
             'Browser': this.getBrowserName(),
