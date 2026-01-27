@@ -47,8 +47,8 @@ jobs:
           VITE_SMS_API_KEY: ${{ secrets.VITE_SMS_API_KEY }}
           VITE_SMS_FROM_NUMBER: ${{ secrets.VITE_SMS_FROM_NUMBER }}
           VITE_ENABLE_SMS: false
-          VITE_RSVP_DEADLINE: '2025-03-15'
-          VITE_WEDDING_DATE: '2025-04-23'
+          VITE_RSVP_DEADLINE: '2026-03-15'
+          VITE_WEDDING_DATE: '2026-04-23'
           VITE_ENABLE_RSVP: true
           VITE_ENABLE_GUEST_MESSAGES: true
           VITE_SHOW_GALLERY: true

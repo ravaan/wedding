@@ -19,7 +19,7 @@ const Hero = () => {
   });
 
   useEffect(() => {
-    const weddingDate = dayjs('2026-04-24 10:00:00');
+    const weddingDate = dayjs('2026-04-23 10:00:00');
 
     const updateCountdown = () => {
       const now = dayjs();

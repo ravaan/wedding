@@ -9,8 +9,8 @@
     "brideNameIsPlaceholder": false,
     "groomName": "Arpit Agarwal",
     "groomNameIsPlaceholder": false,
-    "date": "2025-04-23",
-    "endDate": "2025-04-24",
+    "date": "2026-04-23",
+    "endDate": "2026-04-24",
     "location": "Nashik, Maharashtra",
     "tagline": "Together with our families, we invite you to celebrate our union",
     "taglineIsPlaceholder": true,
@@ -28,7 +28,7 @@
   },
   "events": {
     "day1": {
-      "date": "2025-04-23",
+      "date": "2026-04-23",
       "title": "Day 1 - Pre-Wedding Ceremonies",
       "events": [
         {
@@ -66,7 +66,7 @@
       ]
     },
     "day2": {
-      "date": "2025-04-24",
+      "date": "2026-04-24",
       "title": "Day 2 - Wedding Day",
       "events": [
         {
@@ -473,8 +473,8 @@
     }
   ],
   "rsvp": {
-    "deadline": "2025-03-15",
-    "deadlineText": "Please RSVP by March 15, 2025",
+    "deadline": "2026-03-15",
+    "deadlineText": "Please RSVP by March 15, 2026",
     "formFields": {
       "mealOptions": ["Pure Vegetarian (Jain)", "Vegetarian", "Non-Vegetarian"],
       "eventOptions": [
@@ -494,15 +494,15 @@
     "ourStoryComingSoon": "Our love story will be shared here soon!"
   },
   "seo": {
-    "title": "Prerna & Arpit - Wedding Invitation | April 23-24, 2025",
-    "description": "Join us in celebrating our wedding at Taj Ambad, Nashik on April 23-24, 2025. RSVP, view event details, and plan your visit.",
-    "keywords": "wedding, indian wedding, nashik wedding, april 2025, taj ambad wedding, prerna arpit wedding",
+    "title": "Prerna & Arpit - Wedding Invitation | April 23-24, 2026",
+    "description": "Join us in celebrating our wedding at Taj Ambad, Nashik on April 23-24, 2026. RSVP, view event details, and plan your visit.",
+    "keywords": "wedding, indian wedding, nashik wedding, april 2026, taj ambad wedding, prerna arpit wedding",
     "image": "/og-image.jpg",
     "url": "https://wedding.com"
   },
   "footer": {
     "tagline": "We can't wait to celebrate with you!",
-    "copyright": "© 2025 Prerna & Arpit Wedding. All Rights Reserved.",
+    "copyright": "© 2026 Prerna & Arpit Wedding. All Rights Reserved.",
     "madeWith": "Made with ❤️ in India"
   },
   "languages": {
@@ -525,8 +525,8 @@
     }
   ],
   "socialMedia": {
-    "instagram": "@wedding2026",
-    "facebook": "/wedding2026",
+    "instagram": "@PrernaArpitWedding",
+    "facebook": "/PrernaArpitWedding",
     "isPlaceholder": true
   }
 }

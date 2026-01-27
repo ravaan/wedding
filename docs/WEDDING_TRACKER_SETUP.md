@@ -29,7 +29,7 @@ const CONFIG = {
   NOTIFICATION_EMAIL: 'your-email@example.com',  // Your email
   BRIDE_NAME: 'Prerna',
   GROOM_NAME: 'Arpit',
-  WEDDING_DATE: 'April 23-24, 2025',
+  WEDDING_DATE: 'April 23-24, 2026',
   WEDDING_VENUE: 'Taj Ambad, Nashik',
   // ... rest of config
 };
