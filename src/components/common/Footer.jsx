@@ -11,7 +11,7 @@ const Footer = () => {
             Prerna & Arpit
           </p>
           <p className="text-[10px] font-light tracking-[0.3em] uppercase text-primary-300">
-            April 24—25, 2026 · Nashik
+            April 23—24, 2026 · Nashik
           </p>
         </div>
       </div>
