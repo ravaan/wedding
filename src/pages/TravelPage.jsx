@@ -302,7 +302,7 @@ const TravelPage = () => {
             <div>
               <p className="text-label text-xs mb-3">FLIGHT BOOKINGS</p>
               <p className="text-sm font-light leading-relaxed text-primary-600">
-                Schedules for April 2025 available now. Book early for best rates!
+                Schedules for April 2026 available now. Book early for best rates!
               </p>
             </div>
 

@@ -30,7 +30,7 @@ const CONFIG = {
   GROOM_NAME: 'Arpit',
 
   // Wedding details
-  WEDDING_DATE: 'April 23-24, 2025',
+  WEDDING_DATE: 'April 23-24, 2026',
   WEDDING_VENUE: 'Taj Ambad, Nashik',
 
   // Sheet names (must match exactly)

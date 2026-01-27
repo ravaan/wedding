@@ -18,7 +18,7 @@ const Hero = () => {
   });
 
   useEffect(() => {
-    const weddingDate = dayjs('2025-04-23 10:00:00');
+    const weddingDate = dayjs('2026-04-23 10:00:00');
 
     const updateCountdown = () => {
       const now = dayjs();
@@ -61,7 +61,7 @@ const Hero = () => {
           className="text-center mb-8 md:mb-16"
         >
           <span className="text-label tracking-[0.3em]">
-            APRIL 23—24, 2025
+            APRIL 23—24, 2026
           </span>
         </motion.div>
 

@@ -12,11 +12,11 @@ const EventsPage = () => {
   const allEvents = [
     ...content.events.day1.events.map(event => ({
       ...event,
-      date: content.events.day1.date || 'April 23, 2025'
+      date: content.events.day1.date || 'April 23, 2026'
     })),
     ...content.events.day2.events.map(event => ({
       ...event,
-      date: content.events.day2.date || 'April 24, 2025'
+      date: content.events.day2.date || 'April 24, 2026'
     }))
   ];
 
@@ -64,7 +64,7 @@ const EventsPage = () => {
                   style={{ fontVariationSettings: '"opsz" 48, "wght" 350' }}>
                 Day One
               </h2>
-              <p className="text-label text-xs">APRIL 23, 2025</p>
+              <p className="text-label text-xs">APRIL 23, 2026</p>
             </motion.div>
 
             {/* Day 1 Events */}
@@ -122,7 +122,7 @@ const EventsPage = () => {
                   style={{ fontVariationSettings: '"opsz" 48, "wght" 350' }}>
                 Day Two
               </h2>
-              <p className="text-label text-xs">APRIL 24, 2025</p>
+              <p className="text-label text-xs">APRIL 24, 2026</p>
             </motion.div>
 
             {/* Day 2 Events */}
