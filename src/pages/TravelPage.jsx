@@ -10,7 +10,7 @@ const TravelPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-cream">
       {/* Header - Full height with proper spacing */}
       <section className="min-h-screen flex items-center justify-center px-6 lg:px-12">
         <div className="max-w-screen-lg mx-auto w-full">
@@ -45,9 +45,9 @@ const TravelPage = () => {
             className="space-y-20"
           >
             {/* By Air */}
-            <div className="border-t border-primary-100 pt-8">
+            <div className="border-t border-white/20 pt-8">
               <div className="flex items-start gap-4 mb-6">
-                <Plane className="w-4 h-4 text-primary-400 mt-1" strokeWidth={1} />
+                <Plane className="w-4 h-4 text-gold-light mt-1" strokeWidth={1} />
                 <h3 className="text-label">BY AIR</h3>
               </div>
               <div className="ml-8 space-y-4">
@@ -62,9 +62,9 @@ const TravelPage = () => {
             </div>
 
             {/* By Train */}
-            <div className="border-t border-primary-100 pt-8">
+            <div className="border-t border-white/20 pt-8">
               <div className="flex items-start gap-4 mb-6">
-                <Train className="w-4 h-4 text-primary-400 mt-1" strokeWidth={1} />
+                <Train className="w-4 h-4 text-gold-light mt-1" strokeWidth={1} />
                 <h3 className="text-label">BY TRAIN</h3>
               </div>
               <div className="ml-8 space-y-4">
@@ -79,9 +79,9 @@ const TravelPage = () => {
             </div>
 
             {/* By Road */}
-            <div className="border-t border-primary-100 pt-8">
+            <div className="border-t border-white/20 pt-8">
               <div className="flex items-start gap-4 mb-6">
-                <Car className="w-4 h-4 text-primary-400 mt-1" strokeWidth={1} />
+                <Car className="w-4 h-4 text-gold-light mt-1" strokeWidth={1} />
                 <h3 className="text-label">BY ROAD</h3>
               </div>
               <div className="ml-8 space-y-4">
@@ -133,7 +133,7 @@ const TravelPage = () => {
                       href="https://www.goindigo.in/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="link-elegant text-primary-600 text-xs uppercase tracking-wider"
+                      className="link-elegant text-gold text-xs uppercase tracking-wider"
                     >
                       Book Flight
                     </a>
@@ -148,7 +148,7 @@ const TravelPage = () => {
                       href="https://www.irctc.co.in/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="link-elegant text-primary-600 text-xs uppercase tracking-wider"
+                      className="link-elegant text-gold text-xs uppercase tracking-wider"
                     >
                       Book Train
                     </a>
@@ -176,7 +176,7 @@ const TravelPage = () => {
                       href="https://www.goindigo.in/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="link-elegant text-primary-600 text-xs uppercase tracking-wider"
+                      className="link-elegant text-gold text-xs uppercase tracking-wider"
                     >
                       Book Flight
                     </a>
@@ -191,7 +191,7 @@ const TravelPage = () => {
                       href="https://www.irctc.co.in/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="link-elegant text-primary-600 text-xs uppercase tracking-wider"
+                      className="link-elegant text-gold text-xs uppercase tracking-wider"
                     >
                       Book Train
                     </a>
@@ -219,7 +219,7 @@ const TravelPage = () => {
                       href="https://www.uber.com/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="link-elegant text-primary-600 text-xs uppercase tracking-wider"
+                      className="link-elegant text-gold text-xs uppercase tracking-wider"
                     >
                       Book Cab
                     </a>
@@ -234,7 +234,7 @@ const TravelPage = () => {
                       href="https://www.irctc.co.in/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="link-elegant text-primary-600 text-xs uppercase tracking-wider"
+                      className="link-elegant text-gold text-xs uppercase tracking-wider"
                     >
                       Book Train
                     </a>
@@ -262,7 +262,7 @@ const TravelPage = () => {
                       href="https://www.goindigo.in/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="link-elegant text-primary-600 text-xs uppercase tracking-wider"
+                      className="link-elegant text-gold text-xs uppercase tracking-wider"
                     >
                       Book Flight
                     </a>
@@ -277,7 +277,7 @@ const TravelPage = () => {
                       href="https://www.irctc.co.in/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="link-elegant text-primary-600 text-xs uppercase tracking-wider"
+                      className="link-elegant text-gold text-xs uppercase tracking-wider"
                     >
                       Book Train
                     </a>
@@ -290,7 +290,7 @@ const TravelPage = () => {
       </section>
 
       {/* Booking Notes - Minimal */}
-      <section className="py-20 md:py-32 border-t border-primary-100">
+      <section className="py-20 md:py-32 border-t border-white/20">
         <div className="max-w-screen-sm mx-auto px-6 lg:px-12 text-center">
           <motion.div
             initial={{ opacity: 0 }}
@@ -308,14 +308,14 @@ const TravelPage = () => {
 
             <div>
               <p className="text-label text-xs mb-3">TRAIN BOOKINGS</p>
-              <p className="text-sm font-light leading-relaxed text-primary-600">
+              <p className="text-sm font-light leading-relaxed text-white/70">
                 IRCTC bookings open 120 days in advance
               </p>
             </div>
 
             <div>
               <p className="text-label text-xs mb-3">LOCAL TRANSPORT</p>
-              <p className="text-sm font-light leading-relaxed text-primary-600">
+              <p className="text-sm font-light leading-relaxed text-white/70">
                 Taxis readily available. Uber and Ola operate in Nashik.
               </p>
             </div>

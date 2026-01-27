@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Check, AlertCircle } from 'lucide-react';
 import { trackPageView, trackRSVP } from '../services/analytics';
 import { submitRSVP, isRSVPServiceConfigured } from '../services/rsvp';
+import FloralDecoration from '../components/ui/FloralDecoration';
 
 const RSVPPage = () => {
   useEffect(() => {
@@ -87,37 +88,67 @@ const RSVPPage = () => {
 
   if (isSubmitted) {
     return (
-      <div className="min-h-screen bg-white pt-32 pb-20 flex items-center justify-center">
+      <div className="min-h-screen bg-cream pt-32 pb-20 flex items-center justify-center relative overflow-hidden">
+        {/* Corner decorations */}
+        <div className="absolute top-0 left-0 w-32 md:w-48 h-auto pointer-events-none">
+          <FloralDecoration variant="corner-left" className="w-full h-auto" />
+        </div>
+        <div className="absolute top-0 right-0 w-32 md:w-48 h-auto pointer-events-none">
+          <FloralDecoration variant="corner-right" className="w-full h-auto" />
+        </div>
+
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
           className="text-center max-w-md mx-auto px-6"
         >
+          <FloralDecoration variant="small-flower" className="w-12 h-12 mx-auto mb-6" />
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-            className="w-20 h-20 mx-auto mb-8 border border-primary-200 rounded-full flex items-center justify-center"
+            className="w-20 h-20 mx-auto mb-8 border-2 border-gold rounded-full flex items-center justify-center"
           >
-            <Check className="w-8 h-8 text-primary-600" strokeWidth={1} />
+            <Check className="w-8 h-8 text-gold-light" strokeWidth={1} />
           </motion.div>
-          <h2 className="font-display text-4xl font-light tracking-tight mb-4"
+          <h2 className="font-display text-4xl font-light tracking-tight mb-4 text-white"
               style={{ fontVariationSettings: '"opsz" 48, "wght" 350' }}>
             Thank You
           </h2>
-          <p className="text-base font-light text-primary-600 leading-relaxed">
+          <p className="text-base font-light text-white/70 leading-relaxed">
             Your response has been received. We look forward to celebrating with you.
           </p>
+          <FloralDecoration variant="divider" className="w-48 h-auto mx-auto mt-8" />
         </motion.div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-cream">
       {/* Header - Full height with proper spacing */}
-      <section className="min-h-screen flex items-center justify-center px-6 lg:px-12">
+      <section className="min-h-screen flex items-center justify-center px-6 lg:px-12 relative overflow-hidden">
+        {/* Corner decorations */}
+        <div className="absolute top-0 left-0 w-32 md:w-48 lg:w-64 h-auto pointer-events-none">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1.5, delay: 0.5 }}
+          >
+            <FloralDecoration variant="corner-left" className="w-full h-auto" />
+          </motion.div>
+        </div>
+        <div className="absolute top-0 right-0 w-32 md:w-48 lg:w-64 h-auto pointer-events-none">
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1.5, delay: 0.5 }}
+          >
+            <FloralDecoration variant="corner-right" className="w-full h-auto" />
+          </motion.div>
+        </div>
+
         <div className="max-w-screen-lg mx-auto w-full">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -125,10 +156,10 @@ const RSVPPage = () => {
             transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
             className="text-center"
           >
-            <span className="text-label tracking-[0.3em] mb-12 block">
+            <span className="text-label tracking-[0.3em] mb-12 block text-white/80">
               CONFIRM YOUR ATTENDANCE
             </span>
-            <h1 className="font-display text-6xl md:text-7xl lg:text-8xl font-light tracking-tight mb-8"
+            <h1 className="font-display text-6xl md:text-7xl lg:text-8xl font-light tracking-tight mb-8 text-white"
                 style={{ fontVariationSettings: '"opsz" 72, "wght" 300' }}>
               RSVP
             </h1>
@@ -158,8 +189,8 @@ const RSVPPage = () => {
                 <label className={`
                   flex-1 py-4 px-6 text-center cursor-pointer transition-all duration-300
                   ${formData.attendance === 'yes'
-                    ? 'bg-primary-900 text-white'
-                    : 'bg-primary-50 text-primary-600 hover:bg-primary-100'}
+                    ? 'bg-gold text-primary-900'
+                    : 'bg-white/10 text-white/70 hover:bg-white/20'}
                 `}>
                   <input
                     type="radio"
@@ -176,8 +207,8 @@ const RSVPPage = () => {
                 <label className={`
                   flex-1 py-4 px-6 text-center cursor-pointer transition-all duration-300
                   ${formData.attendance === 'no'
-                    ? 'bg-primary-900 text-white'
-                    : 'bg-primary-50 text-primary-600 hover:bg-primary-100'}
+                    ? 'bg-gold text-primary-900'
+                    : 'bg-white/10 text-white/70 hover:bg-white/20'}
                 `}>
                   <input
                     type="radio"
@@ -214,7 +245,7 @@ const RSVPPage = () => {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-0 py-3 bg-transparent border-b border-primary-200 text-primary-900 font-light text-base focus:outline-none focus:border-primary-400 transition-colors placeholder-primary-300"
+                      className="w-full px-0 py-3 bg-transparent border-b border-white/30 text-white font-light text-base focus:outline-none focus:border-gold transition-colors placeholder-white/40"
                       placeholder="Your name"
                     />
                   </div>
@@ -231,7 +262,7 @@ const RSVPPage = () => {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        className="w-full px-0 py-3 bg-transparent border-b border-primary-200 text-primary-900 font-light text-base focus:outline-none focus:border-primary-400 transition-colors placeholder-primary-300"
+                        className="w-full px-0 py-3 bg-transparent border-b border-white/30 text-white font-light text-base focus:outline-none focus:border-gold transition-colors placeholder-white/40"
                         placeholder="you@email.com"
                       />
                     </div>
@@ -247,7 +278,7 @@ const RSVPPage = () => {
                         value={formData.phone}
                         onChange={handleChange}
                         required
-                        className="w-full px-0 py-3 bg-transparent border-b border-primary-200 text-primary-900 font-light text-base focus:outline-none focus:border-primary-400 transition-colors placeholder-primary-300"
+                        className="w-full px-0 py-3 bg-transparent border-b border-white/30 text-white font-light text-base focus:outline-none focus:border-gold transition-colors placeholder-white/40"
                         placeholder="+91 98765 43210"
                       />
                     </div>
@@ -262,7 +293,7 @@ const RSVPPage = () => {
                       name="guests"
                       value={formData.guests}
                       onChange={handleChange}
-                      className="w-full px-0 py-3 bg-transparent border-b border-primary-200 text-primary-900 font-light text-base focus:outline-none focus:border-primary-400 transition-colors"
+                      className="w-full px-0 py-3 bg-transparent border-b border-white/30 text-white font-light text-base focus:outline-none focus:border-gold transition-colors"
                     >
                       {[1, 2, 3, 4, 5, 6].map(num => (
                         <option key={num} value={num}>{num} {num === 1 ? 'Guest' : 'Guests'}</option>
@@ -285,7 +316,7 @@ const RSVPPage = () => {
                     ].map(event => (
                       <label
                         key={event.id}
-                        className="flex items-center p-4 bg-primary-50 hover:bg-primary-100 transition-colors cursor-pointer"
+                        className="flex items-center p-4 bg-white/10 hover:bg-white/20 transition-colors cursor-pointer"
                       >
                         <input
                           type="checkbox"
@@ -297,14 +328,14 @@ const RSVPPage = () => {
                         <div className={`
                           w-4 h-4 border transition-all duration-200 mr-4
                           ${formData.events[event.id]
-                            ? 'border-primary-900 bg-primary-900'
-                            : 'border-primary-300 bg-white'}
+                            ? 'border-gold bg-gold'
+                            : 'border-white/30 bg-transparent'}
                         `}>
                           {formData.events[event.id] && (
-                            <Check className="w-3 h-3 text-white" strokeWidth={2} />
+                            <Check className="w-3 h-3 text-primary-900" strokeWidth={2} />
                           )}
                         </div>
-                        <span className="text-sm font-light text-primary-700">
+                        <span className="text-sm font-light text-white/80">
                           {event.label}
                         </span>
                       </label>
@@ -324,7 +355,7 @@ const RSVPPage = () => {
                       name="dietary"
                       value={formData.dietary}
                       onChange={handleChange}
-                      className="w-full px-0 py-3 bg-transparent border-b border-primary-200 text-primary-900 font-light text-base focus:outline-none focus:border-primary-400 transition-colors placeholder-primary-300"
+                      className="w-full px-0 py-3 bg-transparent border-b border-white/30 text-white font-light text-base focus:outline-none focus:border-gold transition-colors placeholder-white/40"
                       placeholder="Optional"
                     />
                   </div>
@@ -339,7 +370,7 @@ const RSVPPage = () => {
                       value={formData.message}
                       onChange={handleChange}
                       rows={3}
-                      className="w-full px-0 py-3 bg-transparent border-b border-primary-200 text-primary-900 font-light text-base focus:outline-none focus:border-primary-400 transition-colors resize-none placeholder-primary-300"
+                      className="w-full px-0 py-3 bg-transparent border-b border-white/30 text-white font-light text-base focus:outline-none focus:border-gold transition-colors resize-none placeholder-primary-300"
                       placeholder="Optional"
                     />
                   </div>

@@ -39,31 +39,13 @@ const Header = () => {
         transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
         className={`fixed top-0 w-full z-50 transition-all duration-700 ${
           isScrolled
-            ? 'bg-white/95 backdrop-blur-md border-b border-primary-50'
+            ? 'bg-cream/95 backdrop-blur-md border-b border-white/20'
             : 'bg-transparent'
         }`}
       >
         <nav className="max-w-screen-2xl mx-auto px-6 lg:px-12 py-6 flex items-center justify-between">
-          {/* Logo/Date */}
-          <Link
-            to="/"
-            onClick={() => handleNavClick({ label: 'Logo', path: '/' })}
-            className="text-primary-900"
-          >
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 400 }}
-              className="flex flex-col gap-0.5"
-            >
-              <span className="font-display text-lg font-medium tracking-tight"
-                    style={{ fontVariationSettings: '"opsz" 24, "wght" 500' }}>
-                P & A
-              </span>
-              <span className="text-label text-[9px] opacity-70">
-                04.23—24.26
-              </span>
-            </motion.div>
-          </Link>
+          {/* Spacer for layout balance */}
+          <div className="w-12"></div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-10 lg:gap-14">
@@ -81,10 +63,10 @@ const Header = () => {
                     className={`
                       text-label transition-all duration-300
                       ${isActive
-                        ? 'text-primary-900'
-                        : 'text-primary-500 hover:text-primary-900'
+                        ? 'text-white'
+                        : 'text-white/70 hover:text-white'
                       }
-                      ${item.highlight ? 'font-medium' : ''}
+                      ${item.highlight ? 'font-medium text-gold' : ''}
                     `}
                   >
                     {item.label}
@@ -92,12 +74,12 @@ const Header = () => {
                   {isActive && (
                     <motion.div
                       layoutId="activeNav"
-                      className="absolute -bottom-2 left-0 right-0 h-[1.5px] bg-primary-900"
+                      className="absolute -bottom-2 left-0 right-0 h-[1.5px] bg-gold"
                       transition={{ type: "spring", stiffness: 400, damping: 30 }}
                     />
                   )}
                   {!isActive && (
-                    <span className="absolute -bottom-2 left-0 right-0 h-[1px] bg-primary-900 scale-x-0 transition-transform duration-300 group-hover:scale-x-100" />
+                    <span className="absolute -bottom-2 left-0 right-0 h-[1px] bg-gold scale-x-0 transition-transform duration-300 group-hover:scale-x-100" />
                   )}
                 </Link>
               );
@@ -115,9 +97,9 @@ const Header = () => {
               transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
             >
               {isMobileMenuOpen ? (
-                <X size={20} strokeWidth={1.5} className="text-primary-900" />
+                <X size={20} strokeWidth={1.5} className="text-white" />
               ) : (
-                <Menu size={20} strokeWidth={1.5} className="text-primary-900" />
+                <Menu size={20} strokeWidth={1.5} className="text-white" />
               )}
             </motion.div>
           </button>
@@ -133,7 +115,7 @@ const Header = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="fixed inset-0 bg-primary-900/10 backdrop-blur-sm z-40 md:hidden"
+              className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40 md:hidden"
               onClick={() => setIsMobileMenuOpen(false)}
             />
 
@@ -142,7 +124,7 @@ const Header = () => {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-              className="fixed right-0 top-0 h-full w-72 bg-white shadow-2xl z-40 md:hidden"
+              className="fixed right-0 top-0 h-full w-72 bg-cream shadow-2xl z-40 md:hidden"
             >
               <div className="pt-24 px-8">
                 <div className="space-y-6">
@@ -161,7 +143,7 @@ const Header = () => {
                           transition={{ delay: index * 0.05 }}
                           className={`
                             text-lg font-sans
-                            ${isActive ? 'text-primary-900 font-medium' : 'text-primary-600 font-normal'}
+                            ${isActive ? 'text-white font-medium' : 'text-white/70 font-normal'}
                             ${item.highlight ? 'font-medium' : ''}
                             transition-all duration-300 hover:translate-x-2
                           `}
@@ -173,7 +155,7 @@ const Header = () => {
                   })}
                 </div>
 
-                <div className="mt-20 pt-8 border-t border-primary-100">
+                <div className="mt-20 pt-8 border-t border-white/20">
                   <p className="text-label text-xs opacity-60">
                     APRIL 23—24, 2026
                   </p>
@@ -181,9 +163,11 @@ const Header = () => {
                     NASHIK, MAHARASHTRA
                   </p>
                   <div className="mt-8">
-                    <p className="font-serif italic text-sm text-primary-500">
-                      Prerna & Arpit
-                    </p>
+                    <img
+                      src={`${import.meta.env.BASE_URL}logo.png`}
+                      alt="Prerna & Arpit"
+                      className="h-16 w-auto"
+                    />
                   </div>
                 </div>
               </div>

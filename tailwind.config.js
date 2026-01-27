@@ -7,32 +7,59 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Ultra-minimalist palette - almost monochrome with subtle warmth
+        // Maximalist Forest Garden palette - from mood board
         primary: {
-          DEFAULT: '#1a1a1a',
-          50: '#fafafa',
-          100: '#f7f7f7',
-          200: '#efefef',
-          300: '#e0e0e0',
-          400: '#b8b8b8',
-          500: '#8a8a8a',
-          600: '#5c5c5c',
-          700: '#3d3d3d',
-          800: '#2a2a2a',
-          900: '#1a1a1a',
-          950: '#0d0d0d',
+          DEFAULT: '#572932',
+          50: '#fdf4f5',
+          100: '#fce8eb',
+          200: '#f9d4da',
+          300: '#f3b0bb',
+          400: '#ea8294',
+          500: '#dc5570',
+          600: '#c73656',
+          700: '#a72845',
+          800: '#8b243d',
+          900: '#572932', // Deep burgundy from Pantone
+          950: '#3a1019',
         },
-        // Extremely subtle accent - barely there
-        accent: {
-          DEFAULT: '#9b8b7a', // Very muted warm gray
-          light: '#b5a89a',
-          dark: '#7a6d5f',
-          muted: '#faf8f6',
+        // Olivine green from mood board
+        forest: {
+          DEFAULT: '#6b7c5e',
+          50: '#f5f7f3',
+          100: '#e8ece4',
+          200: '#d2daca',
+          300: '#b3c2a5',
+          400: '#8fa37c',
+          500: '#6b7c5e', // Olivine
+          600: '#556649',
+          700: '#44513b',
+          800: '#394332',
+          900: '#31392c',
+          950: '#181d15',
         },
-        // Off-white backgrounds
-        cream: '#fcfcfc',
-        sand: '#faf9f8',
-        stone: '#f5f4f2',
+        // Deep wine/burgundy for accents
+        wine: {
+          DEFAULT: '#4a1c24',
+          light: '#6b2d38',
+          dark: '#2d1016',
+        },
+        // Sage green
+        sage: {
+          DEFAULT: '#8a9a7b',
+          light: '#a8b59c',
+          dark: '#6b7c5e',
+        },
+        // Gold accent
+        gold: {
+          DEFAULT: '#C9A227',
+          light: '#E8C547',
+          dark: '#8B7419',
+        },
+        // Backgrounds
+        cream: '#572932',
+        ivory: '#6b2d38',
+        sand: '#4a1c24',
+        moss: '#3d1219',
       },
       fontFamily: {
         sans: ['Inter Tight', 'system-ui', '-apple-system', 'sans-serif'],
