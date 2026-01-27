@@ -27,7 +27,7 @@ const CONFIG = {
 
   // Couple names for email templates
   BRIDE_NAME: 'Prerna',
-  GROOM_NAME: 'Idiot',
+  GROOM_NAME: 'Arpit',
 
   // Wedding details
   WEDDING_DATE: 'April 23-24, 2025',
