@@ -1,5 +1,16 @@
 import React, { useEffect, Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+
+// Scroll to top on route change
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 import { AnimatePresence } from 'framer-motion';
 import { initAnalytics } from './services/analytics';
 import Header from './components/common/Header';
@@ -25,6 +36,7 @@ function App() {
 
   return (
     <Router basename="/wedding">
+      <ScrollToTop />
       <div className="min-h-screen bg-cream">
         <Header />
 

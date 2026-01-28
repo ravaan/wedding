@@ -67,7 +67,7 @@ const Hero = () => {
         </motion.div>
       </div>
 
-      <div className="absolute bottom-0 left-0 w-48 md:w-64 lg:w-80 xl:w-96 h-auto pointer-events-none rotate-180">
+      <div className="absolute bottom-0 left-0 w-48 md:w-64 lg:w-80 xl:w-96 h-auto pointer-events-none rotate-180 hidden md:block">
         <motion.div
           initial={{ opacity: 0, x: -100, y: 100 }}
           animate={{ opacity: 1, x: 0, y: 0 }}
@@ -77,7 +77,7 @@ const Hero = () => {
         </motion.div>
       </div>
 
-      <div className="absolute bottom-0 right-0 w-48 md:w-64 lg:w-80 xl:w-96 h-auto pointer-events-none rotate-180">
+      <div className="absolute bottom-0 right-0 w-48 md:w-64 lg:w-80 xl:w-96 h-auto pointer-events-none rotate-180 hidden md:block">
         <motion.div
           initial={{ opacity: 0, x: 100, y: 100 }}
           animate={{ opacity: 1, x: 0, y: 0 }}
@@ -127,7 +127,7 @@ const Hero = () => {
           <FloralDecoration variant="frame-corner" className="w-full h-auto" />
         </motion.div>
       </div>
-      <div className="absolute bottom-4 left-4 w-24 md:w-32 lg:w-40 pointer-events-none -scale-y-100">
+      <div className="absolute bottom-4 left-4 w-24 md:w-32 lg:w-40 pointer-events-none -scale-y-100 hidden md:block">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -136,7 +136,7 @@ const Hero = () => {
           <FloralDecoration variant="frame-corner" className="w-full h-auto" />
         </motion.div>
       </div>
-      <div className="absolute bottom-4 right-4 w-24 md:w-32 lg:w-40 pointer-events-none scale-[-1]">
+      <div className="absolute bottom-4 right-4 w-24 md:w-32 lg:w-40 pointer-events-none scale-[-1] hidden md:block">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -264,54 +264,7 @@ const Hero = () => {
           ))}
         </motion.div>
 
-        {/* Royal CTA buttons */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.5, ease: [0.23, 1, 0.32, 1] }}
-          className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center items-center"
-        >
-          <button
-            onClick={() => {
-              trackClick('Hero RSVP Button');
-              navigate('/rsvp');
-            }}
-            className="btn-primary group w-full sm:w-auto"
-          >
-            <span className="relative z-10">Confirm Attendance</span>
-          </button>
-
-          <button
-            onClick={() => {
-              trackClick('Hero View Details Button');
-              navigate('/events');
-            }}
-            className="btn-secondary w-full sm:w-auto"
-          >
-            View Schedule
-          </button>
-        </motion.div>
       </div>
-
-      {/* Elegant scroll indicator */}
-      <motion.div
-        className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.7 }}
-        transition={{ duration: 1, delay: 2 }}
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="flex flex-col items-center gap-2 cursor-pointer text-white/70"
-          onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
-        >
-          <span className="text-label text-[10px] md:text-xs">Scroll</span>
-          <svg width="1" height="40" viewBox="0 0 1 40" fill="none">
-            <line x1="0.5" y1="0" x2="0.5" y2="40" stroke="currentColor" strokeDasharray="2 2" opacity="0.5"/>
-          </svg>
-        </motion.div>
-      </motion.div>
     </section>
   );
 };

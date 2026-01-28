@@ -54,8 +54,88 @@ const HomePage = () => {
     <>
       <Hero />
 
-      {/* Maximalist Sections */}
+      {/* Essential Information - Maximalist Style */}
       <section className="bg-cream py-24 md:py-32 relative overflow-hidden">
+        {/* Corner decorations */}
+        <div className="absolute top-0 left-0 w-32 md:w-48 lg:w-64 h-auto pointer-events-none opacity-60">
+          <FloralDecoration variant="corner-left" className="w-full h-auto" />
+        </div>
+        <div className="absolute top-0 right-0 w-32 md:w-48 lg:w-64 h-auto pointer-events-none opacity-60">
+          <FloralDecoration variant="corner-right" className="w-full h-auto" />
+        </div>
+
+        <div className="max-w-screen-md mx-auto px-6 lg:px-12 text-center relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            {/* Elaborate floral divider */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="flex justify-center mb-10 md:mb-14"
+            >
+              <FloralDecoration variant="divider" className="w-56 md:w-72 lg:w-80 h-auto" />
+            </motion.div>
+
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-extralight text-white mb-16 md:mb-20">
+              Details
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
+              <div>
+                <p className="text-[10px] font-sans uppercase tracking-[0.3em] text-gold-light mb-3">
+                  Venue
+                </p>
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=The+Gateway+Hotel+Ambad+Nashik"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-lg font-light text-white hover:text-gold transition-colors underline underline-offset-4"
+                >
+                  The Gateway, Taj Ambad
+                </a>
+              </div>
+
+              <div>
+                <p className="text-[10px] font-sans uppercase tracking-[0.3em] text-gold-light mb-3">
+                  When
+                </p>
+                <p className="text-lg font-light text-white">
+                  April 23—24, 2026
+                </p>
+              </div>
+
+              <div>
+                <p className="text-[10px] font-sans uppercase tracking-[0.3em] text-gold-light mb-3">
+                  Where
+                </p>
+                <p className="text-lg font-light text-white">
+                  Nashik, Maharashtra
+                </p>
+              </div>
+            </div>
+
+            <motion.button
+              onClick={() => {
+                trackClick('Details RSVP Button');
+                navigate('/rsvp');
+              }}
+              className="btn-primary mt-16 md:mt-20"
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.99 }}
+            >
+              RSVP
+            </motion.button>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Navigation Sections */}
+      <section className="bg-cream py-24 md:py-32 border-t border-white/20 relative overflow-hidden">
         {/* Top floral border */}
         <div className="absolute top-0 left-0 right-0 pointer-events-none">
           <FloralDecoration variant="top-border" className="w-full h-20 md:h-28" />
@@ -114,81 +194,6 @@ const HomePage = () => {
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Essential Information - Maximalist Style */}
-      <section className="bg-cream py-24 md:py-32 border-t border-white/20 relative overflow-hidden">
-        {/* Corner decorations */}
-        <div className="absolute top-0 left-0 w-32 md:w-48 lg:w-64 h-auto pointer-events-none opacity-60">
-          <FloralDecoration variant="corner-left" className="w-full h-auto" />
-        </div>
-        <div className="absolute top-0 right-0 w-32 md:w-48 lg:w-64 h-auto pointer-events-none opacity-60">
-          <FloralDecoration variant="corner-right" className="w-full h-auto" />
-        </div>
-
-        <div className="max-w-screen-md mx-auto px-6 lg:px-12 text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            {/* Elaborate floral divider */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              className="flex justify-center mb-10 md:mb-14"
-            >
-              <FloralDecoration variant="divider" className="w-56 md:w-72 lg:w-80 h-auto" />
-            </motion.div>
-
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-extralight text-white mb-16 md:mb-20">
-              Details
-            </h2>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
-              <div>
-                <p className="text-[10px] font-sans uppercase tracking-[0.3em] text-gold-light mb-3">
-                  Venue
-                </p>
-                <p className="text-lg font-light text-white">
-                  Taj Ambad
-                </p>
-              </div>
-
-              <div>
-                <p className="text-[10px] font-sans uppercase tracking-[0.3em] text-gold-light mb-3">
-                  When
-                </p>
-                <p className="text-lg font-light text-white">
-                  April 23—24, 2026
-                </p>
-              </div>
-
-              <div>
-                <p className="text-[10px] font-sans uppercase tracking-[0.3em] text-gold-light mb-3">
-                  Where
-                </p>
-                <p className="text-lg font-light text-white">
-                  Nashik, Maharashtra
-                </p>
-              </div>
-            </div>
-
-            <motion.button
-              onClick={() => {
-                trackClick('Details RSVP Button');
-                navigate('/rsvp');
-              }}
-              className="btn-primary mt-16 md:mt-20"
-              whileHover={{ scale: 1.01 }}
-              whileTap={{ scale: 0.99 }}
-            >
-              RSVP
-            </motion.button>
-          </motion.div>
         </div>
       </section>
 
