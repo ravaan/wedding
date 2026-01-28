@@ -55,7 +55,7 @@ export default {
           light: '#E8C547',
           dark: '#8B7419',
         },
-        // Backgrounds
+        // Backgrounds - Original burgundy
         cream: '#572932',
         ivory: '#6b2d38',
         sand: '#4a1c24',
