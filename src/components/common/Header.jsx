@@ -31,6 +31,11 @@ const Header = () => {
     setIsMobileMenuOpen(false);
   };
 
+  // Hide header on home page
+  if (location.pathname === '/') {
+    return null;
+  }
+
   return (
     <>
       <motion.header
