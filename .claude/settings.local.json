@@ -16,7 +16,14 @@
       "WebFetch(domain:missingpiecesinvites.com)",
       "WebFetch(domain:www.missingpieceinvites.com)",
       "WebFetch(domain:missingpieceinvites.com)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "WebFetch(domain:dontboardme.com)",
+      "WebFetch(domain:www.gateway-hotels.com)",
+      "WebFetch(domain:bulbulonthewing.com)",
+      "WebFetch(domain:www.hotelierindia.com)",
+      "WebFetch(domain:www.architectandinteriorsindia.com)",
+      "WebFetch(domain:www.edifice.co.in)",
+      "Bash(git restore:*)"
     ]
   }
 }
