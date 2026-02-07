@@ -1,0 +1,59 @@
+{
+  "name": "Vibrant2 - FlowFest Palette",
+  "source": "https://www.flowfest.co.uk/",
+  "description": "Bold, colorful festival-style palette with rainbow accents. Award-winning Webflow site.",
+  "colors": {
+    "primary": {
+      "dark": "#222222",
+      "white": "#ffffff"
+    },
+    "accent": {
+      "orangeRed": "#FA5D29",
+      "blue": "#49B3FC",
+      "orange": "#FF9667",
+      "green": "#AAEEC4",
+      "purple": "#502bd8"
+    },
+    "neutral": {
+      "lightest": "#f8f8f8",
+      "light": "#ededed",
+      "mid": "#dedede"
+    },
+    "warm": {
+      "cream": "#eeebdd",
+      "beige": "#e1ded0",
+      "terracotta": "#d14424"
+    }
+  },
+  "fonts": {
+    "primary": {
+      "family": "Inter Tight",
+      "weights": {
+        "light": 300,
+        "regular": 400,
+        "medium": 500,
+        "semibold": 600,
+        "bold": 700,
+        "extrabold": 800
+      },
+      "style": "variable"
+    },
+    "secondary": {
+      "family": "General Sans",
+      "usage": "Supporting text"
+    },
+    "mono": {
+      "family": "JetBrains Mono",
+      "usage": "Code blocks"
+    }
+  },
+  "typography": {
+    "sizes": {
+      "small": "11px",
+      "body": "14px",
+      "medium": "18px",
+      "large": "22px"
+    },
+    "rendering": "antialiased"
+  }
+}

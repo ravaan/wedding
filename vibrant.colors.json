@@ -1,0 +1,38 @@
+{
+  "name": "Vibrant - Modular Comic Palette",
+  "source": "https://comic.modular.com/",
+  "colors": {
+    "dark": {
+      "base": "#020c13",
+      "mid": "#353d42"
+    },
+    "neutral": {
+      "white": "#ffffff",
+      "lightGray": "#B8B8B8",
+      "black": "#000000"
+    },
+    "red": {
+      "50": "#ff9c9c",
+      "100": "#fd6666",
+      "200": "#fc3937",
+      "300": "#fd1f1b",
+      "400": "#fd0f0c",
+      "500": "#e20101",
+      "600": "#ca0000",
+      "700": "#b10000"
+    },
+    "blue": {
+      "50": "#E6EBFF",
+      "100": "#CDD7FF",
+      "200": "#B5C0F6",
+      "500": "#7584DE",
+      "600": "#6370BE",
+      "700": "#515D9E",
+      "800": "#414A80"
+    },
+    "overlay": {
+      "darkBorder": "rgba(0,0,0,0.3)",
+      "lightBorder": "rgba(255,255,255,0.3)"
+    }
+  }
+}
