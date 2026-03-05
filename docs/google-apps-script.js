@@ -23,19 +23,19 @@
 // ============================================
 const CONFIG = {
   // Email to receive notifications when new RSVPs come in
-  NOTIFICATION_EMAIL: 'prerna@example.com',
+  NOTIFICATION_EMAIL: "prerna@example.com",
 
   // Couple names for email templates
-  BRIDE_NAME: 'Prerna',
-  GROOM_NAME: 'Arpit',
+  BRIDE_NAME: "Prerna",
+  GROOM_NAME: "Arpit",
 
   // Wedding details
-  WEDDING_DATE: 'April 23-24, 2025',
-  WEDDING_VENUE: 'Taj Ambad, Nashik',
+  WEDDING_DATE: "April 23-24, 2025",
+  WEDDING_VENUE: "Taj Ambad, Nashik",
 
   // Sheet names (must match exactly)
-  RSVP_SHEET_NAME: 'RSVP Submissions',
-  GUEST_SHEET_NAME: 'Guest List',
+  RSVP_SHEET_NAME: "RSVP Submissions",
+  GUEST_SHEET_NAME: "Guest List",
 
   // Enable/disable features
   SEND_NOTIFICATION_EMAIL: true,
@@ -66,15 +66,14 @@ function doPost(e) {
       sendConfirmationEmail(data);
     }
 
-    return ContentService
-      .createTextOutput(JSON.stringify({ success: true, row: result.row }))
-      .setMimeType(ContentService.MimeType.JSON);
-
+    return ContentService.createTextOutput(
+      JSON.stringify({ success: true, row: result.row }),
+    ).setMimeType(ContentService.MimeType.JSON);
   } catch (error) {
-    console.error('Error processing RSVP:', error);
-    return ContentService
-      .createTextOutput(JSON.stringify({ success: false, error: error.message }))
-      .setMimeType(ContentService.MimeType.JSON);
+    console.error("Error processing RSVP:", error);
+    return ContentService.createTextOutput(
+      JSON.stringify({ success: false, error: error.message }),
+    ).setMimeType(ContentService.MimeType.JSON);
   }
 }
 
@@ -82,13 +81,13 @@ function doPost(e) {
  * Handle GET requests (for testing)
  */
 function doGet(e) {
-  return ContentService
-    .createTextOutput(JSON.stringify({
-      status: 'ok',
-      message: 'Wedding RSVP API is running',
-      timestamp: new Date().toISOString()
-    }))
-    .setMimeType(ContentService.MimeType.JSON);
+  return ContentService.createTextOutput(
+    JSON.stringify({
+      status: "ok",
+      message: "Wedding RSVP API is running",
+      timestamp: new Date().toISOString(),
+    }),
+  ).setMimeType(ContentService.MimeType.JSON);
 }
 
 // ============================================
@@ -110,17 +109,17 @@ function saveRSVP(data) {
   // Prepare row data
   const rowData = [
     data.timestamp || new Date().toISOString(),
-    data.name || '',
-    data.email || '',
-    data.phone || '',
-    data.attendance || '',
+    data.name || "",
+    data.email || "",
+    data.phone || "",
+    data.attendance || "",
     data.guestCount || 1,
-    data.events || '',
-    data.dietary || '',
-    data.message || '',
-    data.source || 'website',
-    '', // Processed column (empty initially)
-    '', // Notes column
+    data.events || "",
+    data.dietary || "",
+    data.message || "",
+    data.source || "website",
+    "", // Processed column (empty initially)
+    "", // Notes column
   ];
 
   // Append to sheet
@@ -139,26 +138,26 @@ function createRSVPSheet(ss) {
 
   // Set headers
   const headers = [
-    'Timestamp',
-    'Name',
-    'Email',
-    'Phone',
-    'Attendance',
-    'Guest Count',
-    'Events',
-    'Dietary',
-    'Message',
-    'Source',
-    'Processed',
-    'Notes'
+    "Timestamp",
+    "Name",
+    "Email",
+    "Phone",
+    "Attendance",
+    "Guest Count",
+    "Events",
+    "Dietary",
+    "Message",
+    "Source",
+    "Processed",
+    "Notes",
   ];
 
   sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
 
   // Format header row
   const headerRange = sheet.getRange(1, 1, 1, headers.length);
-  headerRange.setFontWeight('bold');
-  headerRange.setBackground('#f3f4f6');
+  headerRange.setFontWeight("bold");
+  headerRange.setBackground("#f3f4f6");
 
   // Set column widths
   sheet.setColumnWidth(1, 180); // Timestamp
@@ -198,14 +197,14 @@ Email: ${data.email}
 Phone: ${data.phone}
 Attendance: ${data.attendance}
 Number of Guests: ${data.guestCount}
-Events: ${data.events || 'All events'}
-Dietary Restrictions: ${data.dietary || 'None specified'}
+Events: ${data.events || "All events"}
+Dietary Restrictions: ${data.dietary || "None specified"}
 
 Message:
-${data.message || 'No message'}
+${data.message || "No message"}
 
 ---
-Submitted: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}
+Submitted: ${new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })}
   `.trim();
 
   try {
@@ -215,7 +214,7 @@ Submitted: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}
       body: body,
     });
   } catch (error) {
-    console.error('Failed to send notification email:', error);
+    console.error("Failed to send notification email:", error);
   }
 }
 
@@ -225,21 +224,22 @@ Submitted: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}
 function sendConfirmationEmail(data) {
   if (!data.email) return;
 
-  const isAttending = data.attendance === 'Confirmed';
+  const isAttending = data.attendance === "Confirmed";
 
   const subject = isAttending
     ? `We're excited to see you! - ${CONFIG.BRIDE_NAME} & ${CONFIG.GROOM_NAME}'s Wedding`
     : `Thank you for letting us know - ${CONFIG.BRIDE_NAME} & ${CONFIG.GROOM_NAME}'s Wedding`;
 
-  const body = isAttending ? `
+  const body = isAttending
+    ? `
 Dear ${data.name},
 
 Thank you for confirming your attendance at our wedding celebration!
 
 Here are the details we have recorded:
 - Number of guests: ${data.guestCount}
-- Events attending: ${data.events || 'All events'}
-- Dietary requirements: ${data.dietary || 'None specified'}
+- Events attending: ${data.events || "All events"}
+- Dietary requirements: ${data.dietary || "None specified"}
 
 Wedding Details:
 Date: ${CONFIG.WEDDING_DATE}
@@ -249,7 +249,8 @@ We will be in touch with more details as the date approaches.
 
 With love,
 ${CONFIG.BRIDE_NAME} & ${CONFIG.GROOM_NAME}
-  `.trim() : `
+  `.trim()
+    : `
 Dear ${data.name},
 
 Thank you for letting us know that you won't be able to attend our wedding.
@@ -269,7 +270,7 @@ ${CONFIG.BRIDE_NAME} & ${CONFIG.GROOM_NAME}
       body: body,
     });
   } catch (error) {
-    console.error('Failed to send confirmation email:', error);
+    console.error("Failed to send confirmation email:", error);
   }
 }
 
@@ -295,16 +296,16 @@ function initializeTracker() {
   }
 
   // Create Rooms sheet
-  if (!ss.getSheetByName('Rooms')) {
+  if (!ss.getSheetByName("Rooms")) {
     createRoomsSheet(ss);
   }
 
   // Create Dashboard sheet
-  if (!ss.getSheetByName('Dashboard')) {
+  if (!ss.getSheetByName("Dashboard")) {
     createDashboardSheet(ss);
   }
 
-  SpreadsheetApp.getUi().alert('Tracker initialized successfully!');
+  SpreadsheetApp.getUi().alert("Tracker initialized successfully!");
 }
 
 /**
@@ -314,55 +315,55 @@ function createGuestListSheet(ss) {
   const sheet = ss.insertSheet(CONFIG.GUEST_SHEET_NAME);
 
   const headers = [
-    'Name',
-    'Phone',
-    'Email',
-    'Guest Type',      // Single / Couple / Family
-    'Group Name',      // Links families together
-    'Adult/Child',
-    'Child Age',
-    'Stay Status',     // Check-in 23rd / Check-in 24th / Meals Only
-    'RSVP Status',     // Waiting / Confirmed / Declined
-    'Food Preference', // Regular Veg / Jain
-    'Allergies',
-    'Events',
-    'Room Number',
-    'Notes'
+    "Name",
+    "Phone",
+    "Email",
+    "Guest Type", // Single / Couple / Family
+    "Group Name", // Links families together
+    "Adult/Child",
+    "Child Age",
+    "Stay Status", // Check-in 23rd / Check-in 24th / Meals Only
+    "RSVP Status", // Waiting / Confirmed / Declined
+    "Food Preference", // Regular Veg / Jain
+    "Allergies",
+    "Events",
+    "Room Number",
+    "Notes",
   ];
 
   sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
 
   const headerRange = sheet.getRange(1, 1, 1, headers.length);
-  headerRange.setFontWeight('bold');
-  headerRange.setBackground('#f3f4f6');
+  headerRange.setFontWeight("bold");
+  headerRange.setBackground("#f3f4f6");
 
   sheet.setFrozenRows(1);
 
   // Add data validation for dropdowns
   const guestTypeRule = SpreadsheetApp.newDataValidation()
-    .requireValueInList(['Single', 'Couple', 'Family'], true)
+    .requireValueInList(["Single", "Couple", "Family"], true)
     .build();
-  sheet.getRange('D2:D1000').setDataValidation(guestTypeRule);
+  sheet.getRange("D2:D1000").setDataValidation(guestTypeRule);
 
   const adultChildRule = SpreadsheetApp.newDataValidation()
-    .requireValueInList(['Adult', 'Child'], true)
+    .requireValueInList(["Adult", "Child"], true)
     .build();
-  sheet.getRange('F2:F1000').setDataValidation(adultChildRule);
+  sheet.getRange("F2:F1000").setDataValidation(adultChildRule);
 
   const stayStatusRule = SpreadsheetApp.newDataValidation()
-    .requireValueInList(['Check-in 23rd', 'Check-in 24th', 'Meals Only'], true)
+    .requireValueInList(["Check-in 23rd", "Check-in 24th", "Meals Only"], true)
     .build();
-  sheet.getRange('H2:H1000').setDataValidation(stayStatusRule);
+  sheet.getRange("H2:H1000").setDataValidation(stayStatusRule);
 
   const rsvpStatusRule = SpreadsheetApp.newDataValidation()
-    .requireValueInList(['Waiting', 'Confirmed', 'Declined'], true)
+    .requireValueInList(["Waiting", "Confirmed", "Declined"], true)
     .build();
-  sheet.getRange('I2:I1000').setDataValidation(rsvpStatusRule);
+  sheet.getRange("I2:I1000").setDataValidation(rsvpStatusRule);
 
   const foodPrefRule = SpreadsheetApp.newDataValidation()
-    .requireValueInList(['Regular Veg', 'Jain'], true)
+    .requireValueInList(["Regular Veg", "Jain"], true)
     .build();
-  sheet.getRange('J2:J1000').setDataValidation(foodPrefRule);
+  sheet.getRange("J2:J1000").setDataValidation(foodPrefRule);
 
   return sheet;
 }
@@ -371,39 +372,39 @@ function createGuestListSheet(ss) {
  * Create the Rooms sheet
  */
 function createRoomsSheet(ss) {
-  const sheet = ss.insertSheet('Rooms');
+  const sheet = ss.insertSheet("Rooms");
 
   const headers = [
-    'Room Number',
-    'Room Type',       // Suite / Deluxe / Standard
-    'Max Adults',
-    'Assigned Guests', // Names comma-separated
-    'Adult Count',
-    'Child Count',
-    'Check-in Date',   // 23rd / 24th
-    'Status',          // Not Arrived / Checked In / Checked Out
-    'Special Requests',
-    'Notes'
+    "Room Number",
+    "Room Type", // Suite / Deluxe / Standard
+    "Max Adults",
+    "Assigned Guests", // Names comma-separated
+    "Adult Count",
+    "Child Count",
+    "Check-in Date", // 23rd / 24th
+    "Status", // Not Arrived / Checked In / Checked Out
+    "Special Requests",
+    "Notes",
   ];
 
   sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
 
   const headerRange = sheet.getRange(1, 1, 1, headers.length);
-  headerRange.setFontWeight('bold');
-  headerRange.setBackground('#f3f4f6');
+  headerRange.setFontWeight("bold");
+  headerRange.setBackground("#f3f4f6");
 
   sheet.setFrozenRows(1);
 
   // Add data validation
   const roomTypeRule = SpreadsheetApp.newDataValidation()
-    .requireValueInList(['Suite', 'Deluxe', 'Standard'], true)
+    .requireValueInList(["Suite", "Deluxe", "Standard"], true)
     .build();
-  sheet.getRange('B2:B1000').setDataValidation(roomTypeRule);
+  sheet.getRange("B2:B1000").setDataValidation(roomTypeRule);
 
   const statusRule = SpreadsheetApp.newDataValidation()
-    .requireValueInList(['Not Arrived', 'Checked In', 'Checked Out'], true)
+    .requireValueInList(["Not Arrived", "Checked In", "Checked Out"], true)
     .build();
-  sheet.getRange('H2:H1000').setDataValidation(statusRule);
+  sheet.getRange("H2:H1000").setDataValidation(statusRule);
 
   return sheet;
 }
@@ -412,44 +413,64 @@ function createRoomsSheet(ss) {
  * Create the Dashboard sheet with summary formulas
  */
 function createDashboardSheet(ss) {
-  const sheet = ss.insertSheet('Dashboard');
+  const sheet = ss.insertSheet("Dashboard");
 
   // Title
-  sheet.getRange('A1').setValue('Wedding Tracker Dashboard');
-  sheet.getRange('A1').setFontSize(18).setFontWeight('bold');
+  sheet.getRange("A1").setValue("Wedding Tracker Dashboard");
+  sheet.getRange("A1").setFontSize(18).setFontWeight("bold");
 
   // Stats section
   const stats = [
-    ['', '', ''],
-    ['RSVP Summary', '', ''],
-    ['Total Submissions', `=COUNTA('${CONFIG.RSVP_SHEET_NAME}'!A:A)-1`, ''],
-    ['Confirmed', `=COUNTIF('${CONFIG.RSVP_SHEET_NAME}'!E:E,"Confirmed")`, ''],
-    ['Declined', `=COUNTIF('${CONFIG.RSVP_SHEET_NAME}'!E:E,"Declined")`, ''],
-    ['Total Guests (Confirmed)', `=SUMIF('${CONFIG.RSVP_SHEET_NAME}'!E:E,"Confirmed",'${CONFIG.RSVP_SHEET_NAME}'!F:F)`, ''],
-    ['', '', ''],
-    ['Guest List Summary', '', ''],
-    ['Total Guests', `=COUNTA('${CONFIG.GUEST_SHEET_NAME}'!A:A)-1`, ''],
-    ['RSVP Waiting', `=COUNTIF('${CONFIG.GUEST_SHEET_NAME}'!I:I,"Waiting")`, ''],
-    ['RSVP Confirmed', `=COUNTIF('${CONFIG.GUEST_SHEET_NAME}'!I:I,"Confirmed")`, ''],
-    ['RSVP Declined', `=COUNTIF('${CONFIG.GUEST_SHEET_NAME}'!I:I,"Declined")`, ''],
-    ['', '', ''],
-    ['Food Preferences', '', ''],
-    ['Regular Veg', `=COUNTIF('${CONFIG.GUEST_SHEET_NAME}'!J:J,"Regular Veg")`, ''],
-    ['Jain', `=COUNTIF('${CONFIG.GUEST_SHEET_NAME}'!J:J,"Jain")`, ''],
-    ['', '', ''],
-    ['Room Summary', '', ''],
-    ['Total Rooms', `=COUNTA('Rooms'!A:A)-1`, ''],
-    ['Rooms Assigned', `=COUNTIF('Rooms'!D:D,"<>")`, ''],
-    ['Rooms Available', `=COUNTA('Rooms'!A:A)-1-COUNTIF('Rooms'!D:D,"<>")`, ''],
+    ["", "", ""],
+    ["RSVP Summary", "", ""],
+    ["Total Submissions", `=COUNTA('${CONFIG.RSVP_SHEET_NAME}'!A:A)-1`, ""],
+    ["Confirmed", `=COUNTIF('${CONFIG.RSVP_SHEET_NAME}'!E:E,"Confirmed")`, ""],
+    ["Declined", `=COUNTIF('${CONFIG.RSVP_SHEET_NAME}'!E:E,"Declined")`, ""],
+    [
+      "Total Guests (Confirmed)",
+      `=SUMIF('${CONFIG.RSVP_SHEET_NAME}'!E:E,"Confirmed",'${CONFIG.RSVP_SHEET_NAME}'!F:F)`,
+      "",
+    ],
+    ["", "", ""],
+    ["Guest List Summary", "", ""],
+    ["Total Guests", `=COUNTA('${CONFIG.GUEST_SHEET_NAME}'!A:A)-1`, ""],
+    [
+      "RSVP Waiting",
+      `=COUNTIF('${CONFIG.GUEST_SHEET_NAME}'!I:I,"Waiting")`,
+      "",
+    ],
+    [
+      "RSVP Confirmed",
+      `=COUNTIF('${CONFIG.GUEST_SHEET_NAME}'!I:I,"Confirmed")`,
+      "",
+    ],
+    [
+      "RSVP Declined",
+      `=COUNTIF('${CONFIG.GUEST_SHEET_NAME}'!I:I,"Declined")`,
+      "",
+    ],
+    ["", "", ""],
+    ["Food Preferences", "", ""],
+    [
+      "Regular Veg",
+      `=COUNTIF('${CONFIG.GUEST_SHEET_NAME}'!J:J,"Regular Veg")`,
+      "",
+    ],
+    ["Jain", `=COUNTIF('${CONFIG.GUEST_SHEET_NAME}'!J:J,"Jain")`, ""],
+    ["", "", ""],
+    ["Room Summary", "", ""],
+    ["Total Rooms", `=COUNTA('Rooms'!A:A)-1`, ""],
+    ["Rooms Assigned", `=COUNTIF('Rooms'!D:D,"<>")`, ""],
+    ["Rooms Available", `=COUNTA('Rooms'!A:A)-1-COUNTIF('Rooms'!D:D,"<>")`, ""],
   ];
 
   sheet.getRange(1, 1, stats.length, 3).setValues(stats);
 
   // Format headers
-  sheet.getRange('A3').setFontWeight('bold').setBackground('#e0f2fe');
-  sheet.getRange('A8').setFontWeight('bold').setBackground('#e0f2fe');
-  sheet.getRange('A14').setFontWeight('bold').setBackground('#e0f2fe');
-  sheet.getRange('A18').setFontWeight('bold').setBackground('#e0f2fe');
+  sheet.getRange("A3").setFontWeight("bold").setBackground("#e0f2fe");
+  sheet.getRange("A8").setFontWeight("bold").setBackground("#e0f2fe");
+  sheet.getRange("A14").setFontWeight("bold").setBackground("#e0f2fe");
+  sheet.getRange("A18").setFontWeight("bold").setBackground("#e0f2fe");
 
   // Set column widths
   sheet.setColumnWidth(1, 200);
@@ -464,17 +485,17 @@ function createDashboardSheet(ss) {
 function testSubmission() {
   const testData = {
     timestamp: new Date().toISOString(),
-    name: 'Test Guest',
-    email: 'test@example.com',
-    phone: '+91 98765 43210',
-    attendance: 'Confirmed',
+    name: "Test Guest",
+    email: "test@example.com",
+    phone: "+91 98765 43210",
+    attendance: "Confirmed",
     guestCount: 2,
-    events: 'Sangeet, Haldi, Wedding Ceremony, Reception',
-    dietary: 'Jain',
-    message: 'This is a test submission',
-    source: 'test',
+    events: "Sangeet, Haldi, Wedding Ceremony, Reception",
+    dietary: "Jain",
+    message: "This is a test submission",
+    source: "test",
   };
 
   const result = saveRSVP(testData);
-  console.log('Test submission saved to row:', result.row);
+  console.log("Test submission saved to row:", result.row);
 }

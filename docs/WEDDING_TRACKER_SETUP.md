@@ -5,6 +5,7 @@ This guide will help you set up the Google Sheets-based Wedding Tracker and conn
 ## Overview
 
 The tracker consists of:
+
 1. **Google Sheets** - Your central database for guests, rooms, and RSVPs
 2. **Google Apps Script** - Receives RSVP submissions from your website
 3. **Wedding Website** - Already updated to submit RSVPs to Google Sheets
@@ -26,11 +27,11 @@ The tracker consists of:
 
 ```javascript
 const CONFIG = {
-  NOTIFICATION_EMAIL: 'your-email@example.com',  // Your email
-  BRIDE_NAME: 'Prerna',
-  GROOM_NAME: 'Arpit',
-  WEDDING_DATE: 'April 23-24, 2025',
-  WEDDING_VENUE: 'Taj Ambad, Nashik',
+  NOTIFICATION_EMAIL: "your-email@example.com", // Your email
+  BRIDE_NAME: "Prerna",
+  GROOM_NAME: "Arpit",
+  WEDDING_DATE: "April 23-24, 2025",
+  WEDDING_VENUE: "Taj Ambad, Nashik",
   // ... rest of config
 };
 ```
@@ -86,33 +87,35 @@ If you have an existing guest list spreadsheet:
 
 ### Guest List Column Reference
 
-| Column | Description | Valid Values |
-|--------|-------------|--------------|
-| Name | Guest full name | Text |
-| Phone | Contact number | Text |
-| Email | Email address | Text |
-| Guest Type | How they're grouped | Single / Couple / Family |
-| Group Name | Links families together | Text (e.g., "Sharma Family") |
-| Adult/Child | Age category | Adult / Child |
-| Child Age | Age if child | Number |
-| Stay Status | Hotel stay info | Check-in 23rd / Check-in 24th / Meals Only |
-| RSVP Status | Response status | Waiting / Confirmed / Declined |
-| Food Preference | Dietary needs | Regular Veg / Jain |
-| Allergies | Food allergies | Text |
-| Events | Which events | Text |
-| Room Number | Assigned room | Text |
-| Notes | Any notes | Text |
+| Column          | Description             | Valid Values                               |
+| --------------- | ----------------------- | ------------------------------------------ |
+| Name            | Guest full name         | Text                                       |
+| Phone           | Contact number          | Text                                       |
+| Email           | Email address           | Text                                       |
+| Guest Type      | How they're grouped     | Single / Couple / Family                   |
+| Group Name      | Links families together | Text (e.g., "Sharma Family")               |
+| Adult/Child     | Age category            | Adult / Child                              |
+| Child Age       | Age if child            | Number                                     |
+| Stay Status     | Hotel stay info         | Check-in 23rd / Check-in 24th / Meals Only |
+| RSVP Status     | Response status         | Waiting / Confirmed / Declined             |
+| Food Preference | Dietary needs           | Regular Veg / Jain                         |
+| Allergies       | Food allergies          | Text                                       |
+| Events          | Which events            | Text                                       |
+| Room Number     | Assigned room           | Text                                       |
+| Notes           | Any notes               | Text                                       |
 
 ## Using the Tracker
 
 ### Processing RSVPs
 
 When someone submits an RSVP on your website:
+
 1. It appears in "RSVP Submissions" sheet
 2. You (optionally) receive an email notification
 3. The guest receives a confirmation email
 
 To process into Guest List:
+
 1. Review the submission in "RSVP Submissions"
 2. Find/add the guest in "Guest List"
 3. Update their RSVP Status to "Confirmed" or "Declined"
@@ -129,6 +132,7 @@ To process into Guest List:
 ### Viewing Statistics
 
 The "Dashboard" sheet automatically calculates:
+
 - Total RSVP submissions
 - Confirmed vs Declined counts
 - Total expected guests
@@ -165,10 +169,11 @@ For testing locally:
 ## Support
 
 If you have issues:
+
 1. Check the browser console for errors
 2. Check Apps Script execution logs
 3. Verify all environment variables are set
 
 ---
 
-*Last updated: January 2026*
+_Last updated: January 2026_

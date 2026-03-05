@@ -1,9 +1,9 @@
-import mixpanel from 'mixpanel-browser';
+import mixpanel from "mixpanel-browser";
 
 class Analytics {
   constructor() {
     this.initialized = false;
-    this.enabled = import.meta.env.VITE_ENABLE_ANALYTICS === 'true';
+    this.enabled = import.meta.env.VITE_ENABLE_ANALYTICS === "true";
     this.token = import.meta.env.VITE_MIXPANEL_PROJECT_TOKEN;
   }
 
@@ -14,20 +14,20 @@ class Analytics {
       mixpanel.init(this.token, {
         debug: import.meta.env.DEV,
         track_pageview: true,
-        persistence: 'localStorage',
+        persistence: "localStorage",
         ignore_dnt: false,
-        api_host: 'https://api-eu.mixpanel.com',
+        api_host: "https://api-eu.mixpanel.com",
         loaded: (mixpanel) => {
           // Set super properties that will be sent with every event
           mixpanel.register({
-            'Wedding Date': '2025-04-23',
-            'Platform': 'Web',
-            'Device Type': this.getDeviceType(),
-            'Browser': this.getBrowserName(),
-            'Screen Size': `${window.screen.width}x${window.screen.height}`,
-            'Viewport Size': `${window.innerWidth}x${window.innerHeight}`,
+            "Wedding Date": "2025-04-23",
+            Platform: "Web",
+            "Device Type": this.getDeviceType(),
+            Browser: this.getBrowserName(),
+            "Screen Size": `${window.screen.width}x${window.screen.height}`,
+            "Viewport Size": `${window.innerWidth}x${window.innerHeight}`,
           });
-        }
+        },
       });
 
       this.initialized = true;
@@ -38,9 +38,9 @@ class Analytics {
       // Set up scroll depth tracking
       this.setupScrollDepthTracking();
 
-      console.log('📊 Analytics initialized');
+      console.log("📊 Analytics initialized");
     } catch (error) {
-      console.error('Failed to initialize analytics:', error);
+      console.error("Failed to initialize analytics:", error);
     }
   }
 
@@ -53,10 +53,10 @@ class Analytics {
       $name: traits.name,
       $email: traits.email,
       $phone: traits.phone,
-      'Guest Count': traits.guestCount,
-      'RSVP Status': traits.rsvpStatus,
-      'Events Attending': traits.eventsAttending,
-      ...traits
+      "Guest Count": traits.guestCount,
+      "RSVP Status": traits.rsvpStatus,
+      "Events Attending": traits.eventsAttending,
+      ...traits,
     });
   }
 
@@ -64,13 +64,13 @@ class Analytics {
   pageView(page, properties = {}) {
     if (!this.enabled || !this.initialized) return;
 
-    mixpanel.track('Page View', {
+    mixpanel.track("Page View", {
       page,
       url: window.location.href,
       referrer: document.referrer,
       title: document.title,
       timestamp: new Date().toISOString(),
-      ...properties
+      ...properties,
     });
   }
 
@@ -80,7 +80,7 @@ class Analytics {
 
     mixpanel.track(eventName, {
       timestamp: new Date().toISOString(),
-      ...properties
+      ...properties,
     });
   }
 
@@ -88,9 +88,9 @@ class Analytics {
   trackClick(element, properties = {}) {
     if (!this.enabled || !this.initialized) return;
 
-    this.track('Button Clicked', {
+    this.track("Button Clicked", {
       element,
-      ...properties
+      ...properties,
     });
   }
 
@@ -98,39 +98,39 @@ class Analytics {
   trackFormStart(formName) {
     if (!this.enabled || !this.initialized) return;
 
-    this.track('Form Started', {
-      'Form Name': formName,
-      'Start Time': new Date().toISOString()
+    this.track("Form Started", {
+      "Form Name": formName,
+      "Start Time": new Date().toISOString(),
     });
   }
 
   trackFormField(formName, fieldName, value) {
     if (!this.enabled || !this.initialized) return;
 
-    this.track('Form Field Completed', {
-      'Form Name': formName,
-      'Field Name': fieldName,
-      'Has Value': !!value
+    this.track("Form Field Completed", {
+      "Form Name": formName,
+      "Field Name": fieldName,
+      "Has Value": !!value,
     });
   }
 
   trackFormSubmit(formName, data = {}) {
     if (!this.enabled || !this.initialized) return;
 
-    this.track('Form Submitted', {
-      'Form Name': formName,
-      'Submission Time': new Date().toISOString(),
-      ...data
+    this.track("Form Submitted", {
+      "Form Name": formName,
+      "Submission Time": new Date().toISOString(),
+      ...data,
     });
   }
 
   trackFormError(formName, error) {
     if (!this.enabled || !this.initialized) return;
 
-    this.track('Form Error', {
-      'Form Name': formName,
-      'Error Message': error,
-      'Error Time': new Date().toISOString()
+    this.track("Form Error", {
+      "Form Name": formName,
+      "Error Message": error,
+      "Error Time": new Date().toISOString(),
     });
   }
 
@@ -139,18 +139,18 @@ class Analytics {
     if (!this.enabled || !this.initialized) return;
 
     const eventMap = {
-      start: 'RSVP Started',
-      complete: 'RSVP Completed',
-      update: 'RSVP Updated',
-      cancel: 'RSVP Cancelled'
+      start: "RSVP Started",
+      complete: "RSVP Completed",
+      update: "RSVP Updated",
+      cancel: "RSVP Cancelled",
     };
 
     this.track(eventMap[action] || action, {
-      'Guest Count': data.guestCount,
-      'Meal Preference': data.mealPreference,
-      'Events Attending': data.eventsAttending,
-      'Accommodation Needed': data.accommodationNeeded,
-      ...data
+      "Guest Count": data.guestCount,
+      "Meal Preference": data.mealPreference,
+      "Events Attending": data.eventsAttending,
+      "Accommodation Needed": data.accommodationNeeded,
+      ...data,
     });
   }
 
@@ -158,9 +158,9 @@ class Analytics {
   trackGalleryView(imageIndex, imageUrl) {
     if (!this.enabled || !this.initialized) return;
 
-    this.track('Gallery Image Viewed', {
-      'Image Index': imageIndex,
-      'Image URL': imageUrl
+    this.track("Gallery Image Viewed", {
+      "Image Index": imageIndex,
+      "Image URL": imageUrl,
     });
   }
 
@@ -168,9 +168,9 @@ class Analytics {
   trackExternalLink(linkType, destination) {
     if (!this.enabled || !this.initialized) return;
 
-    this.track('External Link Clicked', {
-      'Link Type': linkType,
-      'Destination': destination
+    this.track("External Link Clicked", {
+      "Link Type": linkType,
+      Destination: destination,
     });
   }
 
@@ -178,9 +178,9 @@ class Analytics {
   trackLanguageChange(fromLang, toLang) {
     if (!this.enabled || !this.initialized) return;
 
-    this.track('Language Changed', {
-      'From Language': fromLang,
-      'To Language': toLang
+    this.track("Language Changed", {
+      "From Language": fromLang,
+      "To Language": toLang,
     });
   }
 
@@ -188,8 +188,8 @@ class Analytics {
   trackCeremonyView(ceremonyName) {
     if (!this.enabled || !this.initialized) return;
 
-    this.track('Ceremony Guide Viewed', {
-      'Ceremony Name': ceremonyName
+    this.track("Ceremony Guide Viewed", {
+      "Ceremony Name": ceremonyName,
     });
   }
 
@@ -197,8 +197,8 @@ class Analytics {
   trackFAQView(question) {
     if (!this.enabled || !this.initialized) return;
 
-    this.track('FAQ Viewed', {
-      'Question': question
+    this.track("FAQ Viewed", {
+      Question: question,
     });
   }
 
@@ -206,8 +206,8 @@ class Analytics {
   trackCountdownView(daysRemaining) {
     if (!this.enabled || !this.initialized) return;
 
-    this.track('Countdown Viewed', {
-      'Days Remaining': daysRemaining
+    this.track("Countdown Viewed", {
+      "Days Remaining": daysRemaining,
     });
   }
 
@@ -215,12 +215,12 @@ class Analytics {
   trackError(errorMessage, errorStack, componentName) {
     if (!this.enabled || !this.initialized) return;
 
-    mixpanel.track('Error Occurred', {
-      'Error Message': errorMessage,
-      'Error Stack': errorStack,
-      'Component': componentName,
-      'URL': window.location.href,
-      'User Agent': navigator.userAgent
+    mixpanel.track("Error Occurred", {
+      "Error Message": errorMessage,
+      "Error Stack": errorStack,
+      Component: componentName,
+      URL: window.location.href,
+      "User Agent": navigator.userAgent,
     });
   }
 
@@ -239,15 +239,16 @@ class Analytics {
     const tracked = new Set();
 
     const checkScrollDepth = () => {
-      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
       const scrolled = (window.scrollY / scrollHeight) * 100;
 
-      depths.forEach(depth => {
+      depths.forEach((depth) => {
         if (scrolled >= depth && !tracked.has(depth)) {
           tracked.add(depth);
-          this.track('Scroll Depth', {
-            'Depth Percentage': depth,
-            'Page': window.location.pathname
+          this.track("Scroll Depth", {
+            "Depth Percentage": depth,
+            Page: window.location.pathname,
           });
         }
       });
@@ -255,7 +256,7 @@ class Analytics {
 
     // Debounce scroll events
     let scrollTimeout;
-    window.addEventListener('scroll', () => {
+    window.addEventListener("scroll", () => {
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(checkScrollDepth, 100);
     });
@@ -264,20 +265,21 @@ class Analytics {
   // Helper functions
   getDeviceType() {
     const width = window.innerWidth;
-    if (width < 768) return 'Mobile';
-    if (width < 1024) return 'Tablet';
-    return 'Desktop';
+    if (width < 768) return "Mobile";
+    if (width < 1024) return "Tablet";
+    return "Desktop";
   }
 
   getBrowserName() {
     const agent = navigator.userAgent;
-    if (agent.indexOf('Firefox') > -1) return 'Firefox';
-    if (agent.indexOf('Opera') > -1 || agent.indexOf('OPR') > -1) return 'Opera';
-    if (agent.indexOf('Trident') > -1) return 'Internet Explorer';
-    if (agent.indexOf('Edge') > -1) return 'Edge';
-    if (agent.indexOf('Chrome') > -1) return 'Chrome';
-    if (agent.indexOf('Safari') > -1) return 'Safari';
-    return 'Unknown';
+    if (agent.indexOf("Firefox") > -1) return "Firefox";
+    if (agent.indexOf("Opera") > -1 || agent.indexOf("OPR") > -1)
+      return "Opera";
+    if (agent.indexOf("Trident") > -1) return "Internet Explorer";
+    if (agent.indexOf("Edge") > -1) return "Edge";
+    if (agent.indexOf("Chrome") > -1) return "Chrome";
+    if (agent.indexOf("Safari") > -1) return "Safari";
+    return "Unknown";
   }
 }
 
@@ -291,9 +293,12 @@ export default analytics;
 export const initAnalytics = () => analytics.init();
 export const trackEvent = (name, props) => analytics.track(name, props);
 export const trackPageView = (page, props) => analytics.pageView(page, props);
-export const trackClick = (element, props) => analytics.trackClick(element, props);
+export const trackClick = (element, props) =>
+  analytics.trackClick(element, props);
 export const trackRSVP = (action, data) => analytics.trackRSVP(action, data);
-export const trackError = (msg, stack, component) => analytics.trackError(msg, stack, component);
+export const trackError = (msg, stack, component) =>
+  analytics.trackError(msg, stack, component);
 export const identifyUser = (id, traits) => analytics.identify(id, traits);
-export const trackExternalLink = (type, dest) => analytics.trackExternalLink(type, dest);
+export const trackExternalLink = (type, dest) =>
+  analytics.trackExternalLink(type, dest);
 export const trackCountdownView = (days) => analytics.trackCountdownView(days);

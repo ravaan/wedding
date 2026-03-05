@@ -1,11 +1,13 @@
 # Technical Dependencies & Requirements
 
 ## Overview
+
 This document outlines all technical dependencies, API keys, third-party services, and configurations required for the wedding website. Items marked with 🔄 are using placeholders/mocks until the actual service is set up.
 
 ## 1. Domain & Hosting
 
 ### Domain Name
+
 - **Status**: 🔄 PLACEHOLDER - Using GitHub Pages initially
 - **Required Action**: Purchase custom domain (e.g., `[names]wedding.com`)
 - **Suggested Registrars**:
@@ -16,6 +18,7 @@ This document outlines all technical dependencies, API keys, third-party service
 - **Timeline**: Needed before final launch
 
 ### Hosting
+
 - **Current**: GitHub Pages (free)
 - **Production**: Netlify (recommended) or Vercel
 - **Requirements**:
@@ -30,6 +33,7 @@ This document outlines all technical dependencies, API keys, third-party service
 ## 2. API Keys & Services
 
 ### Google Maps API
+
 - **Status**: 🔄 PLACEHOLDER - Using embedded maps without API key
 - **Required For**:
   - Venue location map
@@ -45,6 +49,7 @@ This document outlines all technical dependencies, API keys, third-party service
 - **Environment Variable**: `VITE_GOOGLE_MAPS_API_KEY`
 
 ### Google Sheets API
+
 - **Status**: 🔄 PLACEHOLDER - Using localStorage for now
 - **Required For**: RSVP form submissions
 - **Setup Options**:
@@ -65,6 +70,7 @@ This document outlines all technical dependencies, API keys, third-party service
     - `VITE_GOOGLE_SERVICE_ACCOUNT`
 
 ### Email Service (Optional)
+
 - **Status**: 🔄 PLACEHOLDER - No email notifications yet
 - **Options**:
   1. **SendGrid** (Free: 100 emails/day)
@@ -79,6 +85,7 @@ This document outlines all technical dependencies, API keys, third-party service
   - `VITE_EMAIL_TEMPLATE_ID` (for EmailJS)
 
 ### SMS Service (Optional)
+
 - **Status**: 🔄 NOT IMPLEMENTED - Low priority
 - **Options**:
   1. **Twilio** (~$0.0079/SMS to India)
@@ -90,6 +97,7 @@ This document outlines all technical dependencies, API keys, third-party service
   - `VITE_SMS_FROM_NUMBER`
 
 ### Analytics - Mixpanel
+
 - **Status**: ✅ REQUIRED - Will implement comprehensive tracking
 - **Service**: **Mixpanel** (Preferred for detailed event tracking)
 - **Free Tier**: 20M events/month, 12 month data history
@@ -125,6 +133,7 @@ This document outlines all technical dependencies, API keys, third-party service
 ## 3. Content Dependencies
 
 ### Photography
+
 - **Status**: 🔄 PLACEHOLDER - Using gradients and stock images
 - **Required**:
   - Hero image (couple photo or illustration)
@@ -135,6 +144,7 @@ This document outlines all technical dependencies, API keys, third-party service
 - **Storage**: Local `/assets` folder initially, CDN later
 
 ### Logo/Monogram
+
 - **Status**: 🔄 PLACEHOLDER - Using text logo
 - **Required Formats**:
   - SVG (primary)
@@ -143,6 +153,7 @@ This document outlines all technical dependencies, API keys, third-party service
 - **Current Solution**: Simple text-based logo with couple initials
 
 ### Wedding Content
+
 - **Status**: 🔄 PLACEHOLDER - Using sample content
 - **Required**:
   - Couple names
@@ -156,6 +167,7 @@ This document outlines all technical dependencies, API keys, third-party service
 ## 4. Environment Variables
 
 ### Current .env Structure
+
 ```env
 # API Keys
 VITE_GOOGLE_MAPS_API_KEY=placeholder_key_maps
@@ -182,6 +194,7 @@ VITE_ENABLE_BACKGROUND_MUSIC=false
 ## 5. NPM Dependencies
 
 ### Core Dependencies
+
 ```json
 {
   "dependencies": {
@@ -199,6 +212,7 @@ VITE_ENABLE_BACKGROUND_MUSIC=false
 ```
 
 ### Dev Dependencies
+
 ```json
 {
   "devDependencies": {
@@ -214,10 +228,11 @@ VITE_ENABLE_BACKGROUND_MUSIC=false
 ```
 
 ### Optional Dependencies (Phase 2)
+
 ```json
 {
   "dependencies": {
-    "@emailjs/browser": "^3.11.0",  // For email without backend
+    "@emailjs/browser": "^3.11.0", // For email without backend
     "react-photo-gallery": "^8.0.0", // For photo gallery
     "yet-another-react-lightbox": "^3.15.0", // For lightbox
     "react-lazy-load-image-component": "^1.6.0", // For lazy loading
@@ -231,11 +246,13 @@ VITE_ENABLE_BACKGROUND_MUSIC=false
 ## 6. Third-Party Services Configuration
 
 ### Google Sheets Setup
+
 1. **Create Spreadsheet**:
    - Name: `Wedding_RSVP_2026`
    - Columns: As specified in PRD Appendix B
 
 2. **Apps Script Setup** (if using):
+
    ```javascript
    // Deploy as Web App with these permissions:
    // Execute as: Me
@@ -248,10 +265,12 @@ VITE_ENABLE_BACKGROUND_MUSIC=false
    - Others: No access
 
 ### Google Calendar
+
 - **Event Templates**: Create .ics file templates for each ceremony
 - **Calendar ID**: For embedded calendar (optional)
 
 ### WhatsApp
+
 - **Groups to Create**:
   - All Guests
   - Family Members
@@ -262,27 +281,29 @@ VITE_ENABLE_BACKGROUND_MUSIC=false
 ## 7. Build & Deployment Configuration
 
 ### Vite Configuration
+
 ```javascript
 // vite.config.js
 export default {
-  base: '/wedding/', // For GitHub Pages
+  base: "/wedding/", // For GitHub Pages
   build: {
-    outDir: 'dist',
-    assetsDir: 'assets',
+    outDir: "dist",
+    assetsDir: "assets",
     sourcemap: false,
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ['react', 'react-dom', 'react-router-dom'],
-          ui: ['framer-motion', 'lucide-react'],
-        }
-      }
-    }
-  }
-}
+          vendor: ["react", "react-dom", "react-router-dom"],
+          ui: ["framer-motion", "lucide-react"],
+        },
+      },
+    },
+  },
+};
 ```
 
 ### GitHub Actions (CI/CD)
+
 ```yaml
 # .github/workflows/deploy.yml
 name: Deploy to GitHub Pages
@@ -294,18 +315,21 @@ on:
 ## 8. Security Considerations
 
 ### API Key Security
+
 - ✅ Use environment variables
 - ✅ Never commit .env files
 - ✅ Restrict API keys by domain
 - ✅ Use server-side proxy for sensitive operations
 
 ### Form Security
+
 - ✅ Client-side validation
 - ✅ Rate limiting (if using backend)
 - ✅ Honeypot fields for spam prevention
 - ✅ HTTPS only
 
 ### Data Privacy
+
 - ✅ No password storage
 - ✅ Minimal data collection
 - ✅ Clear privacy policy
@@ -314,15 +338,18 @@ on:
 ## 9. Monitoring & Maintenance
 
 ### Error Tracking (Optional)
+
 - **Sentry** (Free tier available)
 - **LogRocket** (For session replay)
 - **Environment Variable**: `VITE_SENTRY_DSN`
 
 ### Uptime Monitoring
+
 - **UptimeRobot** (Free: 50 monitors)
 - **Better Uptime** (Free tier available)
 
 ### Backup Strategy
+
 - **Code**: GitHub repository
 - **Data**: Google Sheets auto-backup
 - **Assets**: Google Drive backup
@@ -330,6 +357,7 @@ on:
 ## 10. Development Tools
 
 ### VS Code Extensions
+
 - Tailwind CSS IntelliSense
 - ES7+ React/Redux/React-Native snippets
 - Prettier
@@ -337,6 +365,7 @@ on:
 - Auto Rename Tag
 
 ### Chrome Extensions
+
 - React Developer Tools
 - Lighthouse
 - WAVE Evaluation Tool
@@ -344,6 +373,7 @@ on:
 ## 11. Testing Requirements
 
 ### Browser Testing
+
 - **BrowserStack** (Free for open source)
 - **LambdaTest** (Free tier available)
 - **Manual Testing Devices**:
@@ -353,6 +383,7 @@ on:
   - Desktop (Chrome, Firefox, Safari)
 
 ### Performance Testing
+
 - Google Lighthouse
 - GTmetrix
 - WebPageTest
@@ -360,7 +391,9 @@ on:
 ## 12. Content Management
 
 ### JSON Structure for Dynamic Content
+
 All content stored in `/src/data/content.json`:
+
 ```json
 {
   "meta": {
@@ -391,18 +424,21 @@ All content stored in `/src/data/content.json`:
 ## 13. Immediate Action Items
 
 ### Before Development
+
 1. ✅ Set up Git repository
 2. ✅ Create project structure plan
 3. ⬜ Decide on color palette
 4. ⬜ Create placeholder content
 
 ### Week 1 Priorities
+
 1. ⬜ Set up React + Vite
 2. ⬜ Implement core components
 3. ⬜ Create RSVP form
 4. ⬜ Deploy to GitHub Pages
 
 ### Blockers to Resolve
+
 1. **Critical**: None (can start with placeholders)
 2. **High Priority**:
    - Couple names for proper branding
@@ -415,16 +451,19 @@ All content stored in `/src/data/content.json`:
 ## 14. Fallback Solutions
 
 ### If Google Sheets API fails
+
 - Use EmailJS to email CSV data
 - Store in localStorage with export function
 - Use Netlify Forms as backup
 
 ### If Custom Domain unavailable
+
 - Use GitHub Pages URL
 - Use Netlify subdomain
 - Register alternative domain
 
 ### If Photos unavailable at launch
+
 - Use gradient backgrounds
 - Use illustration library (unDraw)
 - Display "Gallery Coming Soon" section
@@ -432,12 +471,14 @@ All content stored in `/src/data/content.json`:
 ---
 
 ## Status Legend
+
 - ✅ Completed/Ready
 - 🔄 Using Placeholder/Mock
 - ⬜ Not Started/Pending
 - ⚠️ Blocker/Critical
 
 ## Next Steps
+
 1. Start development with placeholders
 2. Gradually replace placeholders with real content
 3. Add services as credentials become available

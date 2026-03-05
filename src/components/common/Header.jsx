@@ -5,9 +5,10 @@ import { Link, useLocation } from "react-router-dom";
 import { trackClick } from "../../services/analytics";
 
 const Header = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showNav, setShowNav] = useState(false);
   const location = useLocation();
+  const isHome = location.pathname === "/";
 
   const navItems = [
     { path: "/", label: "Home" },
@@ -18,13 +19,20 @@ const Header = () => {
   ];
 
   useEffect(() => {
+    if (!isHome) {
+      setShowNav(true);
+      return;
+    }
+
+    setShowNav(false);
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setShowNav(window.scrollY > window.innerHeight * 0.8);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isHome]);
 
   const handleNavClick = (item) => {
     trackClick("Navigation", { page: item.label, path: item.path });
@@ -35,13 +43,9 @@ const Header = () => {
     <>
       <motion.header
         initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
-        className={`fixed top-0 w-full z-50 transition-all duration-700 ${
-          isScrolled
-            ? "bg-primary-500 border-b-4 border-orange shadow-lg"
-            : "bg-transparent"
-        }`}
+        animate={{ y: showNav ? 0 : -100 }}
+        transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
+        className="fixed top-0 w-full z-50 bg-primary-500 border-b-4 border-orange shadow-lg"
       >
         <nav className="max-w-screen-2xl mx-auto px-6 lg:px-12 py-5 flex items-center justify-between">
           {/* Logo/Date */}
@@ -54,14 +58,8 @@ const Header = () => {
               transition={{ type: "spring", stiffness: 400 }}
               className="flex flex-col gap-0.5"
             >
-              <span
-                className={`font-script text-3xl ${isScrolled ? "text-[#E8C84A]" : "text-accent"}`}
-              >
-                P & A
-              </span>
-              <span
-                className={`text-[9px] font-sans font-bold uppercase tracking-[0.3em] ${isScrolled ? "text-cream/70" : "text-primary-400"}`}
-              >
+              <span className="font-script text-3xl text-[#E8C84A]">P & A</span>
+              <span className="text-[9px] font-sans font-bold uppercase tracking-[0.3em] text-cream/70">
                 04.24 — 25.26
               </span>
             </motion.div>
@@ -81,16 +79,8 @@ const Header = () => {
                 >
                   <span
                     className={`
-                      text-[11px] font-sans font-bold uppercase tracking-[0.25em] transition-all duration-300
-                      ${
-                        isScrolled
-                          ? isActive
-                            ? "text-[#E8C84A]"
-                            : "text-cream/80 hover:text-[#E8C84A]"
-                          : isActive
-                            ? "text-primary-500"
-                            : "text-primary-400 hover:text-primary-500"
-                      }
+                      text-xs font-sans font-bold uppercase tracking-[0.25em] transition-all duration-300
+                      ${isActive ? "text-[#E8C84A]" : "text-cream/80 hover:text-[#E8C84A]"}
                       ${item.highlight ? "font-extrabold" : ""}
                     `}
                   >
@@ -99,7 +89,7 @@ const Header = () => {
                   {isActive && (
                     <motion.div
                       layoutId="activeNav"
-                      className={`absolute -bottom-2 left-0 right-0 h-[3px] ${isScrolled ? "bg-orange" : "bg-orange"}`}
+                      className="absolute -bottom-2 left-0 right-0 h-[3px] bg-orange"
                       transition={{
                         type: "spring",
                         stiffness: 400,
@@ -108,9 +98,7 @@ const Header = () => {
                     />
                   )}
                   {!isActive && (
-                    <span
-                      className={`absolute -bottom-2 left-0 right-0 h-[2px] ${isScrolled ? "bg-orange/60" : "bg-orange"} scale-x-0 transition-transform duration-300 group-hover:scale-x-100`}
-                    />
+                    <span className="absolute -bottom-2 left-0 right-0 h-[2px] bg-orange/60 scale-x-0 transition-transform duration-300 group-hover:scale-x-100" />
                   )}
                 </Link>
               );
@@ -128,17 +116,9 @@ const Header = () => {
               transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
             >
               {isMobileMenuOpen ? (
-                <X
-                  size={22}
-                  strokeWidth={2}
-                  className={isScrolled ? "text-cream" : "text-primary-500"}
-                />
+                <X size={22} strokeWidth={2} className="text-cream" />
               ) : (
-                <Menu
-                  size={22}
-                  strokeWidth={2}
-                  className={isScrolled ? "text-cream" : "text-primary-500"}
-                />
+                <Menu size={22} strokeWidth={2} className="text-cream" />
               )}
             </motion.div>
           </button>

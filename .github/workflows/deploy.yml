@@ -24,8 +24,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: "20"
+          cache: "npm"
 
       - name: Install dependencies
         run: npm ci
@@ -47,8 +47,8 @@ jobs:
           VITE_SMS_API_KEY: ${{ secrets.VITE_SMS_API_KEY }}
           VITE_SMS_FROM_NUMBER: ${{ secrets.VITE_SMS_FROM_NUMBER }}
           VITE_ENABLE_SMS: false
-          VITE_RSVP_DEADLINE: '2025-03-15'
-          VITE_WEDDING_DATE: '2025-04-23'
+          VITE_RSVP_DEADLINE: "2025-03-15"
+          VITE_WEDDING_DATE: "2025-04-23"
           VITE_ENABLE_RSVP: true
           VITE_ENABLE_GUEST_MESSAGES: true
           VITE_SHOW_GALLERY: true
@@ -62,7 +62,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'
+          path: "./dist"
 
   deploy:
     environment:

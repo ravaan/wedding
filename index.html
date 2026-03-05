@@ -5,7 +5,10 @@
     <link rel="icon" type="image/svg+xml" href="/wedding/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Prerna & Arpit - Wedding | April 24-25, 2026</title>
-    <meta name="description" content="Join us in celebrating the wedding of Prerna Bhatia and Arpit Agarwal on April 24-25, 2026 in Nashik, Maharashtra" />
+    <meta
+      name="description"
+      content="Join us in celebrating the wedding of Prerna Bhatia and Arpit Agarwal on April 24-25, 2026 in Nashik, Maharashtra"
+    />
 
     <!-- Start Single Page Apps for GitHub Pages -->
     <script type="text/javascript">
@@ -18,16 +21,22 @@
       // When the single page app is loaded further down in this file,
       // the correct url will be waiting in the browser's history for
       // the single page app to route accordingly.
-      (function(l) {
-        if (l.search[1] === '/' ) {
-          var decoded = l.search.slice(1).split('&').map(function(s) {
-            return s.replace(/~and~/g, '&')
-          }).join('?');
-          window.history.replaceState(null, null,
-              l.pathname.slice(0, -1) + decoded + l.hash
+      (function (l) {
+        if (l.search[1] === "/") {
+          var decoded = l.search
+            .slice(1)
+            .split("&")
+            .map(function (s) {
+              return s.replace(/~and~/g, "&");
+            })
+            .join("?");
+          window.history.replaceState(
+            null,
+            null,
+            l.pathname.slice(0, -1) + decoded + l.hash,
           );
         }
-      }(window.location))
+      })(window.location);
     </script>
     <!-- End Single Page Apps for GitHub Pages -->
   </head>
