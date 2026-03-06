@@ -15,6 +15,7 @@ const EventsPage = lazy(() => import("./pages/EventsPage"));
 const RSVPPage = lazy(() => import("./pages/RSVPPage"));
 const TravelPage = lazy(() => import("./pages/TravelPage"));
 const GiftRegistryPage = lazy(() => import("./pages/GiftRegistryPage"));
+const GiftRegistryEditPage = lazy(() => import("./pages/GiftRegistryEditPage"));
 
 function App() {
   useEffect(() => {
@@ -32,6 +33,7 @@ function App() {
             <Route path="/schedule" element={<EventsPage />} />
             <Route path="/rsvp" element={<RSVPPage />} />
             <Route path="/travel" element={<TravelPage />} />
+            <Route path="/gift/edit" element={<GiftRegistryEditPage />} />
             <Route path="/gift" element={<GiftRegistryPage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>

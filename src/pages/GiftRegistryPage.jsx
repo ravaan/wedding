@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 import Divider from "../components/ui/Divider";
 import { trackPageView, trackClick } from "../services/analytics";
 
-const registries = [
+const DEFAULT_REGISTRIES = [
   {
     name: "Amazon",
     url: "https://www.amazon.in/wedding/registry",
@@ -18,8 +18,16 @@ const registries = [
 ];
 
 const GiftRegistryPage = () => {
+  const [registries, setRegistries] = useState(DEFAULT_REGISTRIES);
+
   useEffect(() => {
     trackPageView("Gift Registry");
+    try {
+      const stored = localStorage.getItem("giftRegistries");
+      if (stored) setRegistries(JSON.parse(stored));
+    } catch {
+      // use defaults
+    }
   }, []);
 
   return (
