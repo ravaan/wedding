@@ -3,7 +3,7 @@ import Divider from "../ui/Divider";
 
 const Footer = () => {
   return (
-    <footer className="bg-primary-600 border-t-4 border-[var(--theme-gold)] relative overflow-hidden">
+    <footer className="bg-[var(--theme-green-dark)] border-t-4 border-[var(--theme-gold)] relative overflow-hidden">
       {/* Batik pattern overlay on footer */}
       <div className="absolute inset-0 batik-bg opacity-30" />
       <div className="max-w-screen-xl mx-auto px-6 lg:px-12 py-16 relative z-10">

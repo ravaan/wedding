@@ -96,7 +96,7 @@ const RSVPPage = () => {
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-            className="w-20 h-20 mx-auto mb-8 border-3 border-orange rounded-full flex items-center justify-center bg-primary-500"
+            className="w-20 h-20 mx-auto mb-8 border-3 border-orange rounded-full flex items-center justify-center bg-[var(--theme-green)]"
           >
             <Check
               className="w-8 h-8 text-[var(--theme-gold-light)]"
@@ -138,7 +138,7 @@ const RSVPPage = () => {
                   flex-1 py-4 px-6 text-center cursor-pointer transition-all duration-300 border-2
                   ${
                     formData.attendance === "yes"
-                      ? "bg-primary-500 text-cream border-orange"
+                      ? "bg-[var(--theme-green)] text-cream border-orange"
                       : "bg-white text-primary-400 border-orange/30 hover:border-orange"
                   }
                 `}
@@ -158,7 +158,7 @@ const RSVPPage = () => {
                   flex-1 py-4 px-6 text-center cursor-pointer transition-all duration-300 border-2
                   ${
                     formData.attendance === "no"
-                      ? "bg-primary-500 text-cream border-orange"
+                      ? "bg-[var(--theme-green)] text-cream border-orange"
                       : "bg-white text-primary-400 border-orange/30 hover:border-orange"
                   }
                 `}
@@ -306,7 +306,7 @@ const RSVPPage = () => {
                           w-5 h-5 border-3 transition-all duration-200 mr-4
                           ${
                             formData.events[event.id]
-                              ? "border-orange bg-primary-500"
+                              ? "border-orange bg-[var(--theme-green)]"
                               : "border-orange/40 bg-white"
                           }
                         `}

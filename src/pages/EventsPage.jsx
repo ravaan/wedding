@@ -148,7 +148,7 @@ const EventsPage = () => {
       </section>
 
       {/* Venue Information */}
-      <section className="py-20 md:py-32 border-t-4 border-[var(--theme-gold)] bg-primary-500">
+      <section className="py-20 md:py-32 border-t-4 border-[var(--theme-gold)] bg-[var(--theme-green)]">
         <div className="max-w-screen-sm mx-auto px-6 lg:px-12 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

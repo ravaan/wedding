@@ -168,7 +168,7 @@ const GiftRegistryEditPage = () => {
 
             <button
               onClick={handleSave}
-              className="flex items-center gap-2 bg-primary-500 hover:bg-primary-600 text-white text-sm font-bold tracking-wide uppercase px-6 py-3 transition-colors cursor-pointer"
+              className="flex items-center gap-2 bg-[var(--theme-green)] hover:bg-[var(--theme-green-dark)] text-white text-sm font-bold tracking-wide uppercase px-6 py-3 transition-colors cursor-pointer"
             >
               <Save size={16} />
               {saved ? "Saved!" : "Save Changes"}
