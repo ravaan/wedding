@@ -59,6 +59,24 @@ const GoldOrnament = ({ width = "200px", className = "" }) => (
   </svg>
 );
 
+// Detect portrait vs landscape orientation
+const useOrientation = () => {
+  const [orientation, setOrientation] = useState(() =>
+    window.matchMedia("(orientation: portrait)").matches
+      ? "portrait"
+      : "landscape",
+  );
+
+  useEffect(() => {
+    const mql = window.matchMedia("(orientation: portrait)");
+    const handler = (e) => setOrientation(e.matches ? "portrait" : "landscape");
+    mql.addEventListener("change", handler);
+    return () => mql.removeEventListener("change", handler);
+  }, []);
+
+  return orientation;
+};
+
 const Hero = () => {
   const [countdown, setCountdown] = useState({
     days: 0,
@@ -69,7 +87,19 @@ const Hero = () => {
   const [editorMode, setEditorMode] = useState(
     () => new URLSearchParams(window.location.search).get("editor") === "true",
   );
-  const [flowers, setFlowers] = useState(flowerData.flowers);
+  const orientation = useOrientation();
+  const [editOrientation, setEditOrientation] = useState(orientation);
+  const [landscapeFlowers, setLandscapeFlowers] = useState(
+    flowerData.landscape.flowers,
+  );
+  const [portraitFlowers, setPortraitFlowers] = useState(
+    flowerData.portrait.flowers,
+  );
+  const activeOrientation = editorMode ? editOrientation : orientation;
+  const flowers =
+    activeOrientation === "portrait" ? portraitFlowers : landscapeFlowers;
+  const simulateViewport = editorMode && editOrientation !== orientation;
+  const widthUnit = simulateViewport ? "%" : "vw";
   const topClusterRef = useRef(null);
   const bottomClusterRef = useRef(null);
   const sectionRef = useRef(null);
@@ -114,7 +144,15 @@ const Hero = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="relative min-h-screen overflow-hidden"
+      style={
+        simulateViewport
+          ? { maxWidth: "56vh", margin: "0 auto", height: "100vh" }
+          : undefined
+      }
+    >
       {/* === LIGHT BACKGROUND === */}
       <div className="absolute inset-0 bg-[var(--theme-cream)]" />
 
@@ -145,7 +183,7 @@ const Hero = () => {
                 style={{
                   top: `${f.y}%`,
                   left: `${f.x}%`,
-                  width: `${f.width}vw`,
+                  width: `${f.width}${widthUnit}`,
                   opacity: f.opacity,
                   transform: `rotate(${f.rotation}deg) scaleX(${f.scaleX})`,
                 }}
@@ -167,7 +205,7 @@ const Hero = () => {
                 style={{
                   bottom: `${-f.y}%`,
                   left: `${f.x}%`,
-                  width: `${f.width}vw`,
+                  width: `${f.width}${widthUnit}`,
                   opacity: f.opacity,
                   transform: `rotate(${f.rotation}deg) scaleX(${f.scaleX})`,
                 }}
@@ -376,7 +414,14 @@ const Hero = () => {
       {editorMode && (
         <FlowerEditor
           flowers={flowers}
-          setFlowers={setFlowers}
+          landscapeFlowers={landscapeFlowers}
+          setLandscapeFlowers={setLandscapeFlowers}
+          portraitFlowers={portraitFlowers}
+          setPortraitFlowers={setPortraitFlowers}
+          orientation={orientation}
+          editOrientation={editOrientation}
+          setEditOrientation={setEditOrientation}
+          simulateViewport={simulateViewport}
           sectionRef={sectionRef}
           topClusterRef={topClusterRef}
           bottomClusterRef={bottomClusterRef}

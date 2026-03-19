@@ -15,7 +15,14 @@ const FLOWER_OPTIONS = [
 
 const FlowerEditor = ({
   flowers,
-  setFlowers,
+  landscapeFlowers,
+  setLandscapeFlowers,
+  portraitFlowers,
+  setPortraitFlowers,
+  orientation,
+  editOrientation,
+  setEditOrientation,
+  simulateViewport,
   sectionRef,
   topClusterRef,
   bottomClusterRef,
@@ -27,8 +34,20 @@ const FlowerEditor = ({
   const [panelPos, setPanelPos] = useState({ x: null, y: null });
   const panelDragRef = useRef(null);
 
-  const selected = flowers.find((f) => f.id === selectedId);
-  const clusterFlowers = flowers.filter((f) => f.cluster === activeCluster);
+  // Select the right flowers/setter based on which orientation is being edited
+  const editingFlowers =
+    editOrientation === "portrait" ? portraitFlowers : landscapeFlowers;
+  const setEditingFlowers =
+    editOrientation === "portrait" ? setPortraitFlowers : setLandscapeFlowers;
+
+  // When editing the active orientation, use live flowers; otherwise use the stored config
+  const displayFlowers =
+    editOrientation === orientation ? flowers : editingFlowers;
+
+  const selected = displayFlowers.find((f) => f.id === selectedId);
+  const clusterFlowers = displayFlowers.filter(
+    (f) => f.cluster === activeCluster,
+  );
   const clusterRef = activeCluster === "top" ? topClusterRef : bottomClusterRef;
 
   // Force re-render on scroll/resize so overlay positions stay in sync
@@ -44,11 +63,11 @@ const FlowerEditor = ({
 
   const updateFlower = useCallback(
     (id, updates) => {
-      setFlowers((prev) =>
+      setEditingFlowers((prev) =>
         prev.map((f) => (f.id === id ? { ...f, ...updates } : f)),
       );
     },
-    [setFlowers],
+    [setEditingFlowers],
   );
 
   const getClusterRect = useCallback(() => {
@@ -128,7 +147,7 @@ const FlowerEditor = ({
 
   const addFlower = useCallback(() => {
     const prefix = activeCluster === "top" ? "t" : "b";
-    const clusterNums = flowers
+    const clusterNums = editingFlowers
       .filter((f) => f.cluster === activeCluster)
       .map((f) => parseInt(f.id.replace(prefix, ""), 10));
     const maxNum = Math.max(...clusterNums, 0);
@@ -145,22 +164,22 @@ const FlowerEditor = ({
       cluster: activeCluster,
     };
 
-    setFlowers((prev) => [...prev, newFlower]);
+    setEditingFlowers((prev) => [...prev, newFlower]);
     setSelectedId(newFlower.id);
-  }, [flowers, activeCluster, setFlowers]);
+  }, [editingFlowers, activeCluster, setEditingFlowers]);
 
   const deleteFlower = useCallback(
     (id) => {
-      setFlowers((prev) => prev.filter((f) => f.id !== id));
+      setEditingFlowers((prev) => prev.filter((f) => f.id !== id));
       setSelectedId(null);
     },
-    [setFlowers],
+    [setEditingFlowers],
   );
 
   const duplicateFlower = useCallback(
     (flower) => {
       const prefix = activeCluster === "top" ? "t" : "b";
-      const allNums = flowers
+      const allNums = editingFlowers
         .filter((f) => f.cluster === activeCluster)
         .map((f) => parseInt(f.id.replace(prefix, ""), 10));
       const maxNum = Math.max(...allNums, 0);
@@ -172,10 +191,10 @@ const FlowerEditor = ({
         y: flower.y + 5,
       };
 
-      setFlowers((prev) => [...prev, dup]);
+      setEditingFlowers((prev) => [...prev, dup]);
       setSelectedId(dup.id);
     },
-    [flowers, activeCluster, setFlowers],
+    [editingFlowers, activeCluster, setEditingFlowers],
   );
 
   const handlePanelDragStart = useCallback(
@@ -204,19 +223,62 @@ const FlowerEditor = ({
     [panelPos],
   );
 
+  const [saveStatus, setSaveStatus] = useState(null);
+
   const exportJSON = useCallback(() => {
-    const json = JSON.stringify({ flowers }, null, 2);
+    const json = JSON.stringify(
+      {
+        landscape: { flowers: landscapeFlowers },
+        portrait: { flowers: portraitFlowers },
+      },
+      null,
+      2,
+    );
     navigator.clipboard.writeText(json).then(() => {
       alert("Flower layout JSON copied to clipboard!");
     });
     console.log("Flower Layout JSON:\n", json);
-  }, [flowers]);
+  }, [landscapeFlowers, portraitFlowers]);
+
+  const saveFlowers = useCallback(async () => {
+    setSaveStatus("saving");
+    try {
+      const res = await fetch("/api/save-flowers", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          landscape: { flowers: landscapeFlowers },
+          portrait: { flowers: portraitFlowers },
+        }),
+      });
+      if (!res.ok) throw new Error("Save failed");
+      setSaveStatus("saved");
+    } catch (err) {
+      setSaveStatus("error");
+      console.error("Failed to save flowers:", err);
+    }
+    setTimeout(() => setSaveStatus(null), 2000);
+  }, [landscapeFlowers, portraitFlowers]);
+
+  const copyFromOther = useCallback(() => {
+    const source =
+      editOrientation === "portrait" ? landscapeFlowers : portraitFlowers;
+    const label = editOrientation === "portrait" ? "landscape" : "portrait";
+    if (
+      window.confirm(
+        `Replace ${editOrientation} flowers with a copy from ${label}?`,
+      )
+    ) {
+      setEditingFlowers(JSON.parse(JSON.stringify(source)));
+      setSelectedId(null);
+    }
+  }, [editOrientation, landscapeFlowers, portraitFlowers, setEditingFlowers]);
 
   // Keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (!selectedId) return;
-      const sel = flowers.find((f) => f.id === selectedId);
+      const sel = displayFlowers.find((f) => f.id === selectedId);
       if (!sel) return;
 
       const step = e.shiftKey ? 5 : 1;
@@ -252,7 +314,7 @@ const FlowerEditor = ({
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [selectedId, flowers, updateFlower, deleteFlower]);
+  }, [selectedId, displayFlowers, updateFlower, deleteFlower]);
 
   // Compute flower overlay positions from cluster ref rect
   const rect = getClusterRect();
@@ -298,7 +360,7 @@ const FlowerEditor = ({
               className="absolute"
               style={{
                 ...posStyle,
-                width: `${flower.width}vw`,
+                width: `${flower.width}${simulateViewport ? "%" : "vw"}`,
                 transform: `rotate(${flower.rotation}deg) scaleX(${flower.scaleX})`,
                 opacity: flower.opacity,
                 cursor: dragging === flower.id ? "grabbing" : "grab",
@@ -361,6 +423,41 @@ const FlowerEditor = ({
           <div className="w-8 h-1 bg-gray-400 rounded-full" />
         </div>
 
+        {/* Orientation toggle */}
+        <div className="flex mb-2 border border-gray-300 rounded overflow-hidden">
+          <button
+            onClick={() => {
+              setEditOrientation("portrait");
+              setSelectedId(null);
+            }}
+            className={`flex-1 py-1.5 text-xs font-bold ${
+              editOrientation === "portrait"
+                ? "bg-purple-600 text-white"
+                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+            }`}
+          >
+            Portrait
+          </button>
+          <button
+            onClick={() => {
+              setEditOrientation("landscape");
+              setSelectedId(null);
+            }}
+            className={`flex-1 py-1.5 text-xs font-bold ${
+              editOrientation === "landscape"
+                ? "bg-purple-600 text-white"
+                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+            }`}
+          >
+            Landscape
+          </button>
+        </div>
+        {editOrientation !== orientation && (
+          <p className="text-[10px] text-amber-600 mb-2 font-medium">
+            Editing {editOrientation} (current view: {orientation})
+          </p>
+        )}
+
         {/* Cluster toggle */}
         <div className="flex mb-3 border border-gray-300 rounded overflow-hidden">
           <button
@@ -391,15 +488,42 @@ const FlowerEditor = ({
           </button>
         </div>
 
-        <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center justify-between mb-2">
           <h3 className="font-bold text-sm text-gray-800">Flower Editor</h3>
-          <button
-            onClick={exportJSON}
-            className="px-2 py-1 bg-green-600 text-white rounded text-[10px] font-bold hover:bg-green-700"
-          >
-            Export JSON
-          </button>
+          <div className="flex gap-1">
+            <button
+              onClick={saveFlowers}
+              disabled={saveStatus === "saving"}
+              className={`px-2 py-1 rounded text-[10px] font-bold ${
+                saveStatus === "saved"
+                  ? "bg-green-600 text-white"
+                  : saveStatus === "error"
+                    ? "bg-red-600 text-white"
+                    : "bg-blue-600 text-white hover:bg-blue-700"
+              }`}
+            >
+              {saveStatus === "saving"
+                ? "..."
+                : saveStatus === "saved"
+                  ? "Saved!"
+                  : saveStatus === "error"
+                    ? "Error"
+                    : "Save"}
+            </button>
+            <button
+              onClick={exportJSON}
+              className="px-2 py-1 bg-green-600 text-white rounded text-[10px] font-bold hover:bg-green-700"
+            >
+              Export
+            </button>
+          </div>
         </div>
+        <button
+          onClick={copyFromOther}
+          className="w-full mb-3 px-3 py-1 bg-amber-100 text-amber-800 rounded text-[10px] font-bold hover:bg-amber-200 border border-amber-300"
+        >
+          Copy from {editOrientation === "portrait" ? "Landscape" : "Portrait"}
+        </button>
 
         <button
           onClick={addFlower}
