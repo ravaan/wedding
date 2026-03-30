@@ -400,7 +400,7 @@ const PartyPage = () => {
                   }}
                 />
               ))}
-            </div>
+            </motion.div>
           ) : (
             <motion.svg
               key="paused"
