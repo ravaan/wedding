@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import confetti from "canvas-confetti";
 
 const basePath = import.meta.env.BASE_URL || "/";
 
 const PartyPage = () => {
   const [playing, setPlaying] = useState(true);
+  const [beatDrop, setBeatDrop] = useState(false);
   const audioRef = useRef(null);
+  const beatTimerRef = useRef(null);
 
   useEffect(() => {
     const audio = new Audio(`${basePath}clap-your-hands.mp3`);
@@ -14,9 +17,17 @@ const PartyPage = () => {
     audio.currentTime = 40;
     audioRef.current = audio;
 
+    const startBeatTimer = () => {
+      // Beat drops at 1:15 (75s). Song starts at 40s. So 35s after playback.
+      beatTimerRef.current = setTimeout(() => {
+        setBeatDrop(true);
+      }, 35000);
+    };
+
     const tryPlay = () => {
       audio.play().then(() => {
         setPlaying(true);
+        startBeatTimer();
       }).catch(() => {});
       document.removeEventListener("click", tryPlay);
       document.removeEventListener("touchstart", tryPlay);
@@ -26,6 +37,7 @@ const PartyPage = () => {
 
     audio.play().then(() => {
       setPlaying(true);
+      startBeatTimer();
     }).catch(() => {
       document.addEventListener("click", tryPlay, { once: false });
       document.addEventListener("touchstart", tryPlay, { once: false });
@@ -36,12 +48,86 @@ const PartyPage = () => {
     return () => {
       audio.pause();
       audio.src = "";
+      if (beatTimerRef.current) clearTimeout(beatTimerRef.current);
       document.removeEventListener("click", tryPlay);
       document.removeEventListener("touchstart", tryPlay);
       document.removeEventListener("keydown", tryPlay);
       document.removeEventListener("scroll", tryPlay);
     };
   }, []);
+
+  // Fireworks on beat drop — original style, runs until song loops
+  useEffect(() => {
+    if (!beatDrop) return;
+
+    const colors = ["#e91e90", "#e53e3e", "#ecc94b", "#2ecc40", "#7c3aed", "#3b82f6", "#e67e22", "#00ffff"];
+    let rafId;
+    let stopped = false;
+
+    const frame = () => {
+      if (stopped) return;
+      confetti({
+        particleCount: 3,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0, y: 0.6 },
+        colors,
+        zIndex: 9999,
+      });
+      confetti({
+        particleCount: 3,
+        angle: 120,
+        spread: 55,
+        origin: { x: 1, y: 0.6 },
+        colors,
+        zIndex: 9999,
+      });
+      rafId = requestAnimationFrame(frame);
+    };
+
+    // Big burst first
+    confetti({
+      particleCount: 150,
+      spread: 100,
+      origin: { y: 0.5 },
+      colors,
+      zIndex: 9999,
+    });
+
+    frame();
+
+    // Stop when song loops (161s of fireworks), then restart on next beat drop
+    const fireworkDuration = 161000;
+    const loopTotal = 196000;
+    const beatDropOffset = 35000;
+
+    const stopAndLoop = () => {
+      stopped = true;
+      cancelAnimationFrame(rafId);
+
+      setTimeout(() => {
+        // Restart on next beat drop
+        stopped = false;
+        confetti({
+          particleCount: 150,
+          spread: 100,
+          origin: { y: 0.5 },
+          colors,
+          zIndex: 9999,
+        });
+        frame();
+        setTimeout(stopAndLoop, fireworkDuration);
+      }, beatDropOffset);
+    };
+
+    const loopTimeout = setTimeout(stopAndLoop, fireworkDuration);
+
+    return () => {
+      stopped = true;
+      cancelAnimationFrame(rafId);
+      clearTimeout(loopTimeout);
+    };
+  }, [beatDrop]);
 
   const toggle = () => {
     const audio = audioRef.current;
@@ -59,286 +145,227 @@ const PartyPage = () => {
 
   return (
     <div className="min-h-screen bg-black">
-      <div className="max-w-3xl mx-auto px-6 md:px-12 py-16 md:py-24">
+      <div className="w-full px-6 md:px-12 py-16 md:py-24 text-center">
 
         {/* Title */}
         <motion.h1
           initial={{ opacity: 0 }}
           animate={{ opacity: [0, 1, 0] }}
           transition={{ duration: 0.5, repeat: Infinity, ease: "linear" }}
-          className="text-6xl md:text-8xl lg:text-9xl font-black text-white text-center mb-16 md:mb-24"
-          style={{ fontFamily: "'Playfair Display', serif" }}
+          className="font-black text-white text-center mb-16 md:mb-24"
+          style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(8rem, 15vw, 16rem)" }}
         >
           Party Itirenary
         </motion.h1>
 
         {/* ===== DAY 1 ===== */}
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
+        <div>
           <h2
-            className="text-3xl md:text-4xl font-black mb-10"
-            style={{ color: "#e91e90", fontFamily: "'Playfair Display', serif", fontWeight: 900 }}
+            className="font-black mb-20 text-center"
+            style={{ color: "#e91e90", fontFamily: "'Playfair Display', serif", fontWeight: 900, fontSize: "clamp(4rem, 8vw, 8rem)" }}
           >
             Day 1 - 23<sup>rd</sup> April
           </h2>
-        </motion.div>
+        </div>
 
         {/* Mehendi & Bhaat */}
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-12"
+        <div className="mb-12"
         >
           <h3
-            className="text-2xl md:text-3xl font-black uppercase tracking-wide mb-3"
-            style={{ color: "#2ecc40", fontFamily: "'Bebas Neue', sans-serif" }}
+            className="font-black uppercase tracking-wide mb-3"
+            style={{ color: "#2ecc40", fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(3.5rem, 7vw, 7rem)" }}
           >
             Mehendi & Bhaat - 1 PM
           </h3>
           <p
-            className="text-lg md:text-xl"
-            style={{ color: "#2ecc40", fontFamily: "'Inter', sans-serif" }}
+            style={{ color: "#2ecc40", fontFamily: "'Inter', sans-serif", fontSize: "clamp(2.5rem, 5vw, 5rem)" }}
           >
             Get Inked, Get Fed
           </p>
-        </motion.div>
+        </div>
 
         {/* Party #1 */}
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-6"
+        <div className="mb-6"
         >
           <h3
-            className="text-2xl md:text-3xl font-black uppercase tracking-wide"
-            style={{ color: "#e53e3e", fontFamily: "'Bebas Neue', sans-serif" }}
+            className="font-black uppercase tracking-wide"
+            style={{ color: "#e53e3e", fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(3.5rem, 7vw, 7rem)" }}
           >
             Party #1
           </h3>
           <p
-            className="text-xl md:text-2xl font-bold"
-            style={{ color: "#00ffff", fontFamily: "'Playfair Display', serif" }}
+            className="font-bold"
+            style={{ color: "#00ffff", fontFamily: "'Playfair Display', serif", fontSize: "clamp(3rem, 6vw, 6rem)" }}
           >
             Welcome Drinks & Drags @ Arpit's suite
           </p>
-        </motion.div>
+        </div>
 
         {/* Dance Practice */}
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-12 mt-8"
+        <div className="mb-12 mt-8"
         >
           <p
-            className="text-xl md:text-2xl"
-            style={{ color: "#00ffff", fontFamily: "'Inter', sans-serif" }}
+            style={{ color: "#00ffff", fontFamily: "'Inter', sans-serif", fontSize: "clamp(2.4rem, 4.8vw, 4.8rem)" }}
           >
             Dance Practice - choreographed by Iron Man
           </p>
-        </motion.div>
+        </div>
 
         {/* Party #2 */}
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-4"
+        <div className="mb-4"
         >
           <h3
-            className="text-2xl md:text-3xl font-black uppercase tracking-wide"
-            style={{ color: "#e53e3e", fontFamily: "'Bebas Neue', sans-serif" }}
+            className="font-black uppercase tracking-wide"
+            style={{ color: "#e53e3e", fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(3.5rem, 7vw, 7rem)" }}
           >
             Party #2
           </h3>
           <h4
-            className="text-xl md:text-2xl font-black uppercase tracking-wide mb-3"
-            style={{ color: "#e67e22", fontFamily: "'Bebas Neue', sans-serif" }}
+            className="font-black uppercase tracking-wide mb-3"
+            style={{ color: "#e67e22", fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(3rem, 6vw, 6rem)" }}
           >
             Sangeet & DJ Night - 7 PM
           </h4>
           <p
-            className="text-lg md:text-xl"
-            style={{ color: "#e67e22", fontFamily: "'Inter', sans-serif" }}
+            style={{ color: "#e67e22", fontFamily: "'Inter', sans-serif", fontSize: "clamp(2.5rem, 5vw, 5rem)" }}
           >
             Party, perform, party, perform,
           </p>
           <p
-            className="text-sm md:text-base"
-            style={{ color: "#e67e22", fontFamily: "'Inter', sans-serif" }}
+            style={{ color: "#e67e22", fontFamily: "'Inter', sans-serif", fontSize: "clamp(1.5rem, 3vw, 3rem)" }}
           >
             but with Naniji around
           </p>
-        </motion.div>
+        </div>
 
         {/* Party #3 */}
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-20 mt-10"
+        <div className="mb-20 mt-10"
         >
           <h3
-            className="text-2xl md:text-3xl font-black uppercase tracking-wide"
-            style={{ color: "#e53e3e", fontFamily: "'Bebas Neue', sans-serif" }}
+            className="font-black uppercase tracking-wide"
+            style={{ color: "#e53e3e", fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(3.5rem, 7vw, 7rem)" }}
           >
             Party #3
           </h3>
           <p
-            className="text-xl md:text-2xl font-bold"
-            style={{ color: "#3b3bbe", fontFamily: "'Playfair Display', serif" }}
+            className="font-bold"
+            style={{ color: "#3b3bbe", fontFamily: "'Playfair Display', serif", fontSize: "clamp(3rem, 6vw, 6rem)" }}
           >
             After Party @ Arpit's suite, No Naniji here
           </p>
-        </motion.div>
+        </div>
+
+        {/* Separator */}
+        <div className="my-20">
+          <img
+            src={`${basePath}smoke-divider.jpg`}
+            alt="divider"
+            className="w-full max-w-2xl mx-auto"
+            style={{ filter: "invert(1) hue-rotate(180deg)", mixBlendMode: "screen" }}
+          />
+        </div>
 
         {/* ===== DAY 2 ===== */}
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
+        <div>
           <h2
-            className="text-3xl md:text-4xl font-black mb-10"
-            style={{ color: "#e91e90", fontFamily: "'Playfair Display', serif", fontWeight: 900 }}
+            className="font-black mb-20 text-center"
+            style={{ color: "#e91e90", fontFamily: "'Playfair Display', serif", fontWeight: 900, fontSize: "clamp(4rem, 8vw, 8rem)" }}
           >
             Day 2 - 24<sup>th</sup> April
           </h2>
-        </motion.div>
+        </div>
 
         {/* Haldi */}
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-12"
+        <div className="mb-12"
         >
           <h3
-            className="text-2xl md:text-3xl font-black uppercase tracking-wide mb-3"
-            style={{ color: "#ecc94b", fontFamily: "'Bebas Neue', sans-serif" }}
+            className="font-black uppercase tracking-wide mb-3"
+            style={{ color: "#ecc94b", fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(3.5rem, 7vw, 7rem)" }}
           >
             Haldi - 11 AM
           </h3>
           <p
-            className="text-lg md:text-xl"
-            style={{ color: "#ecc94b", fontFamily: "'Inter', sans-serif" }}
+            style={{ color: "#ecc94b", fontFamily: "'Inter', sans-serif", fontSize: "clamp(2rem, 4vw, 4rem)" }}
           >
             Sober up, have some lemonade, and tear Arpit's kurta
           </p>
-        </motion.div>
+        </div>
 
         {/* Party #4 */}
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-4"
+        <div className="mb-4"
         >
           <h3
-            className="text-2xl md:text-3xl font-black uppercase tracking-wide"
-            style={{ color: "#e53e3e", fontFamily: "'Bebas Neue', sans-serif" }}
+            className="font-black uppercase tracking-wide"
+            style={{ color: "#e53e3e", fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(3.5rem, 7vw, 7rem)" }}
           >
             Party #4
           </h3>
           <p
-            className="text-xl md:text-2xl font-bold mb-3"
-            style={{ color: "#3b82f6", fontFamily: "'Playfair Display', serif" }}
+            className="font-bold mb-3"
+            style={{ color: "#3b82f6", fontFamily: "'Playfair Display', serif", fontSize: "clamp(2.4rem, 4.8vw, 4.8rem)" }}
           >
             Gentleman's (& woman's) drinks @ Arpit's suite
           </p>
           <p
-            className="text-lg md:text-xl"
-            style={{ color: "#00ffff", fontFamily: "'Inter', sans-serif" }}
+            style={{ color: "#00ffff", fontFamily: "'Inter', sans-serif", fontSize: "clamp(2.5rem, 5vw, 5rem)" }}
           >
             Get ready for Baarat
           </p>
-        </motion.div>
+        </div>
 
         {/* Party #5 */}
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-4 mt-10"
+        <div className="mb-4 mt-10"
         >
           <h3
-            className="text-2xl md:text-3xl font-black uppercase tracking-wide"
-            style={{ color: "#e53e3e", fontFamily: "'Bebas Neue', sans-serif" }}
+            className="font-black uppercase tracking-wide"
+            style={{ color: "#e53e3e", fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(3.5rem, 7vw, 7rem)" }}
           >
             Party #5
           </h3>
           <h4
-            className="text-xl md:text-2xl font-black uppercase tracking-wide mb-3"
-            style={{ color: "#ef4444", fontFamily: "'Bebas Neue', sans-serif" }}
+            className="font-black uppercase tracking-wide mb-3"
+            style={{ color: "#ef4444", fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(3rem, 6vw, 6rem)" }}
           >
             Baarat - 5 PM
           </h4>
           <p
-            className="text-lg md:text-xl"
-            style={{ color: "#ef4444", fontFamily: "'Inter', sans-serif" }}
+            style={{ color: "#ef4444", fontFamily: "'Inter', sans-serif", fontSize: "clamp(2.5rem, 5vw, 5rem)" }}
           >
             Dance till your legs fall off
           </p>
-        </motion.div>
+        </div>
 
         {/* Jaimala, Reception & Pheras */}
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-12 mt-10"
+        <div className="mb-12 mt-10"
         >
           <h3
-            className="text-xl md:text-2xl font-black uppercase tracking-wide mb-3"
-            style={{ color: "#7c3aed", fontFamily: "'Bebas Neue', sans-serif" }}
+            className="font-black uppercase tracking-wide mb-3"
+            style={{ color: "#7c3aed", fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(3rem, 6vw, 6rem)" }}
           >
             Jaimala, Reception & Pheras - 8 PM Onwards
           </h3>
           <p
-            className="text-lg md:text-xl"
-            style={{ color: "#7c3aed", fontFamily: "'Inter', sans-serif" }}
+            style={{ color: "#7c3aed", fontFamily: "'Inter', sans-serif", fontSize: "clamp(2.5rem, 5vw, 5rem)" }}
           >
             Summon your inner Sajjan
           </p>
-        </motion.div>
+        </div>
 
         {/* Party #6 */}
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-16"
+        <div className="mb-16"
         >
           <h3
-            className="text-2xl md:text-3xl font-black uppercase tracking-wide"
-            style={{ color: "#e53e3e", fontFamily: "'Bebas Neue', sans-serif" }}
+            className="font-black uppercase tracking-wide"
+            style={{ color: "#e53e3e", fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(3.5rem, 7vw, 7rem)" }}
           >
             Party #6
           </h3>
           <p
-            className="text-xl md:text-2xl"
-            style={{ color: "#6b7280", fontFamily: "'Inter', sans-serif" }}
+            style={{ color: "#6b7280", fontFamily: "'Inter', sans-serif", fontSize: "clamp(3rem, 6vw, 6rem)" }}
           >
             5 parties were enough, no?
           </p>
-        </motion.div>
+        </div>
 
       </div>
 
@@ -373,7 +400,7 @@ const PartyPage = () => {
                   }}
                 />
               ))}
-            </motion.div>
+            </div>
           ) : (
             <motion.svg
               key="paused"
