@@ -1,5 +1,4 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
   <rect width="1200" height="630" fill="#fff5e6"/>
-  <text x="600" y="340" font-family="Georgia, serif" font-size="180" font-weight="700" text-anchor="middle" fill="#d4993d">P&amp;A</text>
-  <text x="600" y="460" font-family="Georgia, serif" font-size="80" font-weight="600" text-anchor="middle" fill="#6a7e6f">2026</text>
+  <text x="600" y="380" font-family="Georgia, serif" font-size="240" font-weight="700" text-anchor="middle" fill="#d4993d">P&amp;A</text>
 </svg>
