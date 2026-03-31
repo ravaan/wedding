@@ -325,12 +325,12 @@ const PartyPage = () => {
         <div className="mb-10 mt-8">
           <h3
             className="font-black uppercase tracking-wide mb-2"
-            style={{ color: "#7c3aed", fontFamily: "'Cubao Narrow', sans-serif", fontSize: "clamp(1.6rem, 4vw, 4.5rem)" }}
+            style={{ color: "#e91e90", fontFamily: "'Cubao Narrow', sans-serif", fontSize: "clamp(1.6rem, 4vw, 4.5rem)" }}
           >
             Jaimala, Reception & Pheras - 8 PM Onwards
           </h3>
           <p
-            style={{ color: "#7c3aed", fontFamily: "'Garet', sans-serif", fontSize: "clamp(1.4rem, 3.5vw, 3.5rem)" }}
+            style={{ color: "#e91e90", fontFamily: "'Garet', sans-serif", fontSize: "clamp(1.4rem, 3.5vw, 3.5rem)" }}
           >
             Summon your inner Sajjan
           </p>
