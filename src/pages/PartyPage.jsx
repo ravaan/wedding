@@ -14,14 +14,14 @@ const PartyPage = () => {
     const audio = new Audio(`${basePath}clap-your-hands.mp3`);
     audio.loop = true;
     audio.volume = 0.5;
-    audio.currentTime = 40;
+    audio.currentTime = 55;
     audioRef.current = audio;
 
     const startBeatTimer = () => {
-      // Beat drops at 1:15 (75s). Song starts at 40s. So 35s after playback.
+      // Beat drops at 1:15 (75s). Song starts at 55s. So 20s after playback.
       beatTimerRef.current = setTimeout(() => {
         setBeatDrop(true);
-      }, 35000);
+      }, 20000);
     };
 
     const tryPlay = () => {
@@ -60,14 +60,17 @@ const PartyPage = () => {
   useEffect(() => {
     if (!beatDrop) return;
 
-    const colors = ["#e91e90", "#e53e3e", "#ecc94b", "#2ecc40", "#7c3aed", "#3b82f6", "#e67e22", "#00ffff"];
+    const colors = ["#ff0000", "#00ff00", "#0000ff", "#ffff00", "#ff00ff", "#00ffff", "#ff8800", "#ffffff"];
+    const isMobile = window.innerWidth < 768;
+    const streamCount = isMobile ? 1 : 2;
+    const burstCount = isMobile ? 96 : 120;
     let rafId;
     let stopped = false;
 
     const frame = () => {
       if (stopped) return;
       confetti({
-        particleCount: 3,
+        particleCount: streamCount,
         angle: 60,
         spread: 55,
         origin: { x: 0, y: 0.6 },
@@ -75,7 +78,7 @@ const PartyPage = () => {
         zIndex: 9999,
       });
       confetti({
-        particleCount: 3,
+        particleCount: streamCount,
         angle: 120,
         spread: 55,
         origin: { x: 1, y: 0.6 },
@@ -87,7 +90,7 @@ const PartyPage = () => {
 
     // Big burst first
     confetti({
-      particleCount: 150,
+      particleCount: burstCount,
       spread: 100,
       origin: { y: 0.5 },
       colors,
@@ -109,7 +112,7 @@ const PartyPage = () => {
         // Restart on next beat drop
         stopped = false;
         confetti({
-          particleCount: 150,
+          particleCount: burstCount,
           spread: 100,
           origin: { y: 0.5 },
           colors,
@@ -153,7 +156,7 @@ const PartyPage = () => {
           animate={{ opacity: [0, 1, 0] }}
           transition={{ duration: 0.5, repeat: Infinity, ease: "linear" }}
           className="font-black text-white text-center mb-16 md:mb-24"
-          style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(8rem, 15vw, 16rem)" }}
+          style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(6.4rem, 15vw, 16rem)" }}
         >
           Party Itirenary
         </motion.h1>
@@ -256,13 +259,8 @@ const PartyPage = () => {
         </div>
 
         {/* Separator */}
-        <div className="my-20">
-          <img
-            src={`${basePath}smoke-divider.jpg`}
-            alt="divider"
-            className="w-full max-w-2xl mx-auto"
-            style={{ filter: "invert(1) hue-rotate(180deg)", mixBlendMode: "screen" }}
-          />
+        <div className="my-20 flex justify-center">
+          <div className="w-full max-w-2xl h-1 bg-white rounded-full" />
         </div>
 
         {/* ===== DAY 2 ===== */}

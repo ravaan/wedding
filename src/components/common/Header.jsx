@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import { trackClick } from "../../services/analytics";
 
 const navItems = [
@@ -9,9 +8,9 @@ const navItems = [
 ];
 
 const Header = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showNav, setShowNav] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const isHome = location.pathname === "/" || location.pathname === "";
 
   useEffect(() => {
@@ -21,10 +20,6 @@ const Header = () => {
     }
     setShowNav(true);
   }, [isHome]);
-
-  useEffect(() => {
-    setIsMobileMenuOpen(false);
-  }, [location.pathname]);
 
   return (
     <>
@@ -70,75 +65,17 @@ const Header = () => {
         }}
         transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
         className="fixed bottom-6 right-4 z-50 md:hidden rounded-full bg-white/90 backdrop-blur-md shadow-md border-2 border-[var(--theme-gold)]/40 flex items-center justify-center cursor-pointer px-4 py-2.5 gap-2"
-        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        aria-label="Toggle menu"
+        onClick={() => {
+          window.scrollTo(0, 0);
+          navigate("/");
+        }}
+        aria-label="Go home"
       >
-        <motion.div
-          animate={{ rotate: isMobileMenuOpen ? 90 : 0 }}
-          transition={{ duration: 0.3 }}
-          className="flex items-center"
-        >
-          {isMobileMenuOpen ? (
-            <X size={20} strokeWidth={2.5} className="text-[var(--theme-green-dark)]" />
-          ) : (
-            <Menu size={20} strokeWidth={2.5} className="text-[var(--theme-green-dark)]" />
-          )}
-        </motion.div>
         <span className="text-xs font-sans font-bold uppercase tracking-[0.15em] text-[var(--theme-green-dark)]">
-          {isMobileMenuOpen ? "Close" : "Home"}
+          Home
         </span>
       </motion.button>
 
-      {/* Mobile menu drawer */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="fixed inset-0 bg-black/10 backdrop-blur-sm z-40 md:hidden"
-              onClick={() => setIsMobileMenuOpen(false)}
-            />
-
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="fixed right-0 top-0 h-full w-64 bg-white/95 backdrop-blur-md shadow-lg z-40 md:hidden"
-            >
-              <div className="pt-20 px-8">
-                <div className="space-y-6">
-                  {navItems.map((item, index) => (
-                    <motion.div
-                      key={item.id}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.05 }}
-                    >
-                      <Link
-                        to={item.path}
-                        onClick={() =>
-                          trackClick("Navigation", { section: item.id })
-                        }
-                        className={`
-                          block text-base font-sans font-semibold tracking-wide
-                          ${location.pathname === item.path ? "text-[var(--theme-gold)]" : "text-primary-600"}
-                          transition-all duration-300 hover:translate-x-1 hover:text-[var(--theme-gold)]
-                        `}
-                      >
-                        {item.label}
-                      </Link>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
     </>
   );
 };

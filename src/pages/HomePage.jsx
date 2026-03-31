@@ -271,6 +271,7 @@ const HomePage = () => {
               onSubmit={(e) => {
                 e.preventDefault();
                 if (riddleAnswer.trim() === "420") {
+                  window.scrollTo(0, 0);
                   navigate("/party");
                 } else {
                   setShake(true);
