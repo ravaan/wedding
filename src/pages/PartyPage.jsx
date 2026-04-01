@@ -13,6 +13,55 @@ const PartyPage = () => {
 
   useEffect(() => {
     trackPageView("Party");
+    trackEvent("Party Discovery Funnel", {
+      step: "Party Page Loaded",
+      referrer: document.referrer,
+    });
+  }, []);
+
+  // Track beat drop moment
+  useEffect(() => {
+    if (!beatDrop) return;
+    trackEvent("Beat Drop Triggered", { page: "Party" });
+  }, [beatDrop]);
+
+  // Track time spent on party page
+  useEffect(() => {
+    const start = Date.now();
+    return () => {
+      const seconds = Math.round((Date.now() - start) / 1000);
+      trackEvent("Party Page Time Spent", { "Duration Seconds": seconds });
+    };
+  }, []);
+
+  // Track party page scroll depth (how far they read the itinerary)
+  useEffect(() => {
+    const milestones = new Set();
+    const sections = [
+      { pct: 10, label: "Day 1 Header" },
+      { pct: 30, label: "Party #1-2" },
+      { pct: 50, label: "Day 1 Complete" },
+      { pct: 60, label: "Day 2 Header" },
+      { pct: 80, label: "Party #4-5" },
+      { pct: 95, label: "Full Itinerary Read" },
+    ];
+    const onScroll = () => {
+      const scrollHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
+      if (scrollHeight <= 0) return;
+      const pct = (window.scrollY / scrollHeight) * 100;
+      for (const s of sections) {
+        if (pct >= s.pct && !milestones.has(s.label)) {
+          milestones.add(s.label);
+          trackEvent("Party Itinerary Scroll", {
+            milestone: s.label,
+            "Scroll Percentage": Math.round(pct),
+          });
+        }
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
@@ -48,8 +97,10 @@ const PartyPage = () => {
       .then(() => {
         setPlaying(true);
         startBeatTimer();
+        trackEvent("Party Music Autoplay", { success: true });
       })
       .catch(() => {
+        trackEvent("Party Music Autoplay", { success: false });
         document.addEventListener("click", tryPlay, { once: false });
         document.addEventListener("touchstart", tryPlay, { once: false });
         document.addEventListener("keydown", tryPlay, { once: false });

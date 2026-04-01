@@ -27,8 +27,11 @@ const MusicPlayer = () => {
       .then(() => {
         startedRef.current = true;
         setPlaying(true);
+        trackEvent("Background Music Autoplay", { success: true });
       })
-      .catch(() => {});
+      .catch(() => {
+        trackEvent("Background Music Autoplay", { success: false });
+      });
 
     return () => {
       audio.pause();

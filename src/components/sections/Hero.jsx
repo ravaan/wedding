@@ -5,7 +5,7 @@ import duration from "dayjs/plugin/duration";
 import content from "../../data/content.json";
 import flowerData from "../../data/flowerLayout.json";
 import FlowerEditor from "../editor/FlowerEditor";
-import { trackCountdownView } from "../../services/analytics";
+import { trackCountdownView, trackEvent } from "../../services/analytics";
 
 dayjs.extend(duration);
 
@@ -374,9 +374,10 @@ const Hero = () => {
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           className="flex flex-col items-center gap-2 cursor-pointer"
-          onClick={() =>
-            window.scrollTo({ top: window.innerHeight, behavior: "smooth" })
-          }
+          onClick={() => {
+            trackEvent("Scroll Indicator Clicked", { page: "Home" });
+            window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
+          }}
         >
           <span className="text-[10px] font-sans uppercase tracking-[0.3em] text-[var(--theme-text-muted)] font-semibold">
             Scroll

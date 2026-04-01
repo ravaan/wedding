@@ -45,11 +45,23 @@ function AppContent() {
   const [themeEditorOpen, setThemeEditorOpen] = useState(false);
   const location = useLocation();
   const isPartyPage = location.pathname === "/party";
+  const prevPathRef = React.useRef(location.pathname);
 
   useEffect(() => {
     applyTheme();
     initAnalytics();
   }, []);
+
+  // Track every route change
+  useEffect(() => {
+    if (prevPathRef.current !== location.pathname) {
+      trackEvent("Route Changed", {
+        from: prevPathRef.current,
+        to: location.pathname,
+      });
+      prevPathRef.current = location.pathname;
+    }
+  }, [location.pathname]);
 
   const handleKeyDown = useCallback((e) => {
     if (isInputFocused()) return;

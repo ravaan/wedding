@@ -1,11 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { MapPin, ExternalLink } from "lucide-react";
 import Hero from "../components/sections/Hero";
 import Divider from "../components/ui/Divider";
 import content from "../data/content.json";
-import { trackPageView, trackClick, trackEvent } from "../services/analytics";
+import {
+  trackPageView,
+  trackClick,
+  trackEvent,
+  trackSectionView,
+} from "../services/analytics";
 
 const DEFAULT_REGISTRIES = [
   {
@@ -17,6 +22,11 @@ const DEFAULT_REGISTRIES = [
 const HomePage = () => {
   const [digits, setDigits] = useState(["", "", ""]);
   const [shake, setShake] = useState(false);
+  const [riddleAttempts, setRiddleAttempts] = useState(0);
+  const riddleStartedRef = useRef(false);
+  const scheduleSectionRef = useRef(null);
+  const giftSectionRef = useRef(null);
+  const riddleSectionRef = useRef(null);
   const digitRefs = [
     React.useRef(null),
     React.useRef(null),
@@ -29,6 +39,15 @@ const HomePage = () => {
     const newDigits = [...digits];
     newDigits[index] = value;
     setDigits(newDigits);
+
+    // Track first interaction with the riddle input
+    if (value && !riddleStartedRef.current) {
+      riddleStartedRef.current = true;
+      trackEvent("Riddle Input Started", {
+        "First Digit Index": index,
+      });
+    }
+
     if (value && index < 2) {
       digitRefs[index + 1].current?.focus();
     }
@@ -48,12 +67,41 @@ const HomePage = () => {
     trackPageView("Home");
   }, []);
 
+  // Track section visibility — key funnel: did they scroll far enough?
+  const useSectionObserver = useCallback((ref, sectionName) => {
+    if (!ref) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          trackSectionView(sectionName);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 },
+    );
+    observer.observe(ref);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const cleanups = [];
+    if (scheduleSectionRef.current)
+      cleanups.push(useSectionObserver(scheduleSectionRef.current, "Schedule"));
+    if (giftSectionRef.current)
+      cleanups.push(
+        useSectionObserver(giftSectionRef.current, "Gift Registry"),
+      );
+    if (riddleSectionRef.current)
+      cleanups.push(useSectionObserver(riddleSectionRef.current, "Riddle"));
+    return () => cleanups.forEach((fn) => fn && fn());
+  }, [useSectionObserver]);
+
   return (
     <>
       <Hero />
 
       {/* Schedule Section */}
-      <section className="pt-20 pb-20 md:pb-32">
+      <section ref={scheduleSectionRef} className="pt-20 pb-20 md:pb-32">
         <div className="max-w-screen-md mx-auto px-6 lg:px-12">
           <motion.div
             initial={{ opacity: 0 }}
@@ -187,7 +235,10 @@ const HomePage = () => {
       </section>
 
       {/* Gift Registry Section */}
-      <section className="py-20 md:py-32 bg-batik-cream batik-bg border-y-4 border-[var(--theme-gold)]">
+      <section
+        ref={giftSectionRef}
+        className="py-20 md:py-32 bg-batik-cream batik-bg border-y-4 border-[var(--theme-gold)]"
+      >
         <div className="max-w-screen-sm mx-auto px-6 lg:px-12">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -243,7 +294,10 @@ const HomePage = () => {
       </section>
 
       {/* Riddle Section */}
-      <section className="hero-panel py-32 relative overflow-hidden">
+      <section
+        ref={riddleSectionRef}
+        className="hero-panel py-32 relative overflow-hidden"
+      >
         <div className="absolute inset-0 batik-bg opacity-20" />
         <div className="max-w-screen-md mx-auto px-6 lg:px-12 text-center relative z-10">
           <h2
@@ -267,15 +321,27 @@ const HomePage = () => {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
+                const attempt = riddleAttempts + 1;
+                setRiddleAttempts(attempt);
                 const isCorrect = riddleAnswer.trim() === "420";
                 trackEvent("Riddle Attempted", {
                   answer: riddleAnswer,
                   correct: isCorrect,
+                  "Attempt Number": attempt,
+                  "Digits Filled": digits.filter(Boolean).length,
                 });
                 if (isCorrect) {
+                  trackEvent("Party Page Unlocked", {
+                    "Total Attempts": attempt,
+                    method: "riddle",
+                  });
                   window.scrollTo(0, 0);
                   navigate("/party");
                 } else {
+                  trackEvent("Riddle Failed", {
+                    answer: riddleAnswer,
+                    "Attempt Number": attempt,
+                  });
                   setShake(true);
                   setTimeout(() => setShake(false), 500);
                 }
