@@ -316,7 +316,10 @@ const Hero = () => {
                 April 23 — 24, 2026
               </motion.p>
 
-              <motion.p
+              <motion.a
+                href={content.venue.mapLink}
+                target="_blank"
+                rel="noopener noreferrer"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{
@@ -324,14 +327,14 @@ const Hero = () => {
                   delay: 1.1,
                   ease: [0.23, 1, 0.32, 1],
                 }}
-                className="text-lg md:text-xl text-[var(--theme-text-muted)] italic mb-10"
+                className="block text-lg md:text-xl text-[var(--theme-text-muted)] italic mb-10 hover:text-[var(--theme-gold)] transition-colors"
                 style={{
                   fontFamily: "'Cormorant Garamond', serif",
                   fontWeight: 300,
                 }}
               >
                 Taj Gateway, Nashik
-              </motion.p>
+              </motion.a>
 
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
