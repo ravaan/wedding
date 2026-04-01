@@ -20,7 +20,7 @@ class Analytics {
         loaded: (mixpanel) => {
           // Set super properties that will be sent with every event
           mixpanel.register({
-            "Wedding Date": "2025-04-23",
+            "Wedding Date": "2026-04-23",
             Platform: "Web",
             "Device Type": this.getDeviceType(),
             Browser: this.getBrowserName(),
@@ -31,12 +31,16 @@ class Analytics {
       });
 
       this.initialized = true;
+      this.sessionStart = Date.now();
 
       // Track initial page view
       this.pageView(window.location.pathname);
 
       // Set up scroll depth tracking
       this.setupScrollDepthTracking();
+
+      // Track session duration on page unload
+      this.setupSessionTracking();
 
       console.log("📊 Analytics initialized");
     } catch (error) {
@@ -226,6 +230,37 @@ class Analytics {
     });
   }
 
+  // Track session duration on page leave
+  setupSessionTracking() {
+    if (!this.enabled || !this.initialized) return;
+
+    const trackSession = () => {
+      const duration = Math.round((Date.now() - this.sessionStart) / 1000);
+      this.track("Session Ended", {
+        "Duration Seconds": duration,
+        Page: window.location.pathname,
+      });
+    };
+
+    window.addEventListener("beforeunload", trackSession);
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "hidden") {
+        trackSession();
+      }
+    });
+  }
+
+  // Track section visibility
+  trackSectionView(sectionName, properties = {}) {
+    if (!this.enabled || !this.initialized) return;
+
+    this.track("Section Viewed", {
+      "Section Name": sectionName,
+      Page: window.location.pathname,
+      ...properties,
+    });
+  }
+
   // Helper functions
   getDeviceType() {
     const width = window.innerWidth;
@@ -264,3 +299,9 @@ export const trackError = (msg, stack, component) =>
 export const trackExternalLink = (type, dest) =>
   analytics.trackExternalLink(type, dest);
 export const trackCountdownView = (days) => analytics.trackCountdownView(days);
+export const trackSectionView = (section, props) =>
+  analytics.trackSectionView(section, props);
+export const trackFormSubmit = (form, data) =>
+  analytics.trackFormSubmit(form, data);
+export const trackFormError = (form, error) =>
+  analytics.trackFormError(form, error);

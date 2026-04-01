@@ -5,7 +5,7 @@ import { MapPin, ExternalLink } from "lucide-react";
 import Hero from "../components/sections/Hero";
 import Divider from "../components/ui/Divider";
 import content from "../data/content.json";
-import { trackPageView, trackClick } from "../services/analytics";
+import { trackPageView, trackClick, trackEvent } from "../services/analytics";
 
 const DEFAULT_REGISTRIES = [
   {
@@ -17,7 +17,11 @@ const DEFAULT_REGISTRIES = [
 const HomePage = () => {
   const [digits, setDigits] = useState(["", "", ""]);
   const [shake, setShake] = useState(false);
-  const digitRefs = [React.useRef(null), React.useRef(null), React.useRef(null)];
+  const digitRefs = [
+    React.useRef(null),
+    React.useRef(null),
+    React.useRef(null),
+  ];
 
   const handleDigitChange = (index, value) => {
     if (value.length > 1) value = value.slice(-1);
@@ -178,7 +182,6 @@ const HomePage = () => {
                 </motion.div>
               ))}
             </div>
-
           </motion.div>
         </div>
       </section>
@@ -205,7 +208,8 @@ const HomePage = () => {
               style={{ fontFamily: "'Cormorant Garamond', serif" }}
             >
               Your presence at our wedding is the greatest gift of all. However,
-              if you wish to honour us with a gift, please use our Amazon Wishlist.
+              if you wish to honour us with a gift, please use our Amazon
+              Wishlist.
             </p>
           </motion.div>
 
@@ -226,8 +230,8 @@ const HomePage = () => {
                 className="group flex items-center justify-center gap-2 bg-white border border-orange px-8 py-4 transition-all duration-300 hover:border-[var(--theme-gold)]/50 hover:shadow-sm"
               >
                 <h3 className="text-xl font-display font-semibold text-primary-600 group-hover:text-[var(--theme-gold)] transition-colors mb-0">
-                    {registry.name}
-                  </h3>
+                  {registry.name}
+                </h3>
                 <ExternalLink
                   size={18}
                   className="text-primary-300 group-hover:text-[var(--theme-gold)] transition-colors flex-shrink-0"
@@ -263,7 +267,12 @@ const HomePage = () => {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                if (riddleAnswer.trim() === "420") {
+                const isCorrect = riddleAnswer.trim() === "420";
+                trackEvent("Riddle Attempted", {
+                  answer: riddleAnswer,
+                  correct: isCorrect,
+                });
+                if (isCorrect) {
                   window.scrollTo(0, 0);
                   navigate("/party");
                 } else {

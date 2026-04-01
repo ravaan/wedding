@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { trackEvent } from "../../services/analytics";
 
 const basePath = import.meta.env.BASE_URL || "/";
 
@@ -21,10 +22,13 @@ const MusicPlayer = () => {
     audio.currentTime = 15;
     audioRef.current = audio;
 
-    audio.play().then(() => {
-      startedRef.current = true;
-      setPlaying(true);
-    }).catch(() => {});
+    audio
+      .play()
+      .then(() => {
+        startedRef.current = true;
+        setPlaying(true);
+      })
+      .catch(() => {});
 
     return () => {
       audio.pause();
@@ -41,7 +45,10 @@ const MusicPlayer = () => {
       audio.pause();
       setPlaying(false);
     } else if (!userPaused && startedRef.current) {
-      audio.play().then(() => setPlaying(true)).catch(() => {});
+      audio
+        .play()
+        .then(() => setPlaying(true))
+        .catch(() => {});
     }
   }, [isPartyPage]);
 
@@ -53,12 +60,17 @@ const MusicPlayer = () => {
       audio.pause();
       setPlaying(false);
       setUserPaused(true);
+      trackEvent("Music Toggled", { action: "pause", page: "Main" });
     } else {
-      audio.play().then(() => {
-        startedRef.current = true;
-        setPlaying(true);
-        setUserPaused(false);
-      }).catch(() => {});
+      audio
+        .play()
+        .then(() => {
+          startedRef.current = true;
+          setPlaying(true);
+          setUserPaused(false);
+          trackEvent("Music Toggled", { action: "play", page: "Main" });
+        })
+        .catch(() => {});
     }
   };
 

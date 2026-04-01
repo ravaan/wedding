@@ -36,7 +36,7 @@ function flowerSavePlugin() {
 export default defineConfig({
   plugins: [flowerSavePlugin(), react()],
   base: "/",
-  server: {},
+  server: { host: true },
   build: {
     outDir: "dist",
     assetsDir: "assets",

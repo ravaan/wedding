@@ -1,4 +1,5 @@
 # Wedding Tracker
+
 ## Product Requirements Document
 
 ---
@@ -21,12 +22,12 @@
 
 ## 2. What Does Success Look Like?
 
-| Goal | How We'll Know It's Working |
-|------|------------------------------|
-| Everything in one place | No more switching between apps and spreadsheets |
-| Always know who's coming | RSVPs flow in automatically from your wedding website |
-| No missed deadlines | WhatsApp reminders ping you before important dates |
-| Family can help without breaking things | People only see and edit what you allow them to |
+| Goal                                    | How We'll Know It's Working                           |
+| --------------------------------------- | ----------------------------------------------------- |
+| Everything in one place                 | No more switching between apps and spreadsheets       |
+| Always know who's coming                | RSVPs flow in automatically from your wedding website |
+| No missed deadlines                     | WhatsApp reminders ping you before important dates    |
+| Family can help without breaking things | People only see and edit what you allow them to       |
 
 ---
 
@@ -34,11 +35,11 @@
 
 You'll invite people via their Google account (no new passwords to remember).
 
-| Role | What They Can Do |
-|------|------------------|
-| **Admin (You)** | Everything — add/edit/delete anything, invite users, change settings |
-| **Editor** | Add and edit in specific sections you assign (e.g., "Cousin Neha manages gifts") |
-| **Viewer** | Can only look, not touch — useful for people who just need visibility |
+| Role            | What They Can Do                                                                 |
+| --------------- | -------------------------------------------------------------------------------- |
+| **Admin (You)** | Everything — add/edit/delete anything, invite users, change settings             |
+| **Editor**      | Add and edit in specific sections you assign (e.g., "Cousin Neha manages gifts") |
+| **Viewer**      | Can only look, not touch — useful for people who just need visibility            |
 
 ---
 
@@ -102,14 +103,14 @@ Manage the 150 guests staying 2 nights at Taj Ambad. Maximum 3 adults per room (
 
 Your 4 events over 2 days.
 
-| Event | Date & Time | Venue |
-|-------|-------------|-------|
-| Bhaat, Matki Pooja, Mehendi | 23rd April, Noon | Residency Ball Room |
-| Engagement Party | 23rd April, Night | Grand Ball Room Hall |
-| Haldi | 24th April, Morning | Poolside Lawn |
-| Baarat | 24th April, 6 PM | Internal Main Road |
-| Jaimala & Reception | 24th April, Evening | Grand Ball Room Hall |
-| Pheras | 24th April, Evening | Grand Ball Room Lawns |
+| Event                       | Date & Time         | Venue                 |
+| --------------------------- | ------------------- | --------------------- |
+| Bhaat, Matki Pooja, Mehendi | 23rd April, Noon    | Residency Ball Room   |
+| Engagement Party            | 23rd April, Night   | Grand Ball Room Hall  |
+| Haldi                       | 24th April, Morning | Poolside Lawn         |
+| Baarat                      | 24th April, 6 PM    | Internal Main Road    |
+| Jaimala & Reception         | 24th April, Evening | Grand Ball Room Hall  |
+| Pheras                      | 24th April, Evening | Grand Ball Room Lawns |
 
 **What you'll track for each event:**
 
@@ -213,13 +214,13 @@ Plan what food is served at each event. All food is vegetarian.
 
 Track decoration plans for each event or area.
 
-| Venue | Event(s) | Notes |
-|-------|----------|-------|
-| Residency Ball Room | Bhaat, Matki Pooja, Mehendi | General festive decoration |
-| Grand Ball Room Hall | Engagement (23rd), Jaimala & Reception (24th) | Used twice — check if decor needs refresh |
-| Poolside Lawn | Haldi | Bright, outdoor Haldi vibe |
-| Internal Main Road | Baarat | Pathway, lighting, band/welcome setup |
-| Grand Ball Room Lawns | Pheras | Mandap setup |
+| Venue                 | Event(s)                                      | Notes                                     |
+| --------------------- | --------------------------------------------- | ----------------------------------------- |
+| Residency Ball Room   | Bhaat, Matki Pooja, Mehendi                   | General festive decoration                |
+| Grand Ball Room Hall  | Engagement (23rd), Jaimala & Reception (24th) | Used twice — check if decor needs refresh |
+| Poolside Lawn         | Haldi                                         | Bright, outdoor Haldi vibe                |
+| Internal Main Road    | Baarat                                        | Pathway, lighting, band/welcome setup     |
+| Grand Ball Room Lawns | Pheras                                        | Mandap setup                              |
 
 **What you'll track:**
 
@@ -249,13 +250,13 @@ You can turn specific reminder types on or off based on what's useful.
 
 Technical details for whoever builds this:
 
-| What | Plain English |
-|------|---------------|
-| The screens you'll use | A website that works well on both computer and phone browsers (built with React) |
-| Where your data is stored | A secure database called MongoDB (think of it as a smart digital filing cabinet) |
-| How you'll log in | Using your Google account — no new password needed |
-| How you'll get reminders | Through a WhatsApp messaging service |
-| Wedding website | Hosted on GitHub Pages — RSVP data will sync to the tracker via a connection between the two systems |
+| What                      | Plain English                                                                                        |
+| ------------------------- | ---------------------------------------------------------------------------------------------------- |
+| The screens you'll use    | A website that works well on both computer and phone browsers (built with React)                     |
+| Where your data is stored | A secure database called MongoDB (think of it as a smart digital filing cabinet)                     |
+| How you'll log in         | Using your Google account — no new password needed                                                   |
+| How you'll get reminders  | Through a WhatsApp messaging service                                                                 |
+| Wedding website           | Hosted on GitHub Pages — RSVP data will sync to the tracker via a connection between the two systems |
 
 ---
 
@@ -263,18 +264,18 @@ Technical details for whoever builds this:
 
 Since the wedding is in April, here's the order of priority:
 
-| Priority | Section | Why |
-|----------|---------|-----|
-| **Must have first** | Guest List + RSVP sync | Core of everything — need to know who's coming |
-| **Must have first** | Hotel Rooms & Check-In | 150 people need room assignments |
-| **Must have first** | Event Schedule | 4 events need to be organised |
-| **Should have before wedding** | Budget & Expenses | Track spending and payments |
-| **Should have before wedding** | Vendors | Keep vendor contacts and contracts handy |
-| **Should have before wedding** | Shopping & To-Do List | Don't miss any tasks |
-| Nice to have | Gifts | Can start simple, flesh out later |
-| Nice to have | Menus | Useful but lower urgency |
-| Nice to have | Decoration | Useful but lower urgency |
-| Nice to have | WhatsApp Reminders | Helpful but can manage without initially |
+| Priority                       | Section                | Why                                            |
+| ------------------------------ | ---------------------- | ---------------------------------------------- |
+| **Must have first**            | Guest List + RSVP sync | Core of everything — need to know who's coming |
+| **Must have first**            | Hotel Rooms & Check-In | 150 people need room assignments               |
+| **Must have first**            | Event Schedule         | 4 events need to be organised                  |
+| **Should have before wedding** | Budget & Expenses      | Track spending and payments                    |
+| **Should have before wedding** | Vendors                | Keep vendor contacts and contracts handy       |
+| **Should have before wedding** | Shopping & To-Do List  | Don't miss any tasks                           |
+| Nice to have                   | Gifts                  | Can start simple, flesh out later              |
+| Nice to have                   | Menus                  | Useful but lower urgency                       |
+| Nice to have                   | Decoration             | Useful but lower urgency                       |
+| Nice to have                   | WhatsApp Reminders     | Helpful but can manage without initially       |
 
 ---
 
@@ -290,4 +291,4 @@ Since the wedding is in April, here's the order of priority:
 
 ---
 
-*Version 2.0 — Updated with guest grouping and room allocation logic*
+_Version 2.0 — Updated with guest grouping and room allocation logic_

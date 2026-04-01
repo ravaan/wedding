@@ -3,9 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { trackClick } from "../../services/analytics";
 
-const navItems = [
-  { id: "home", label: "Home", path: "/" },
-];
+const navItems = [{ id: "home", label: "Home", path: "/" }];
 
 const Header = () => {
   const [showNav, setShowNav] = useState(false);
@@ -75,7 +73,6 @@ const Header = () => {
           Home
         </span>
       </motion.button>
-
     </>
   );
 };

@@ -1,40 +1,40 @@
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Cormorant+SC:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap");
 
 @font-face {
-  font-family: 'Cubao Wide';
-  src: url('/fonts/Cubao_Free_Wide.otf') format('opentype');
+  font-family: "Cubao Wide";
+  src: url("/fonts/Cubao_Free_Wide.otf") format("opentype");
   font-weight: 900;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Cubao Narrow';
-  src: url('/fonts/Cubao_Free_Narrow.otf') format('opentype');
+  font-family: "Cubao Narrow";
+  src: url("/fonts/Cubao_Free_Narrow.otf") format("opentype");
   font-weight: 900;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Gulfs Display';
-  src: url('/fonts/GulfsDisplay-Variable.woff2') format('woff2');
+  font-family: "Gulfs Display";
+  src: url("/fonts/GulfsDisplay-Variable.woff2") format("woff2");
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Gulfs Display';
-  src: url('/fonts/GulfsDisplayItalic-Variable.woff2') format('woff2');
+  font-family: "Gulfs Display";
+  src: url("/fonts/GulfsDisplayItalic-Variable.woff2") format("woff2");
   font-weight: 100 900;
   font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Garet';
-  src: url('/fonts/Garet-Book.ttf') format('truetype');
+  font-family: "Garet";
+  src: url("/fonts/Garet-Book.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
