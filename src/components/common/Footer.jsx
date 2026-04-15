@@ -1,5 +1,6 @@
 import React from "react";
 import Divider from "../ui/Divider";
+import "studio-typo-widget";
 
 const Footer = () => {
   return (
@@ -17,6 +18,9 @@ const Footer = () => {
           <p className="text-[10px] font-sans font-bold tracking-[0.3em] uppercase text-white/70">
             April 23 — 24, 2026 · Nashik
           </p>
+        </div>
+        <div className="flex justify-center mt-8 opacity-50 hover:opacity-80 transition-opacity">
+          <studio-typo size="small" theme="dark" speed="1.2"></studio-typo>
         </div>
       </div>
     </footer>

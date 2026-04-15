@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run:*)",
+      "Bash(npx vite:*)",
+      "Bash(lsof:*)",
+      "Bash(taskkill:*)",
+      "Bash(netstat:*)",
+      "Bash(gh pr:*)",
+      "Bash(gh run:*)",
+      "Bash(unzip:*)",
+      "Bash(node:*)",
+      "Bash(where:*)",
+      "Bash(npm ls:*)"
+    ]
+  }
+}
