@@ -20,7 +20,7 @@ const Footer = () => {
           </p>
         </div>
         <div className="flex justify-center mt-8 opacity-50 hover:opacity-80 transition-opacity">
-          <studio-typo size="small" theme="dark" speed="1.2"></studio-typo>
+          <studio-typo size="small" speed="1.2"></studio-typo>
         </div>
       </div>
     </footer>
